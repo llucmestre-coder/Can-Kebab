@@ -317,14 +317,25 @@
   .cart-empty { color:rgba(247,240,227,0.3); font-size:0.85rem; text-align:center; padding:2rem 0; }
   .cart-item-row {
     display:flex; justify-content:space-between; align-items:center;
-    padding:0.55rem 0; border-bottom:1px solid rgba(107,143,97,0.12);
-    color:var(--cream); font-size:0.85rem;
+    padding:0.6rem 0; border-bottom:1px solid rgba(107,143,97,0.12);
+    color:var(--cream); font-size:0.85rem; gap:0.5rem;
   }
   .cart-item-row:last-of-type { border-bottom:none; }
-  .ci-name { flex:1; }
-  .ci-price { color:var(--gold); font-weight:600; margin-left:1rem; }
-  .ci-remove { background:none; border:none; color:rgba(247,240,227,0.25); cursor:pointer; padding:0 0.3rem; font-size:1rem; transition:color 0.2s; }
-  .ci-remove:hover { color:var(--terracotta); }
+  .ci-name { flex:1; line-height:1.3; }
+  .ci-price { color:var(--gold); font-weight:600; white-space:nowrap; }
+  .ci-qty {
+    display:flex; align-items:center; gap:0.4rem;
+    background:rgba(255,255,255,0.07); border-radius:20px;
+    padding:0.15rem 0.4rem;
+  }
+  .ci-qty-btn {
+    background:none; border:none; color:var(--cream); cursor:pointer;
+    font-size:1rem; width:20px; height:20px;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:50%; transition:background 0.15s; line-height:1;
+  }
+  .ci-qty-btn:hover { background:rgba(255,255,255,0.15); }
+  .ci-qty-num { font-size:0.85rem; font-weight:600; min-width:16px; text-align:center; }
   .cart-total-row {
     display:flex; justify-content:space-between;
     padding-top:0.9rem; margin-top:0.5rem;
@@ -384,10 +395,12 @@
   .c-info strong { display:block; font-size:0.88rem; font-weight:600; color:var(--dark); }
   .c-info span { font-size:0.82rem; color:#888; line-height:1.5; }
   .hours-list { display:flex; flex-direction:column; gap:0; }
-  .h-row { display:flex; justify-content:space-between; padding:0.5rem 0; border-bottom:1px solid rgba(74,103,65,0.1); font-size:0.84rem; }
-  .h-row .day { font-weight:500; color:var(--dark); }
-  .h-row .time { color:#888; }
-  .h-row.today .day, .h-row.today .time { color:var(--green); font-weight:600; }
+  .h-row { display:flex; justify-content:space-between; align-items:flex-start; padding:0.5rem 0; border-bottom:1px solid rgba(74,103,65,0.1); font-size:0.84rem; }
+  .h-row .day { font-weight:500; color:var(--dark); min-width:90px; }
+  .h-row .time { color:#888; text-align:right; }
+  .h-row .time span { display:block; }
+  .h-row.today .day, .h-row.today .time, .h-row.today .time span { color:var(--green); font-weight:600; }
+  .h-row .note { font-size:0.72rem; color:var(--terracotta); font-style:italic; display:block; margin-top:0.1rem; }
 
   /* ── FOOTER ── */
   footer {
@@ -456,14 +469,14 @@
       <em>artesà</em><br>
       de veritat.
     </h1>
-    <p class="hero-sub">Ingredients de proximitat, carn de brasa i receptes pròpies. Durum, pita o bowl — fets amb cura al moment.</p>
+    <p class="hero-sub">Ingredients de proximitat, carn a la brasa i receptes pròpies. Durum, pita o bowl — elaborats amb cura al moment.</p>
     <div class="hero-btns">
       <a href="#menu" class="btn-green">Veure carta</a>
       <a href="#order" class="btn-outline">Fer comanda</a>
     </div>
   </div>
   <div class="hero-right">
-    <img src="https://llucmestre-coder.github.io/Can-Kebab/arabic_durum.png" alt="Kebab Can Kebab" class="hero-img-main">
+    <img src="arabic_durum.png" alt="Kebab Can Kebab" class="hero-img-main">
     <div class="hero-overlay"></div>
     <div class="hero-badge-float">
       <strong>4.7★</strong>
@@ -474,7 +487,7 @@
 
 <!-- STRIP -->
 <div class="strip">
-  <div class="strip-item">🕐 Dilluns–Diumenge · 12:00–00:00</div>
+  <div class="strip-item">🕐 Obert cada dia · 12 pm – 12 am (caps de setmana)</div>
   <div class="strip-item">📍 Barcelona</div>
   <div class="strip-item">🛵 Recollida & Lliurament</div>
   <div class="strip-item">🌿 Producte fresc diari</div>
@@ -482,9 +495,9 @@
 
 <!-- GALLERY TEASER -->
 <div class="gallery-strip">
-  <img src="https://llucmestre-coder.github.io/Can-Kebab/meat_spit.png" alt="Brot de carn" class="g-main">
-  <img src="https://llucmestre-coder.github.io/Can-Kebab/pita.png" alt="Pita">
-  <img src="https://llucmestre-coder.github.io/Can-Kebab/kebab_fries.png" alt="Kebab fries">
+  <img src="meat_spit.png" alt="Brot de carn" class="g-main">
+  <img src="pita.png" alt="Pita">
+  <img src="kebab_fries.png" alt="Kebab fries">
 </div>
 
 <!-- MENU -->
@@ -511,7 +524,7 @@
         <div class="cat-title">🥙 Kebabs Signature</div>
 
         <div class="dish" onclick="addToCart('Kebab Àrab',10.99)">
-          <img src="https://llucmestre-coder.github.io/Can-Kebab/arabic_durum.png" alt="Àrab" class="dish-thumb">
+          <img src="arabic_durum.png" alt="Àrab" class="dish-thumb">
           <div>
             <div class="dish-name">Àrab <span style="font-size:0.65rem;color:var(--green);font-weight:600;background:rgba(74,103,65,0.1);padding:0.1rem 0.4rem;border-radius:2px;margin-left:0.4rem">⭐ Popular</span></div>
             <div class="dish-desc">Durum o pita · pollastre 120g · hummus · salsa iogurt · chimichurri àrab · herbes · ceba encurtida</div>
@@ -520,7 +533,7 @@
         </div>
 
         <div class="dish" onclick="addToCart('Kebab Empordanès',10.99)">
-          <img src="https://llucmestre-coder.github.io/Can-Kebab/kebab_empordanes.png" alt="Empordanès" class="dish-thumb">
+          <img src="kebab_empordanes.png" alt="Empordanès" class="dish-thumb">
           <div>
             <div class="dish-name">Empordanès</div>
             <div class="dish-desc">Durum o pita · pollastre 120g · salsa romesco · escarola · tomàquet sec · oliva kalamata</div>
@@ -529,7 +542,7 @@
         </div>
 
         <div class="dish" onclick="addToCart('Kebab De foc i brasa',10.99)">
-          <img src="https://llucmestre-coder.github.io/Can-Kebab/pita.png" alt="Foc i brasa" class="dish-thumb">
+          <img src="pita.png" alt="Foc i brasa" class="dish-thumb">
           <div>
             <div class="dish-name">De foc i brasa 🔥</div>
             <div class="dish-desc">Durum o pita · pollastre 120g · puré d'albergínia al carbó · pebrot caramel·litzat · salsa picant casolana · allioli d'all escalivat</div>
@@ -562,7 +575,7 @@
         </div>
 
         <div class="dish" onclick="addToCart('Dressed fries',5.50)">
-          <img src="https://llucmestre-coder.github.io/Can-Kebab/kebab_fries.png" alt="Dressed fries" class="dish-thumb">
+          <img src="kebab_fries.png" alt="Dressed fries" class="dish-thumb">
           <div>
             <div class="dish-name">Dressed fries</div>
             <div class="dish-desc">Patates fregides · sumac · feta · ceba encurtida · chimichurri àrab · julivert</div>
@@ -571,7 +584,7 @@
         </div>
 
         <div class="dish" onclick="addToCart('Kebab fries',6.50)">
-          <img src="https://llucmestre-coder.github.io/Can-Kebab/kebab_fries.png" alt="Kebab fries" class="dish-thumb">
+          <img src="kebab_fries.png" alt="Kebab fries" class="dish-thumb">
           <div>
             <div class="dish-name">Kebab fries</div>
             <div class="dish-desc">Patates fregides · pollastre · ceba encurtida · salsa tahini · julivert</div>
@@ -580,7 +593,7 @@
         </div>
 
         <div class="dish" onclick="addToCart('Couscous bowl',8.99)">
-          <img src="https://llucmestre-coder.github.io/Can-Kebab/couscous_bowl.png" alt="Couscous bowl" class="dish-thumb">
+          <img src="couscous_bowl.png" alt="Couscous bowl" class="dish-thumb">
           <div>
             <div class="dish-name">Couscous bowl</div>
             <div class="dish-desc">Couscous amanit · pollastre · amanida · cogombre · ceba encurtida · salsa iogurt · salsa tahini</div>
@@ -633,13 +646,13 @@
         </div>
 
         <div class="dish" onclick="addToCart('Carrot cake',5)">
-          <img src="https://llucmestre-coder.github.io/Can-Kebab/carrot_cake.png" alt="Carrot cake" class="dish-thumb">
+          <img src="carrot_cake.png" alt="Carrot cake" class="dish-thumb">
           <div><div class="dish-name">Carrot cake</div></div>
           <div class="dish-right"><span class="dish-price">5€</span><button class="add-btn">+</button></div>
         </div>
 
         <div class="dish" onclick="addToCart('Chocolate fondant',5)">
-          <img src="https://llucmestre-coder.github.io/Can-Kebab/chocolate_fondant.png" alt="Chocolate fondant" class="dish-thumb">
+          <img src="chocolate_fondant.png" alt="Chocolate fondant" class="dish-thumb">
           <div><div class="dish-name">Decadent chocolate fondant</div></div>
           <div class="dish-right"><span class="dish-price">5€</span><button class="add-btn">+</button></div>
         </div>
@@ -652,27 +665,27 @@
 <!-- PHOTO MOSAIC -->
 <div class="mosaic">
   <div class="mosaic-item wide">
-    <img src="https://llucmestre-coder.github.io/Can-Kebab/wrap_cut.png" alt="Wrap">
+    <img src="wrap_cut.png" alt="Wrap">
     <div class="mosaic-label">Durum artesà</div>
   </div>
   <div class="mosaic-item">
-    <img src="https://llucmestre-coder.github.io/Can-Kebab/falafel.png" alt="Falafel">
+    <img src="falafel.png" alt="Falafel">
     <div class="mosaic-label">Falafel casolà</div>
   </div>
   <div class="mosaic-item">
-    <img src="https://llucmestre-coder.github.io/Can-Kebab/couscous_bowl.png" alt="Bowl">
+    <img src="couscous_bowl.png" alt="Bowl">
     <div class="mosaic-label">Couscous bowl</div>
   </div>
   <div class="mosaic-item">
-    <img src="https://llucmestre-coder.github.io/Can-Kebab/durum_wrap.png" alt="Durum">
+    <img src="durum_wrap.png" alt="Durum">
     <div class="mosaic-label">Kebab de brasa</div>
   </div>
   <div class="mosaic-item">
-    <img src="https://llucmestre-coder.github.io/Can-Kebab/carrot_cake.png" alt="Carrot cake">
+    <img src="carrot_cake.png" alt="Carrot cake">
     <div class="mosaic-label">Carrot cake</div>
   </div>
   <div class="mosaic-item wide">
-    <img src="https://llucmestre-coder.github.io/Can-Kebab/meat_spit.png" alt="Brot">
+    <img src="meat_spit.png" alt="Brot">
     <div class="mosaic-label">El nostre brot</div>
   </div>
 </div>
@@ -687,32 +700,37 @@
   <div class="order-layout">
     <div class="order-form-wrap">
       <div class="toggle-row">
-        <button class="tgl on" id="tgl-recollida" onclick="setMode('recollida')">🏃 Recollida</button>
+        <button class="tgl on" id="tgl-recollida" onclick="setMode('recollida')">🏃 Recollida al local</button>
         <button class="tgl" id="tgl-domicili" onclick="setMode('domicili')">🛵 A domicili</button>
       </div>
 
       <div id="delivery-section" style="display:none">
-        <div class="fg"><label>Adreça</label><input type="text" placeholder="Carrer i número"></div>
+        <div class="fg"><label>Adreça *</label><input id="f-adreca" type="text" placeholder="Carrer i número" required></div>
         <div class="fr">
-          <div class="fg"><label>Pis / Porta</label><input type="text" placeholder="2n 1a"></div>
-          <div class="fg"><label>CP</label><input type="text" placeholder="08001"></div>
+          <div class="fg"><label>Pis / Porta</label><input id="f-pis" type="text" placeholder="2n 1a"></div>
+          <div class="fg"><label>Codi postal *</label><input id="f-cp" type="text" placeholder="08001" required></div>
         </div>
       </div>
 
       <div class="fr">
-        <div class="fg"><label>Nom</label><input type="text" placeholder="El teu nom"></div>
-        <div class="fg"><label>Telèfon</label><input type="tel" placeholder="6XX XXX XXX"></div>
+        <div class="fg"><label>Nom *</label><input id="f-nom" type="text" placeholder="El teu nom" required></div>
+        <div class="fg"><label>Telèfon *</label><input id="f-tel" type="tel" placeholder="6XX XXX XXX" required></div>
       </div>
-      <div class="fg"><label>Hora de recollida</label>
-        <select>
-          <option>El més aviat possible</option>
-          <option>En 30 minuts</option>
-          <option>En 45 minuts</option>
-          <option>En 1 hora</option>
-        </select>
+
+      <div id="recollida-hora-section">
+        <div class="fg"><label>Hora de recollida *</label>
+          <select id="f-hora">
+            <option value="">Selecciona una hora</option>
+            <option>El més aviat possible</option>
+            <option>En 30 minuts</option>
+            <option>En 45 minuts</option>
+            <option>En 1 hora</option>
+          </select>
+        </div>
       </div>
+
       <div class="fg"><label>Notes (al·lèrgies, peticions...)</label>
-        <textarea placeholder="Sense ceba, extra salsa..."></textarea>
+        <textarea id="f-notes" placeholder="Sense ceba, salsa extra..."></textarea>
       </div>
     </div>
 
@@ -734,7 +752,7 @@
 <!-- ABOUT -->
 <section id="about">
   <div class="about-img-wrap">
-    <img src="https://llucmestre-coder.github.io/Can-Kebab/exterior.png" alt="Can Kebab exterior" class="about-img">
+    <img src="exterior.png" alt="Can Kebab exterior" class="about-img">
     <div class="about-img-badge">Des del primer dia,<br><em>amb sabor.</em></div>
   </div>
   <div class="about-text">
@@ -742,11 +760,11 @@
     <h2 class="section-title" style="margin-bottom:1.5rem">Kebab fet <em>com cal</em></h2>
     <p>A Can Kebab ens hem cansat dels kebabs industrials. Per això vam crear un lloc on la carn es talla del brot al moment, el pa és casolà i cada salsa té la seva recepta pròpia.</p>
     <p>Treballem amb producte fresc cada dia i seleccionem els ingredients amb el mateix criteri que un restaurant de cuina de mercat. Perquè un bon kebab mereix el mateix respecte que qualsevol altre plat.</p>
-    <p>El local el trobaràs al cor de Barcelona, amb aquell verd característic que ja han reconèixer els veïns del barri.</p>
+    <p>El local el trobaràs al cor de Barcelona, al carrer Jaume Piquet, 1, amb aquell verd característic que ja reconeixen els veïns del barri.</p>
     <div class="about-vals">
       <div class="val"><strong>100% Halal</strong><span>Carn certificada i traçable</span></div>
       <div class="val"><strong>Fresc diari</strong><span>Sense congelats ni precocinats</span></div>
-      <div class="val"><strong>Receptes pròpies</strong><span>Salsers artesanes de la casa</span></div>
+      <div class="val"><strong>Receptes pròpies</strong><span>Salses artesanes de la casa</span></div>
       <div class="val"><strong>Menú obert</strong><span>Durum, pita o bowl — tu tries</span></div>
     </div>
   </div>
@@ -756,7 +774,7 @@
 <section id="contact">
   <div style="text-align:center;margin-bottom:3rem;">
     <span class="section-label">Troba'ns</span>
-    <h2 class="section-title">Vine a <em>visitar-nos</em></h2>
+    <h2 class="section-title">Vine a <em>trobar-nos</em></h2>
   </div>
   <div class="contact-inner">
     <div class="contact-box">
@@ -765,34 +783,58 @@
         <div class="c-icon">📍</div>
         <div class="c-info">
           <strong>Adreça</strong>
-          <span>Barcelona<br>Consulta Google Maps</span>
+          <span>Carrer Jaume Piquet, 1<br>08017 Barcelona</span>
         </div>
       </div>
       <div class="c-row">
         <div class="c-icon">📞</div>
         <div class="c-info">
-          <strong>Telèfon / WhatsApp</strong>
-          <span>Comandes telefòniques<br>disponibles</span>
+          <strong>Telèfon</strong>
+          <span>603 974 811</span>
         </div>
       </div>
       <div class="c-row">
-        <div class="c-icon">📱</div>
+        <div class="c-icon">📸</div>
         <div class="c-info">
-          <strong>Xarxes socials</strong>
-          <span>@cankebab — Google Maps</span>
+          <strong>Instagram</strong>
+          <span><a href="https://instagram.com/cankebabb" target="_blank" style="color:var(--green);text-decoration:none;">@cankebabb</a></span>
         </div>
       </div>
     </div>
     <div class="contact-box">
       <h3>Horaris</h3>
       <div class="hours-list">
-        <div class="h-row"><span class="day">Dilluns</span><span class="time">12:00 – 00:00</span></div>
-        <div class="h-row"><span class="day">Dimarts</span><span class="time">12:00 – 00:00</span></div>
-        <div class="h-row"><span class="day">Dimecres</span><span class="time">12:00 – 00:00</span></div>
-        <div class="h-row"><span class="day">Dijous</span><span class="time">12:00 – 00:00</span></div>
-        <div class="h-row"><span class="day">Divendres</span><span class="time">12:00 – 01:00</span></div>
-        <div class="h-row"><span class="day">Dissabte</span><span class="time">12:00 – 01:00</span></div>
-        <div class="h-row"><span class="day">Diumenge</span><span class="time">12:00 – 00:00</span></div>
+        <div class="h-row">
+          <span class="day">Dissabte</span>
+          <span class="time">12 pm – 12 am</span>
+        </div>
+        <div class="h-row">
+          <span class="day">Diumenge</span>
+          <span class="time"><span>12 – 4 pm</span><span>7 – 11 pm</span></span>
+        </div>
+        <div class="h-row">
+          <span class="day">Dilluns</span>
+          <span class="time"><span>12 – 4 pm</span><span>7 – 11 pm</span></span>
+        </div>
+        <div class="h-row">
+          <span class="day">Dimarts</span>
+          <span class="time"><span>12 – 4 pm</span><span>7 – 11 pm</span></span>
+        </div>
+        <div class="h-row">
+          <span class="day">Dimecres</span>
+          <span class="time"><span>12 – 4 pm</span><span>7 – 11 pm</span></span>
+        </div>
+        <div class="h-row">
+          <span class="day">Dijous</span>
+          <span class="time">
+            <span>12 – 4 pm</span>
+            <span>7 – 11 pm</span>
+          </span>
+        </div>
+        <div class="h-row">
+          <span class="day">Divendres</span>
+          <span class="time">12 pm – 12 am</span>
+        </div>
       </div>
       <p style="font-size:0.78rem;color:var(--green);margin-top:1rem;font-weight:500;">🌿 Rostit de diumenge · disponible cada diumenge</p>
     </div>
@@ -806,7 +848,7 @@
     Can Kebab
   </div>
   <p>© 2025 Can Kebab · Barcelona · Kebab artesà</p>
-  <p>Dissenyat amb ❤️ per al barri</p>
+  <p>Fet amb ❤️ per al barri</p>
 </footer>
 
 <!-- TOAST -->
@@ -824,8 +866,9 @@
     showToast(`✅ ${name} afegit!`);
   }
 
-  function removeFromCart(index) {
-    cart.splice(index, 1);
+  function changeQty(index, delta) {
+    cart[index].qty += delta;
+    if (cart[index].qty <= 0) cart.splice(index, 1);
     renderCart();
   }
 
@@ -850,9 +893,13 @@
       const sub = (item.price * item.qty).toFixed(2);
       total += item.price * item.qty;
       html += `<div class="cart-item-row">
-        <span class="ci-name">${item.qty > 1 ? item.qty + '× ' : ''}${item.name}</span>
+        <span class="ci-name">${item.name}</span>
+        <div class="ci-qty">
+          <button class="ci-qty-btn" onclick="changeQty(${idx}, -1)">−</button>
+          <span class="ci-qty-num">${item.qty}</span>
+          <button class="ci-qty-btn" onclick="changeQty(${idx}, 1)">+</button>
+        </div>
         <span class="ci-price">${sub}€</span>
-        <button class="ci-remove" onclick="removeFromCart(${idx})">✕</button>
       </div>`;
     });
     el.innerHTML = html;
@@ -862,6 +909,24 @@
 
   function submitOrder() {
     if (cart.length === 0) { showToast('⚠️ Afegeix algun plat primer!'); return; }
+
+    const nom = document.getElementById('f-nom').value.trim();
+    const tel = document.getElementById('f-tel').value.trim();
+    if (!nom) { showToast('⚠️ Cal indicar el nom.'); return; }
+    if (!tel) { showToast('⚠️ Cal indicar el telèfon.'); return; }
+
+    if (orderMode === 'recollida') {
+      const hora = document.getElementById('f-hora').value;
+      if (!hora) { showToast('⚠️ Selecciona una hora de recollida.'); return; }
+    }
+
+    if (orderMode === 'domicili') {
+      const adreca = document.getElementById('f-adreca').value.trim();
+      const cp = document.getElementById('f-cp').value.trim();
+      if (!adreca) { showToast('⚠️ Cal indicar l\'adreça de lliurament.'); return; }
+      if (!cp) { showToast('⚠️ Cal indicar el codi postal.'); return; }
+    }
+
     showToast('🎉 Comanda enviada! Ens posem en contacte aviat.');
     cart = [];
     renderCart();
@@ -882,10 +947,14 @@
   }
 
   // ── ORDER MODE ──
+  let orderMode = 'recollida';
+
   function setMode(mode) {
+    orderMode = mode;
     document.getElementById('tgl-recollida').classList.toggle('on', mode === 'recollida');
     document.getElementById('tgl-domicili').classList.toggle('on', mode === 'domicili');
     document.getElementById('delivery-section').style.display = mode === 'domicili' ? 'block' : 'none';
+    document.getElementById('recollida-hora-section').style.display = mode === 'recollida' ? 'block' : 'none';
   }
 
   // ── TOAST ──
