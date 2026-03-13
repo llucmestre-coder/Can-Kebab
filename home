@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Can Kebab — Barcelona</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #4A6741;
+    --green-dark: #2D3F2A;
+    --green-light: #6B8F61;
+    --cream: #F7F0E3;
+    --warm-white: #FDFAF4;
+    --dark: #1C1A15;
+    --brown: #5C3D2E;
+    --gold: #C8973A;
+    --terracotta: #B85C38;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--warm-white); color: var(--dark); font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top:0; left:0; right:0; z-index:100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 3rem;
+    background: rgba(28,26,21,0.95);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(74,103,65,0.3);
+    transition: all 0.3s;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 0.8rem;
+    font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 900;
+    color: var(--cream); letter-spacing: 0.02em;
+  }
+  .logo-mark {
+    width: 36px; height: 36px;
+    background: var(--green);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+  }
+  .nav-links { display:flex; gap:2rem; list-style:none; }
+  .nav-links a {
+    color: rgba(247,240,227,0.65); text-decoration:none;
+    font-size:0.82rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--green-light); }
+  .nav-order {
+    background: var(--green); color: var(--cream) !important;
+    padding: 0.55rem 1.3rem; border-radius: 3px;
+    font-weight: 600 !important;
+  }
+  .nav-order:hover { background: var(--green-light) !important; color: var(--cream) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    background: var(--dark);
+    overflow: hidden;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 9rem 4rem 4rem 5rem;
+    position: relative; z-index: 2;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(74,103,65,0.2);
+    border: 1px solid rgba(74,103,65,0.4);
+    color: var(--green-light);
+    padding: 0.35rem 0.9rem; border-radius: 20px;
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 2rem;
+    width: fit-content;
+    animation: fadeUp 0.7s 0.1s both;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 5.5vw, 5rem);
+    font-weight: 900; line-height: 1.0;
+    color: var(--cream); margin-bottom: 1.5rem;
+    animation: fadeUp 0.7s 0.25s both;
+  }
+  .hero-title em { font-style: italic; color: var(--green-light); }
+  .hero-sub {
+    color: rgba(247,240,227,0.55); font-size: 1rem; line-height: 1.7;
+    max-width: 360px; margin-bottom: 2.5rem;
+    animation: fadeUp 0.7s 0.4s both;
+  }
+  .hero-btns { display:flex; gap:1rem; animation: fadeUp 0.7s 0.55s both; }
+  .btn-green {
+    background: var(--green); color: var(--cream);
+    padding: 0.85rem 2rem; border: none; border-radius: 3px;
+    font-family: 'DM Sans'; font-size: 0.9rem; font-weight: 600;
+    cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-block;
+  }
+  .btn-green:hover { background: var(--green-light); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent; color: var(--cream);
+    padding: 0.85rem 2rem; border: 1px solid rgba(247,240,227,0.25);
+    border-radius: 3px; font-family: 'DM Sans'; font-size: 0.9rem; font-weight: 500;
+    cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--green-light); color: var(--green-light); }
+
+  .hero-right {
+    position: relative; overflow: hidden;
+  }
+  .hero-img-main {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: brightness(0.75);
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, var(--dark) 0%, transparent 40%);
+  }
+  .hero-badge-float {
+    position: absolute; bottom: 3rem; right: 2rem;
+    background: var(--green);
+    color: var(--cream); padding: 1.2rem 1.5rem;
+    border-radius: 4px; text-align: center;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    animation: fadeUp 0.7s 0.7s both;
+  }
+  .hero-badge-float strong { display:block; font-family:'Playfair Display',serif; font-size:2rem; font-weight:900; }
+  .hero-badge-float span { font-size: 0.72rem; letter-spacing:0.1em; text-transform:uppercase; opacity:0.8; }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(18px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  /* ── STRIP ── */
+  .strip {
+    background: var(--green);
+    display: flex; justify-content: center; gap: 4rem;
+    padding: 1.1rem 2rem; flex-wrap: wrap;
+  }
+  .strip-item {
+    display: flex; align-items: center; gap: 0.6rem;
+    color: rgba(247,240,227,0.9); font-size: 0.82rem; font-weight: 500; letter-spacing:0.04em;
+  }
+
+  /* ── SECTION HELPERS ── */
+  .section-label {
+    display:block; font-size:0.7rem; font-weight:600; letter-spacing:0.28em;
+    text-transform:uppercase; color:var(--green); margin-bottom:0.7rem;
+  }
+  .section-title {
+    font-family:'Playfair Display',serif; font-size: clamp(1.8rem,3.5vw,2.6rem);
+    font-weight:900; line-height:1.1; color:var(--dark);
+  }
+  .section-title em { font-style:italic; color:var(--terracotta); }
+
+  /* ── GALLERY INTRO ── */
+  .gallery-strip {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 280px;
+    gap: 3px;
+    overflow: hidden;
+  }
+  .gallery-strip img {
+    width:100%; height:100%; object-fit:cover;
+    transition: transform 0.5s; cursor:pointer;
+  }
+  .gallery-strip img:hover { transform: scale(1.04); }
+  .gallery-strip .g-main { grid-row: span 1; }
+
+  /* ── MENU SECTION ── */
+  #menu { padding: 6rem 4rem; background: var(--warm-white); }
+  .menu-inner { max-width: 1100px; margin: 0 auto; }
+  .menu-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:3rem; }
+
+  .tabs { display:flex; gap:0.3rem; flex-wrap:wrap; }
+  .tab {
+    padding: 0.45rem 1.1rem; border: 1px solid rgba(74,103,65,0.25);
+    background:transparent; color:var(--brown);
+    font-family:'DM Sans'; font-size:0.78rem; font-weight:500;
+    letter-spacing:0.08em; text-transform:uppercase;
+    border-radius:2px; cursor:pointer; transition:all 0.2s;
+  }
+  .tab.active, .tab:hover { background:var(--green-dark); color:var(--cream); border-color:var(--green-dark); }
+
+  .menu-grid { display:flex; flex-direction:column; gap:0.8rem; }
+  .menu-cat { display:none; }
+  .menu-cat.show { display:flex; flex-direction:column; gap:0.8rem; }
+
+  .cat-title {
+    font-family:'Playfair Display',serif; font-size:1.35rem; font-weight:700;
+    color:var(--green-dark); padding-bottom:0.7rem;
+    border-bottom:2px solid var(--green); margin-bottom:0.5rem;
+    display:flex; align-items:center; gap:0.6rem;
+  }
+
+  .dish {
+    display:grid; grid-template-columns: 80px 1fr auto;
+    gap:1rem; align-items:center;
+    background:white; border:1px solid rgba(74,103,65,0.1);
+    border-radius:6px; padding:0.9rem 1rem;
+    transition:all 0.2s; cursor:pointer;
+  }
+  .dish:hover { border-color:var(--green); box-shadow:0 4px 20px rgba(74,103,65,0.12); transform:translateX(3px); }
+  .dish-thumb {
+    width:80px; height:60px; border-radius:4px; object-fit:cover;
+    flex-shrink:0;
+  }
+  .dish-thumb-placeholder {
+    width:80px; height:60px; border-radius:4px;
+    background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.4rem; flex-shrink:0;
+  }
+  .dish-name { font-family:'Playfair Display',serif; font-size:1rem; font-weight:700; color:var(--dark); margin-bottom:0.25rem; }
+  .dish-desc { font-size:0.8rem; color:#888; line-height:1.45; }
+  .dish-badge {
+    font-size:0.62rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--green); background:rgba(74,103,65,0.1);
+    padding:0.15rem 0.5rem; border-radius:2px; display:inline-block; margin-top:0.3rem;
+  }
+  .dish-right { display:flex; flex-direction:column; align-items:flex-end; gap:0.5rem; }
+  .dish-price { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:var(--gold); white-space:nowrap; }
+  .add-btn {
+    width:30px; height:30px; border-radius:50%;
+    background:var(--green-dark); color:var(--cream); border:none;
+    font-size:1.1rem; cursor:pointer; display:flex; align-items:center; justify-content:center;
+    transition:background 0.2s; flex-shrink:0;
+  }
+  .add-btn:hover { background:var(--green); }
+
+  /* ── PHOTO MOSAIC ── */
+  .mosaic {
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 220px 220px;
+    gap:4px;
+  }
+  .mosaic-item { overflow:hidden; position:relative; }
+  .mosaic-item img { width:100%; height:100%; object-fit:cover; transition:transform 0.5s; }
+  .mosaic-item:hover img { transform:scale(1.06); }
+  .mosaic-item.wide { grid-column: span 2; }
+  .mosaic-label {
+    position:absolute; bottom:0; left:0; right:0;
+    padding:0.8rem 1rem;
+    background:linear-gradient(transparent, rgba(28,26,21,0.8));
+    color:var(--cream); font-size:0.8rem; font-weight:500;
+    letter-spacing:0.06em; text-transform:uppercase;
+    opacity:0; transition:opacity 0.3s;
+  }
+  .mosaic-item:hover .mosaic-label { opacity:1; }
+
+  /* ── ORDER ── */
+  #order {
+    padding: 6rem 4rem;
+    background: var(--green-dark);
+  }
+  #order .section-label { color: var(--green-light); }
+  #order .section-title { color: var(--cream); }
+  #order .section-title em { color: var(--gold); }
+
+  .order-layout {
+    max-width:900px; margin:3rem auto 0;
+    display:grid; grid-template-columns:1fr 1fr; gap:2.5rem;
+  }
+
+  .order-form-wrap {
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(107,143,97,0.25);
+    border-radius:6px; padding:2rem;
+  }
+
+  .toggle-row {
+    display:flex; gap:0; margin-bottom:1.8rem;
+    border:1px solid rgba(107,143,97,0.3); border-radius:3px; overflow:hidden;
+  }
+  .tgl {
+    flex:1; padding:0.7rem; background:transparent; border:none;
+    color:rgba(247,240,227,0.5); font-family:'DM Sans'; font-size:0.82rem;
+    font-weight:500; letter-spacing:0.1em; text-transform:uppercase;
+    cursor:pointer; transition:all 0.2s;
+  }
+  .tgl.on { background:var(--green); color:var(--cream); }
+
+  .fg { display:flex; flex-direction:column; gap:0.4rem; margin-bottom:1rem; }
+  .fg label { font-size:0.72rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:rgba(247,240,227,0.45); }
+  .fg input, .fg textarea, .fg select {
+    background:rgba(255,255,255,0.07); border:1px solid rgba(107,143,97,0.25);
+    border-radius:3px; padding:0.7rem 0.9rem; color:var(--cream);
+    font-family:'DM Sans'; font-size:0.88rem; outline:none; transition:border-color 0.2s;
+  }
+  .fg input:focus, .fg textarea:focus, .fg select:focus { border-color:var(--green-light); }
+  .fg select option { background:#2D3F2A; }
+  .fg textarea { resize:vertical; min-height:80px; }
+  .fr { display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; }
+
+  /* CART */
+  .cart-panel {
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(107,143,97,0.2); border-radius:6px; padding:1.5rem;
+  }
+  .cart-title {
+    font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700;
+    color:var(--cream); margin-bottom:1.2rem;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .cart-count {
+    background:var(--green); color:var(--cream); border-radius:50%;
+    width:22px; height:22px; font-size:0.75rem; font-weight:700;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .cart-empty { color:rgba(247,240,227,0.3); font-size:0.85rem; text-align:center; padding:2rem 0; }
+  .cart-item-row {
+    display:flex; justify-content:space-between; align-items:center;
+    padding:0.55rem 0; border-bottom:1px solid rgba(107,143,97,0.12);
+    color:var(--cream); font-size:0.85rem;
+  }
+  .cart-item-row:last-of-type { border-bottom:none; }
+  .ci-name { flex:1; }
+  .ci-price { color:var(--gold); font-weight:600; margin-left:1rem; }
+  .ci-remove { background:none; border:none; color:rgba(247,240,227,0.25); cursor:pointer; padding:0 0.3rem; font-size:1rem; transition:color 0.2s; }
+  .ci-remove:hover { color:var(--terracotta); }
+  .cart-total-row {
+    display:flex; justify-content:space-between;
+    padding-top:0.9rem; margin-top:0.5rem;
+    border-top:1px solid rgba(107,143,97,0.3);
+    font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:700;
+    color:var(--gold);
+  }
+  .submit-btn {
+    width:100%; margin-top:1rem; padding:0.9rem;
+    background:var(--green); color:var(--cream); border:none; border-radius:3px;
+    font-family:'DM Sans'; font-size:0.92rem; font-weight:600;
+    cursor:pointer; transition:all 0.2s; letter-spacing:0.04em;
+  }
+  .submit-btn:hover { background:var(--green-light); transform:translateY(-1px); }
+
+  /* ── ABOUT ── */
+  #about {
+    padding:6rem 4rem;
+    background:var(--cream);
+    display:grid; grid-template-columns:1fr 1fr; gap:5rem;
+    max-width:1200px; margin:0 auto;
+    align-items:center;
+  }
+  .about-img-wrap { position:relative; }
+  .about-img {
+    width:100%; border-radius:6px; object-fit:cover;
+    height:480px;
+    box-shadow: 12px 12px 0 var(--green);
+  }
+  .about-img-badge {
+    position:absolute; bottom:-1rem; left:-1rem;
+    background:var(--green-dark); color:var(--cream);
+    padding:1rem 1.4rem; border-radius:4px;
+    font-family:'Playfair Display',serif; font-style:italic; font-size:1rem;
+    box-shadow:0 8px 24px rgba(0,0,0,0.2);
+  }
+  .about-text p { color:#666; line-height:1.8; margin-bottom:1.1rem; font-size:0.95rem; }
+  .about-vals {
+    display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:2rem;
+  }
+  .val {
+    background:white; border-left:3px solid var(--green);
+    padding:1rem 1.2rem; border-radius:0 4px 4px 0;
+  }
+  .val strong { display:block; font-family:'Playfair Display',serif; font-size:1rem; font-weight:700; color:var(--dark); margin-bottom:0.2rem; }
+  .val span { font-size:0.8rem; color:#888; }
+
+  /* ── CONTACT ── */
+  #contact { padding:5rem 4rem; background:var(--warm-white); }
+  .contact-inner { max-width:900px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:4rem; }
+  .contact-box h3 { font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:700; color:var(--dark); margin-bottom:1.5rem; }
+  .c-row { display:flex; gap:0.9rem; margin-bottom:1.2rem; align-items:flex-start; }
+  .c-icon {
+    width:38px; height:38px; background:var(--green); border-radius:3px;
+    display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0;
+  }
+  .c-info strong { display:block; font-size:0.88rem; font-weight:600; color:var(--dark); }
+  .c-info span { font-size:0.82rem; color:#888; line-height:1.5; }
+  .hours-list { display:flex; flex-direction:column; gap:0; }
+  .h-row { display:flex; justify-content:space-between; padding:0.5rem 0; border-bottom:1px solid rgba(74,103,65,0.1); font-size:0.84rem; }
+  .h-row .day { font-weight:500; color:var(--dark); }
+  .h-row .time { color:#888; }
+  .h-row.today .day, .h-row.today .time { color:var(--green); font-weight:600; }
+
+  /* ── FOOTER ── */
+  footer {
+    background:var(--green-dark);
+    padding:2rem 4rem;
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:1rem;
+  }
+  .footer-logo { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:900; color:var(--cream); display:flex; align-items:center; gap:0.6rem; }
+  footer p { color:rgba(247,240,227,0.35); font-size:0.78rem; }
+
+  /* ── TOAST ── */
+  .toast {
+    position:fixed; bottom:2rem; right:2rem; z-index:999;
+    background:var(--green-dark); color:var(--cream);
+    padding:0.9rem 1.4rem; border-radius:4px;
+    border-left:3px solid var(--green-light);
+    font-size:0.85rem; font-weight:500;
+    transform:translateY(80px); opacity:0; transition:all 0.3s;
+    pointer-events:none;
+  }
+  .toast.show { transform:translateY(0); opacity:1; }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:900px){
+    nav { padding:1rem 1.5rem; }
+    .nav-links { display:none; }
+    .hero { grid-template-columns:1fr; }
+    .hero-right { height:300px; }
+    .hero-left { padding:7rem 1.5rem 3rem; }
+    #menu, #order, #contact { padding:4rem 1.5rem; }
+    #about { grid-template-columns:1fr; padding:4rem 1.5rem; }
+    .order-layout { grid-template-columns:1fr; }
+    .contact-inner { grid-template-columns:1fr; }
+    .mosaic { grid-template-columns:1fr 1fr; grid-template-rows:repeat(3,160px); }
+    .mosaic-item.wide { grid-column:span 1; }
+    .gallery-strip { grid-template-columns:1fr 1fr; grid-template-rows:180px; }
+    .gallery-strip .g-main { display:none; }
+    footer { padding:1.5rem; flex-direction:column; text-align:center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="logo-mark">🥙</div>
+    Can Kebab
+  </div>
+  <ul class="nav-links">
+    <li><a href="#menu">Carta</a></li>
+    <li><a href="#order">Comanda</a></li>
+    <li><a href="#about">Nosaltres</a></li>
+    <li><a href="#contact">Contacte</a></li>
+    <li><a href="#order" class="nav-order">Comanda ara</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">🌿 100% Halal · Barcelona</div>
+    <h1 class="hero-title">
+      Kebab<br>
+      <em>artesà</em><br>
+      de veritat.
+    </h1>
+    <p class="hero-sub">Ingredients de proximitat, carn de brasa i receptes pròpies. Durum, pita o bowl — fets amb cura al moment.</p>
+    <div class="hero-btns">
+      <a href="#menu" class="btn-green">Veure carta</a>
+      <a href="#order" class="btn-outline">Fer comanda</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="cankebab_imgs/arabic_durum.png" alt="Kebab Can Kebab" class="hero-img-main">
+    <div class="hero-overlay"></div>
+    <div class="hero-badge-float">
+      <strong>4.7★</strong>
+      <span>Google Reviews</span>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-item">🕐 Dilluns–Diumenge · 12:00–00:00</div>
+  <div class="strip-item">📍 Barcelona</div>
+  <div class="strip-item">🛵 Recollida & Lliurament</div>
+  <div class="strip-item">🌿 Producte fresc diari</div>
+</div>
+
+<!-- GALLERY TEASER -->
+<div class="gallery-strip">
+  <img src="cankebab_imgs/meat_spit.png" alt="Brot de carn" class="g-main">
+  <img src="cankebab_imgs/pita.png" alt="Pita">
+  <img src="cankebab_imgs/kebab_fries.png" alt="Kebab fries">
+</div>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="menu-inner">
+    <div class="menu-header">
+      <div>
+        <span class="section-label">El nostre menú</span>
+        <h2 class="section-title">Carta <em>Can Kebab</em></h2>
+      </div>
+      <div class="tabs">
+        <button class="tab active" onclick="showCat('all',this)">Tot</button>
+        <button class="tab" onclick="showCat('kebabs',this)">Kebabs</button>
+        <button class="tab" onclick="showCat('sides',this)">Sides</button>
+        <button class="tab" onclick="showCat('combos',this)">Combos</button>
+        <button class="tab" onclick="showCat('postres',this)">Postres</button>
+      </div>
+    </div>
+
+    <div class="menu-grid">
+
+      <!-- KEBABS -->
+      <div class="menu-cat show" id="cat-all-kebabs">
+        <div class="cat-title">🥙 Kebabs Signature</div>
+
+        <div class="dish" onclick="addToCart('Kebab Àrab',10.99)">
+          <img src="cankebab_imgs/arabic_durum.png" alt="Àrab" class="dish-thumb">
+          <div>
+            <div class="dish-name">Àrab <span style="font-size:0.65rem;color:var(--green);font-weight:600;background:rgba(74,103,65,0.1);padding:0.1rem 0.4rem;border-radius:2px;margin-left:0.4rem">⭐ Popular</span></div>
+            <div class="dish-desc">Durum o pita · pollastre 120g · hummus · salsa iogurt · chimichurri àrab · herbes · ceba encurtida</div>
+          </div>
+          <div class="dish-right"><span class="dish-price">10.99€</span><button class="add-btn">+</button></div>
+        </div>
+
+        <div class="dish" onclick="addToCart('Kebab Empordanès',10.99)">
+          <img src="cankebab_imgs/kebab_empordanes.png" alt="Empordanès" class="dish-thumb">
+          <div>
+            <div class="dish-name">Empordanès</div>
+            <div class="dish-desc">Durum o pita · pollastre 120g · salsa romesco · escarola · tomàquet sec · oliva kalamata</div>
+          </div>
+          <div class="dish-right"><span class="dish-price">10.99€</span><button class="add-btn">+</button></div>
+        </div>
+
+        <div class="dish" onclick="addToCart('Kebab De foc i brasa',10.99)">
+          <img src="cankebab_imgs/pita.png" alt="Foc i brasa" class="dish-thumb">
+          <div>
+            <div class="dish-name">De foc i brasa 🔥</div>
+            <div class="dish-desc">Durum o pita · pollastre 120g · puré d'albergínia al carbó · pebrot caramel·litzat · salsa picant casolana · allioli d'all escalivat</div>
+          </div>
+          <div class="dish-right"><span class="dish-price">10.99€</span><button class="add-btn">+</button></div>
+        </div>
+
+        <div class="dish" onclick="addToCart('Kebab Rostit de diumenge',11.50)">
+          <div class="dish-thumb-placeholder">🍗</div>
+          <div>
+            <div class="dish-name">Rostit de diumenge</div>
+            <div class="dish-desc">Durum o pita · pollastre · patata al caliu · allioli</div>
+            <span class="dish-badge">Només diumenge</span>
+          </div>
+          <div class="dish-right"><span class="dish-price">11.50€</span><button class="add-btn">+</button></div>
+        </div>
+      </div>
+
+      <!-- SIDES -->
+      <div class="menu-cat show" id="cat-all-sides">
+        <div class="cat-title">🍟 Sides</div>
+
+        <div class="dish" onclick="addToCart('Can fries',3.90)">
+          <div class="dish-thumb-placeholder">🍟</div>
+          <div>
+            <div class="dish-name">Can fries</div>
+            <div class="dish-desc">Patates fregides especiades</div>
+          </div>
+          <div class="dish-right"><span class="dish-price">3.90€</span><button class="add-btn">+</button></div>
+        </div>
+
+        <div class="dish" onclick="addToCart('Dressed fries',5.50)">
+          <img src="cankebab_imgs/kebab_fries.png" alt="Dressed fries" class="dish-thumb">
+          <div>
+            <div class="dish-name">Dressed fries</div>
+            <div class="dish-desc">Patates fregides · sumac · feta · ceba encurtida · chimichurri àrab · julivert</div>
+          </div>
+          <div class="dish-right"><span class="dish-price">5.50€</span><button class="add-btn">+</button></div>
+        </div>
+
+        <div class="dish" onclick="addToCart('Kebab fries',6.50)">
+          <img src="cankebab_imgs/kebab_fries.png" alt="Kebab fries" class="dish-thumb">
+          <div>
+            <div class="dish-name">Kebab fries</div>
+            <div class="dish-desc">Patates fregides · pollastre · ceba encurtida · salsa tahini · julivert</div>
+          </div>
+          <div class="dish-right"><span class="dish-price">6.50€</span><button class="add-btn">+</button></div>
+        </div>
+
+        <div class="dish" onclick="addToCart('Couscous bowl',8.99)">
+          <img src="cankebab_imgs/couscous_bowl.png" alt="Couscous bowl" class="dish-thumb">
+          <div>
+            <div class="dish-name">Couscous bowl</div>
+            <div class="dish-desc">Couscous amanit · pollastre · amanida · cogombre · ceba encurtida · salsa iogurt · salsa tahini</div>
+          </div>
+          <div class="dish-right"><span class="dish-price">8.99€</span><button class="add-btn">+</button></div>
+        </div>
+      </div>
+
+      <!-- COMBOS -->
+      <div class="menu-cat show" id="cat-all-combos">
+        <div class="cat-title">🎯 Combos</div>
+
+        <div class="dish" onclick="addToCart('Classic experience',13)">
+          <div class="dish-thumb-placeholder">🥙🍟</div>
+          <div>
+            <div class="dish-name">Classic experience</div>
+            <div class="dish-desc">Kebab base · can fries · beguda</div>
+          </div>
+          <div class="dish-right"><span class="dish-price">13€</span><button class="add-btn">+</button></div>
+        </div>
+
+        <div class="dish" onclick="addToCart('Signature feast',16.50)">
+          <div class="dish-thumb-placeholder">⭐🥙</div>
+          <div>
+            <div class="dish-name">Signature feast</div>
+            <div class="dish-desc">Kebab signature (àrab, empordanès o de foc i brasa) · can fries · beguda</div>
+            <span class="dish-badge">Best value</span>
+          </div>
+          <div class="dish-right"><span class="dish-price">16.50€</span><button class="add-btn">+</button></div>
+        </div>
+
+        <div class="dish" onclick="addToCart('Couscous experience',13)">
+          <div class="dish-thumb-placeholder">🍲</div>
+          <div>
+            <div class="dish-name">Couscous experience</div>
+            <div class="dish-desc">Couscous bowl · beguda</div>
+          </div>
+          <div class="dish-right"><span class="dish-price">13€</span><button class="add-btn">+</button></div>
+        </div>
+      </div>
+
+      <!-- POSTRES -->
+      <div class="menu-cat show" id="cat-all-postres">
+        <div class="cat-title">🍰 Postres</div>
+
+        <div class="dish" onclick="addToCart('Cheesecake',5)">
+          <div class="dish-thumb-placeholder">🍰</div>
+          <div><div class="dish-name">Cheesecake</div></div>
+          <div class="dish-right"><span class="dish-price">5€</span><button class="add-btn">+</button></div>
+        </div>
+
+        <div class="dish" onclick="addToCart('Carrot cake',5)">
+          <img src="cankebab_imgs/carrot_cake.png" alt="Carrot cake" class="dish-thumb">
+          <div><div class="dish-name">Carrot cake</div></div>
+          <div class="dish-right"><span class="dish-price">5€</span><button class="add-btn">+</button></div>
+        </div>
+
+        <div class="dish" onclick="addToCart('Chocolate fondant',5)">
+          <img src="cankebab_imgs/chocolate_fondant.png" alt="Chocolate fondant" class="dish-thumb">
+          <div><div class="dish-name">Decadent chocolate fondant</div></div>
+          <div class="dish-right"><span class="dish-price">5€</span><button class="add-btn">+</button></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO MOSAIC -->
+<div class="mosaic">
+  <div class="mosaic-item wide">
+    <img src="cankebab_imgs/wrap_cut.png" alt="Wrap">
+    <div class="mosaic-label">Durum artesà</div>
+  </div>
+  <div class="mosaic-item">
+    <img src="cankebab_imgs/falafel.png" alt="Falafel">
+    <div class="mosaic-label">Falafel casolà</div>
+  </div>
+  <div class="mosaic-item">
+    <img src="cankebab_imgs/couscous_bowl.png" alt="Bowl">
+    <div class="mosaic-label">Couscous bowl</div>
+  </div>
+  <div class="mosaic-item">
+    <img src="cankebab_imgs/durum_wrap.png" alt="Durum">
+    <div class="mosaic-label">Kebab de brasa</div>
+  </div>
+  <div class="mosaic-item">
+    <img src="cankebab_imgs/carrot_cake.png" alt="Carrot cake">
+    <div class="mosaic-label">Carrot cake</div>
+  </div>
+  <div class="mosaic-item wide">
+    <img src="cankebab_imgs/meat_spit.png" alt="Brot">
+    <div class="mosaic-label">El nostre brot</div>
+  </div>
+</div>
+
+<!-- ORDER -->
+<section id="order">
+  <div style="text-align:center;margin-bottom:0.5rem;">
+    <span class="section-label">Fes la teva comanda</span>
+    <h2 class="section-title">Recull o <em>a domicili</em></h2>
+  </div>
+
+  <div class="order-layout">
+    <div class="order-form-wrap">
+      <div class="toggle-row">
+        <button class="tgl on" id="tgl-recollida" onclick="setMode('recollida')">🏃 Recollida</button>
+        <button class="tgl" id="tgl-domicili" onclick="setMode('domicili')">🛵 A domicili</button>
+      </div>
+
+      <div id="delivery-section" style="display:none">
+        <div class="fg"><label>Adreça</label><input type="text" placeholder="Carrer i número"></div>
+        <div class="fr">
+          <div class="fg"><label>Pis / Porta</label><input type="text" placeholder="2n 1a"></div>
+          <div class="fg"><label>CP</label><input type="text" placeholder="08001"></div>
+        </div>
+      </div>
+
+      <div class="fr">
+        <div class="fg"><label>Nom</label><input type="text" placeholder="El teu nom"></div>
+        <div class="fg"><label>Telèfon</label><input type="tel" placeholder="6XX XXX XXX"></div>
+      </div>
+      <div class="fg"><label>Hora de recollida</label>
+        <select>
+          <option>El més aviat possible</option>
+          <option>En 30 minuts</option>
+          <option>En 45 minuts</option>
+          <option>En 1 hora</option>
+        </select>
+      </div>
+      <div class="fg"><label>Notes (al·lèrgies, peticions...)</label>
+        <textarea placeholder="Sense ceba, extra salsa..."></textarea>
+      </div>
+    </div>
+
+    <div class="cart-panel">
+      <div class="cart-title">
+        La teva comanda
+        <div class="cart-count" id="cart-count">0</div>
+      </div>
+      <div id="cart-items"><p class="cart-empty">Afegeix plats de la carta 👆</p></div>
+      <div class="cart-total-row" id="cart-total-row" style="display:none">
+        <span>Total</span>
+        <span id="cart-total-val">0.00€</span>
+      </div>
+      <button class="submit-btn" onclick="submitOrder()">Confirmar comanda</button>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-img-wrap">
+    <img src="cankebab_imgs/exterior.png" alt="Can Kebab exterior" class="about-img">
+    <div class="about-img-badge">Des del primer dia,<br><em>amb sabor.</em></div>
+  </div>
+  <div class="about-text">
+    <span class="section-label">El nostre local</span>
+    <h2 class="section-title" style="margin-bottom:1.5rem">Kebab fet <em>com cal</em></h2>
+    <p>A Can Kebab ens hem cansat dels kebabs industrials. Per això vam crear un lloc on la carn es talla del brot al moment, el pa és casolà i cada salsa té la seva recepta pròpia.</p>
+    <p>Treballem amb producte fresc cada dia i seleccionem els ingredients amb el mateix criteri que un restaurant de cuina de mercat. Perquè un bon kebab mereix el mateix respecte que qualsevol altre plat.</p>
+    <p>El local el trobaràs al cor de Barcelona, amb aquell verd característic que ja han reconèixer els veïns del barri.</p>
+    <div class="about-vals">
+      <div class="val"><strong>100% Halal</strong><span>Carn certificada i traçable</span></div>
+      <div class="val"><strong>Fresc diari</strong><span>Sense congelats ni precocinats</span></div>
+      <div class="val"><strong>Receptes pròpies</strong><span>Salsers artesanes de la casa</span></div>
+      <div class="val"><strong>Menú obert</strong><span>Durum, pita o bowl — tu tries</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div style="text-align:center;margin-bottom:3rem;">
+    <span class="section-label">Troba'ns</span>
+    <h2 class="section-title">Vine a <em>visitar-nos</em></h2>
+  </div>
+  <div class="contact-inner">
+    <div class="contact-box">
+      <h3>Informació</h3>
+      <div class="c-row">
+        <div class="c-icon">📍</div>
+        <div class="c-info">
+          <strong>Adreça</strong>
+          <span>Barcelona<br>Consulta Google Maps</span>
+        </div>
+      </div>
+      <div class="c-row">
+        <div class="c-icon">📞</div>
+        <div class="c-info">
+          <strong>Telèfon / WhatsApp</strong>
+          <span>Comandes telefòniques<br>disponibles</span>
+        </div>
+      </div>
+      <div class="c-row">
+        <div class="c-icon">📱</div>
+        <div class="c-info">
+          <strong>Xarxes socials</strong>
+          <span>@cankebab — Google Maps</span>
+        </div>
+      </div>
+    </div>
+    <div class="contact-box">
+      <h3>Horaris</h3>
+      <div class="hours-list">
+        <div class="h-row"><span class="day">Dilluns</span><span class="time">12:00 – 00:00</span></div>
+        <div class="h-row"><span class="day">Dimarts</span><span class="time">12:00 – 00:00</span></div>
+        <div class="h-row"><span class="day">Dimecres</span><span class="time">12:00 – 00:00</span></div>
+        <div class="h-row"><span class="day">Dijous</span><span class="time">12:00 – 00:00</span></div>
+        <div class="h-row"><span class="day">Divendres</span><span class="time">12:00 – 01:00</span></div>
+        <div class="h-row"><span class="day">Dissabte</span><span class="time">12:00 – 01:00</span></div>
+        <div class="h-row"><span class="day">Diumenge</span><span class="time">12:00 – 00:00</span></div>
+      </div>
+      <p style="font-size:0.78rem;color:var(--green);margin-top:1rem;font-weight:500;">🌿 Rostit de diumenge · disponible cada diumenge</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <div class="logo-mark" style="background:var(--green-light)">🥙</div>
+    Can Kebab
+  </div>
+  <p>© 2025 Can Kebab · Barcelona · Kebab artesà</p>
+  <p>Dissenyat amb ❤️ per al barri</p>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+  // ── CART ──
+  let cart = [];
+
+  function addToCart(name, price) {
+    const existing = cart.find(i => i.name === name);
+    if (existing) existing.qty++;
+    else cart.push({ name, price, qty: 1 });
+    renderCart();
+    showToast(`✅ ${name} afegit!`);
+  }
+
+  function removeFromCart(index) {
+    cart.splice(index, 1);
+    renderCart();
+  }
+
+  function renderCart() {
+    const el = document.getElementById('cart-items');
+    const countEl = document.getElementById('cart-count');
+    const totalRow = document.getElementById('cart-total-row');
+    const totalVal = document.getElementById('cart-total-val');
+
+    const totalItems = cart.reduce((s,i) => s + i.qty, 0);
+    countEl.textContent = totalItems;
+
+    if (cart.length === 0) {
+      el.innerHTML = '<p class="cart-empty">Afegeix plats de la carta 👆</p>';
+      totalRow.style.display = 'none';
+      return;
+    }
+
+    let html = '';
+    let total = 0;
+    cart.forEach((item, idx) => {
+      const sub = (item.price * item.qty).toFixed(2);
+      total += item.price * item.qty;
+      html += `<div class="cart-item-row">
+        <span class="ci-name">${item.qty > 1 ? item.qty + '× ' : ''}${item.name}</span>
+        <span class="ci-price">${sub}€</span>
+        <button class="ci-remove" onclick="removeFromCart(${idx})">✕</button>
+      </div>`;
+    });
+    el.innerHTML = html;
+    totalRow.style.display = 'flex';
+    totalVal.textContent = total.toFixed(2) + '€';
+  }
+
+  function submitOrder() {
+    if (cart.length === 0) { showToast('⚠️ Afegeix algun plat primer!'); return; }
+    showToast('🎉 Comanda enviada! Ens posem en contacte aviat.');
+    cart = [];
+    renderCart();
+  }
+
+  // ── TABS ──
+  function showCat(cat, btn) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+
+    if (cat === 'all') {
+      document.querySelectorAll('.menu-cat').forEach(c => c.classList.add('show'));
+    } else {
+      document.querySelectorAll('.menu-cat').forEach(c => c.classList.remove('show'));
+      const targets = document.querySelectorAll(`[id^="cat-all-${cat}"], [id^="cat-${cat}"]`);
+      targets.forEach(t => t.classList.add('show'));
+    }
+  }
+
+  // ── ORDER MODE ──
+  function setMode(mode) {
+    document.getElementById('tgl-recollida').classList.toggle('on', mode === 'recollida');
+    document.getElementById('tgl-domicili').classList.toggle('on', mode === 'domicili');
+    document.getElementById('delivery-section').style.display = mode === 'domicili' ? 'block' : 'none';
+  }
+
+  // ── TOAST ──
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2800);
+  }
+</script>
+</body>
+</html>
