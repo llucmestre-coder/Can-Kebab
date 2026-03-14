@@ -1,398 +1,208 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Carta — Can Kebab</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carta — Can Kebab</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green:#4A6741; --green-dark:#2D3F2A; --green-light:#6B8F61;
+  --cream:#F7F0E3; --warm-white:#FDFAF4; --dark:#1C1A15;
+  --gold:#C8973A; --terracotta:#B85C38;
+  --card-shadow: 0 2px 20px rgba(28,26,21,0.07), 0 0 0 1px rgba(74,103,65,0.08);
+}
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { background:var(--warm-white); color:var(--dark); font-family:'Inter',sans-serif; overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+img { display:block; max-width:100%; }
+a { text-decoration:none; color:inherit; }
 
-  /* ── VARIABLES ── */
-  :root {
-    --green:       #4A6741;
-    --green-dark:  #2D3F2A;
-    --green-light: #6B8F61;
-    --cream:       #F7F0E3;
-    --warm-white:  #FDFAF4;
-    --dark:        #1C1A15;
-    --gold:        #C8973A;
-    --terracotta:  #B85C38;
-  }
-  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-  html  { scroll-behavior:smooth; }
-  body  { background:var(--warm-white); color:var(--dark); font-family:'DM Sans',sans-serif; overflow-x:hidden; -webkit-font-smoothing:antialiased; }
-  img   { display:block; max-width:100%; }
-  a     { text-decoration:none; color:inherit; }
+/* ══ NAV ══ */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  display:grid; grid-template-columns:1fr auto 1fr;
+  align-items:center; padding:0 2.5rem; height:72px;
+  background:rgba(28,26,21,0.97); backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(107,143,97,0.18);
+}
+.nav-left { display:flex; gap:2rem; list-style:none; align-items:center; }
+.nav-left a { color:rgba(247,240,227,0.55); font-size:0.72rem; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; transition:color 0.25s; }
+.nav-left a:hover { color:var(--cream); }
+.nav-logo { display:flex; flex-direction:column; align-items:center; line-height:1; }
+.nav-logo-name { font-family:'Cormorant Garamond',serif; font-size:1.35rem; font-weight:700; color:var(--cream); letter-spacing:0.15em; text-transform:uppercase; }
+.nav-logo-sub { font-size:0.55rem; color:rgba(247,240,227,0.35); letter-spacing:0.35em; text-transform:uppercase; margin-top:3px; }
+.nav-right { display:flex; justify-content:flex-end; }
+.nav-back { background:transparent; color:rgba(247,240,227,0.55); border:1px solid rgba(247,240,227,0.2); padding:0.45rem 1.3rem; font-size:0.7rem; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; transition:all 0.25s; }
+.nav-back:hover { color:var(--cream); border-color:rgba(247,240,227,0.5); }
+.nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:6px; }
+.nav-hamburger span { display:block; width:24px; height:1.5px; background:var(--cream); }
+.nav-dropdown { display:none; position:fixed; top:72px; left:0; right:0; z-index:199; background:rgba(28,26,21,0.98); backdrop-filter:blur(20px); border-bottom:1px solid rgba(107,143,97,0.18); flex-direction:column; padding:0.5rem 0; }
+.nav-dropdown.open { display:flex; }
+.nav-dropdown a { color:rgba(247,240,227,0.65); font-size:0.75rem; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; padding:1rem 2rem; border-bottom:1px solid rgba(107,143,97,0.1); transition:all 0.2s; }
+.nav-dropdown a:hover { color:var(--cream); background:rgba(74,103,65,0.12); }
+.nav-dropdown a:last-child { border-bottom:none; }
 
-  /* ════════════════════════════════════
-     NAVIGATION — same as index.html:
-     centered logo, links left, back right
-  ════════════════════════════════════ */
-  nav {
-    position: fixed; top:0; left:0; right:0; z-index:200;
-    display: grid; grid-template-columns:1fr auto 1fr;
-    align-items: center; padding:0 2.5rem; height:72px;
-    background: rgba(28,26,21,0.97);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(107,143,97,0.2);
-  }
-  .nav-left { display:flex; gap:2rem; list-style:none; align-items:center; }
-  .nav-left a {
-    color:rgba(247,240,227,0.6); font-size:0.75rem; font-weight:500;
-    letter-spacing:0.15em; text-transform:uppercase; transition:color 0.25s; white-space:nowrap;
-  }
-  .nav-left a:hover { color:var(--cream); }
-  .nav-logo {
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    font-family:'Playfair Display',serif; text-align:center; line-height:1;
-  }
-  .nav-logo-name { font-size:1.25rem; font-weight:900; color:var(--cream); letter-spacing:0.12em; text-transform:uppercase; }
-  .nav-logo-sub  { font-size:0.6rem; font-weight:400; color:rgba(247,240,227,0.4); letter-spacing:0.3em; text-transform:uppercase; margin-top:2px; }
-  .nav-right { display:flex; justify-content:flex-end; align-items:center; }
-  .nav-back {
-    background:transparent; color:rgba(247,240,227,0.6);
-    border:1px solid rgba(247,240,227,0.2);
-    padding:0.45rem 1.3rem; border-radius:2px;
-    font-size:0.72rem; font-weight:600; letter-spacing:0.18em;
-    text-transform:uppercase; transition:all 0.25s; white-space:nowrap;
-  }
-  .nav-back:hover { color:var(--cream); border-color:rgba(247,240,227,0.5); }
-  .nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:6px; }
-  .nav-hamburger span { display:block; width:24px; height:1.5px; background:var(--cream); border-radius:1px; }
-  .nav-dropdown {
-    display:none; position:fixed; top:72px; left:0; right:0; z-index:199;
-    background:rgba(28,26,21,0.98); backdrop-filter:blur(20px);
-    border-bottom:1px solid rgba(107,143,97,0.2);
-    flex-direction:column; padding:0.5rem 0;
-  }
-  .nav-dropdown.open { display:flex; }
-  .nav-dropdown a { color:rgba(247,240,227,0.7); font-size:0.8rem; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; padding:1rem 2rem; border-bottom:1px solid rgba(107,143,97,0.1); transition:all 0.2s; }
-  .nav-dropdown a:hover { color:var(--cream); background:rgba(74,103,65,0.15); }
-  .nav-dropdown a:last-child { border-bottom:none; }
+/* ══ PAGE HERO ══ */
+.page-hero {
+  position:relative; min-height:52svh;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; overflow:hidden; padding:7rem 2rem 4rem;
+}
+.page-hero-bg {
+  position:absolute; inset:0;
+  background-image:url('img_exterior.jpg');
+  background-size:cover; background-position:center top;
+  filter:brightness(0.28); z-index:0;
+}
+.page-hero-vignette { position:absolute; inset:0; background:radial-gradient(ellipse at center, transparent 25%, rgba(28,26,21,0.72) 100%); z-index:1; }
+.page-hero-content { position:relative; z-index:2; animation:heroFade 0.9s 0.2s both; }
+@keyframes heroFade { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+.page-hero-eyebrow { font-size:0.62rem; font-weight:600; letter-spacing:0.4em; text-transform:uppercase; color:var(--gold); margin-bottom:1.2rem; display:block; }
+.page-hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(3rem,8vw,5.5rem); font-weight:700; color:var(--cream); line-height:0.92; letter-spacing:0.05em; text-transform:uppercase; }
+.page-hero-title em { font-style:italic; font-weight:400; text-transform:none; color:rgba(247,240,227,0.65); }
+.page-hero-sub { color:rgba(247,240,227,0.45); font-size:0.8rem; margin-top:1.1rem; letter-spacing:0.12em; text-transform:uppercase; }
 
-  /* ════════════════════════════════════
-     PAGE HERO — full screen, exterior
-     photo as background, centered title.
-     Same treatment as index hero.
-  ════════════════════════════════════ */
-  .page-hero {
-    position:relative; min-height:55svh;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    text-align:center; overflow:hidden;
-    padding:6rem 2rem 4rem;
-  }
-  .page-hero-bg {
-    position:absolute; inset:0;
-    background-image:url('img_exterior.jpg');
-    background-size:cover; background-position:center;
-    filter:brightness(0.3); z-index:0;
-  }
-  .page-hero-vignette {
-    position:absolute; inset:0;
-    background:radial-gradient(ellipse at center, transparent 30%, rgba(28,26,21,0.7) 100%);
-    z-index:1;
-  }
-  .page-hero-content { position:relative; z-index:2; animation:fadeUp 0.9s 0.2s both; }
-  .page-hero-eyebrow {
-    display:inline-block; font-size:0.68rem; font-weight:600;
-    letter-spacing:0.35em; text-transform:uppercase;
-    color:var(--gold); margin-bottom:1.5rem;
-  }
-  .page-hero-title {
-    font-family:'Playfair Display',serif;
-    font-size:clamp(3rem,7vw,5.5rem); font-weight:900;
-    color:var(--cream); line-height:0.95; letter-spacing:0.04em;
-  }
-  .page-hero-title em { font-style:italic; color:rgba(247,240,227,0.7); font-weight:400; }
-  .page-hero-sub {
-    color:rgba(247,240,227,0.5); font-size:0.85rem;
-    margin-top:1.2rem; letter-spacing:0.1em; text-transform:uppercase;
-  }
-  @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+/* ══ MENU SECTION ══ */
+#menu { padding:1.5rem 1.5rem 2.5rem; background:var(--warm-white); }
+.menu-card {
+  max-width:1100px; margin:0 auto;
+  background:#fff; box-shadow:var(--card-shadow); border-radius:4px;
+  padding:3.5rem 3.5rem;
+}
+.menu-header {
+  display:flex; justify-content:space-between; align-items:flex-end;
+  margin-bottom:3rem; padding-bottom:1.5rem;
+  border-bottom:1px solid rgba(74,103,65,0.1);
+  flex-wrap:wrap; gap:1.5rem;
+}
+.menu-header-title { font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,3.5vw,2.5rem); font-weight:700; color:var(--dark); }
+.menu-header-title em { font-style:italic; color:var(--terracotta); }
+.tabs { display:flex; gap:0; border:1px solid rgba(74,103,65,0.18); overflow:hidden; }
+.tab { padding:0.55rem 1.2rem; background:transparent; color:rgba(28,26,21,0.45); font-family:'Inter',sans-serif; font-size:0.68rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; border:none; border-right:1px solid rgba(74,103,65,0.18); cursor:pointer; transition:all 0.2s; white-space:nowrap; }
+.tab:last-child { border-right:none; }
+.tab.active, .tab:hover { background:var(--green-dark); color:var(--cream); }
+.menu-grid { display:flex; flex-direction:column; }
+.menu-cat { display:none; }
+.menu-cat.show { display:flex; flex-direction:column; }
+.cat-heading { font-size:0.62rem; font-weight:700; letter-spacing:0.35em; text-transform:uppercase; color:var(--green); padding:2rem 0 0.8rem; border-bottom:1px solid rgba(74,103,65,0.1); margin-bottom:0; }
 
-  /* ════════════════════════════════════
-     MENU SECTION
-  ════════════════════════════════════ */
-  #menu { padding:5rem 2rem 6rem; background:var(--warm-white); }
-  .menu-inner { max-width:1000px; margin:0 auto; }
+/* Dish rows */
+.dish { display:grid; grid-template-columns:70px 1fr auto; gap:1.2rem; align-items:center; padding:1rem 0; border-bottom:1px solid rgba(74,103,65,0.07); transition:all 0.2s; cursor:pointer; }
+.dish:last-child { border-bottom:none; }
+.dish:hover { background:rgba(247,240,227,0.45); padding-left:0.7rem; padding-right:0.7rem; margin-left:-0.7rem; margin-right:-0.7rem; }
+.dish-thumb { width:70px; height:70px; border-radius:2px; object-fit:cover; flex-shrink:0; }
+.dish-thumb-placeholder { width:70px; height:70px; border-radius:2px; flex-shrink:0; background:linear-gradient(135deg,var(--green) 0%,var(--green-dark) 100%); display:flex; align-items:center; justify-content:center; font-size:1.3rem; }
+.dish-name { font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-weight:700; color:var(--dark); margin-bottom:0.2rem; }
+.dish-desc { font-size:0.75rem; color:#aaa; line-height:1.5; }
+.dish-badge { font-size:0.55rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--green); background:rgba(74,103,65,0.08); padding:0.15rem 0.5rem; display:inline-block; margin-top:0.3rem; }
+.dish-right { display:flex; flex-direction:column; align-items:flex-end; gap:0.5rem; min-width:58px; }
+.dish-price { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:700; color:var(--gold); white-space:nowrap; }
+.add-btn { width:30px; height:30px; border-radius:50%; background:var(--green-dark); color:var(--cream); border:none; font-size:1.1rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.2s; flex-shrink:0; }
+.add-btn:hover { background:var(--green); }
+.dish-qty { display:flex; align-items:center; gap:0.3rem; background:var(--green-dark); border-radius:20px; padding:0.15rem 0.25rem; }
+.dish-qty-btn { width:24px; height:24px; border-radius:50%; border:none; background:rgba(255,255,255,0.15); color:var(--cream); font-size:0.85rem; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.15s; line-height:1; flex-shrink:0; }
+.dish-qty-btn:hover { background:rgba(255,255,255,0.3); }
+.dish-qty-num { font-size:0.82rem; font-weight:700; color:var(--cream); min-width:14px; text-align:center; }
 
-  /* Header: title left, tabs right */
-  .menu-top {
-    display:flex; justify-content:space-between; align-items:flex-end;
-    margin-bottom:3rem; flex-wrap:wrap; gap:1.5rem;
-    padding-bottom:1.5rem; border-bottom:1px solid rgba(74,103,65,0.12);
-  }
-  .menu-top-label {
-    font-size:0.68rem; font-weight:600; letter-spacing:0.3em;
-    text-transform:uppercase; color:var(--green); margin-bottom:0.5rem; display:block;
-  }
-  .menu-top-title {
-    font-family:'Playfair Display',serif;
-    font-size:clamp(1.6rem,3vw,2.2rem); font-weight:900; color:var(--dark);
-  }
-  .menu-top-title em { font-style:italic; color:var(--terracotta); }
+/* ══ ORDER SECTION ══ */
+#order { padding:0 1.5rem 2.5rem; background:var(--warm-white); }
+.order-card { max-width:1100px; margin:0 auto; background:#fff; box-shadow:var(--card-shadow); border-radius:4px; overflow:hidden; }
+.order-header { padding:3rem 3.5rem 2rem; border-bottom:1px solid rgba(74,103,65,0.09); }
+.order-title { font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,3.5vw,2.5rem); font-weight:700; color:var(--dark); }
+.order-title em { font-style:italic; color:var(--terracotta); }
+.order-body { display:grid; grid-template-columns:1fr 1fr; }
 
-  /* Tabs — minimal, elegant */
-  .tabs { display:flex; gap:0; border:1px solid rgba(74,103,65,0.2); border-radius:2px; overflow:hidden; }
-  .tab {
-    padding:0.55rem 1.2rem; background:transparent; color:rgba(28,26,21,0.5);
-    font-family:'DM Sans'; font-size:0.72rem; font-weight:600;
-    letter-spacing:0.12em; text-transform:uppercase;
-    border:none; border-right:1px solid rgba(74,103,65,0.2);
-    cursor:pointer; transition:all 0.2s; white-space:nowrap;
-  }
-  .tab:last-child { border-right:none; }
-  .tab.active, .tab:hover { background:var(--green-dark); color:var(--cream); }
+/* Form */
+.form-panel { padding:2.5rem 3.5rem; border-right:1px solid rgba(74,103,65,0.09); }
+.mode-toggle { display:flex; margin-bottom:2rem; border:1px solid rgba(74,103,65,0.18); overflow:hidden; }
+.tgl { flex:1; padding:0.8rem; background:transparent; border:none; color:rgba(28,26,21,0.4); font-family:'Inter',sans-serif; font-size:0.68rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; cursor:pointer; transition:all 0.2s; border-right:1px solid rgba(74,103,65,0.18); }
+.tgl:last-child { border-right:none; }
+.tgl.on { background:var(--green-dark); color:var(--cream); }
+.fg { display:flex; flex-direction:column; gap:0.4rem; margin-bottom:1rem; }
+.fg label { font-size:0.6rem; font-weight:600; letter-spacing:0.22em; text-transform:uppercase; color:#bbb; }
+.fg input, .fg textarea, .fg select { background:transparent; border:none; border-bottom:1px solid rgba(74,103,65,0.18); padding:0.7rem 0; color:var(--dark); font-family:'Inter',sans-serif; font-size:0.95rem; outline:none; transition:border-color 0.2s; -webkit-appearance:none; border-radius:0; }
+.fg input:focus, .fg textarea:focus, .fg select:focus { border-bottom-color:var(--green); }
+.fg select option { background:#fff; color:var(--dark); }
+.fg textarea { resize:vertical; min-height:75px; }
+.fr { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.submit-btn { width:100%; margin-top:1.5rem; padding:1rem; background:var(--green); color:var(--cream); border:none; font-family:'Inter',sans-serif; font-size:0.72rem; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; cursor:pointer; transition:all 0.25s; }
+.submit-btn:hover { background:var(--green-light); transform:translateY(-1px); }
 
-  /* Category groups */
-  .menu-grid { display:flex; flex-direction:column; gap:1rem; }
-  .menu-cat { display:none; }
-  .menu-cat.show { display:flex; flex-direction:column; gap:0; }
+/* Cart */
+.cart-panel { padding:2.5rem 3.5rem; background:var(--warm-white); display:flex; flex-direction:column; }
+.cart-header-row { display:flex; justify-content:space-between; align-items:center; padding-bottom:1rem; margin-bottom:1rem; border-bottom:1px solid rgba(74,103,65,0.1); }
+.cart-label { font-size:0.6rem; font-weight:700; letter-spacing:0.25em; text-transform:uppercase; color:#bbb; }
+.cart-badge { background:var(--green); color:var(--cream); border-radius:50%; width:22px; height:22px; font-size:0.68rem; font-weight:700; display:flex; align-items:center; justify-content:center; }
+.cart-empty { color:#ccc; font-size:0.82rem; text-align:center; padding:2.5rem 0; font-style:italic; }
+.cart-item-row { display:flex; justify-content:space-between; align-items:center; padding:0.6rem 0; border-bottom:1px solid rgba(74,103,65,0.07); color:var(--dark); font-size:0.8rem; gap:0.5rem; }
+.cart-item-row:last-of-type { border-bottom:none; }
+.ci-name { flex:1; line-height:1.3; }
+.ci-price { color:var(--gold); font-weight:600; white-space:nowrap; }
+.ci-qty { display:flex; align-items:center; gap:0.3rem; background:rgba(74,103,65,0.08); border-radius:20px; padding:0.1rem 0.35rem; }
+.ci-qty-btn { background:none; border:none; color:var(--dark); cursor:pointer; font-size:0.85rem; width:18px; height:18px; display:flex; align-items:center; justify-content:center; border-radius:50%; transition:background 0.15s; }
+.ci-qty-btn:hover { background:rgba(74,103,65,0.12); }
+.ci-qty-num { font-size:0.8rem; font-weight:600; min-width:14px; text-align:center; }
+.cart-total-row { display:flex; justify-content:space-between; padding-top:1rem; margin-top:0.5rem; border-top:1px solid rgba(74,103,65,0.12); font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:700; color:var(--gold); }
 
-  /* Category heading — matches index section-eyebrow style */
-  .cat-heading {
-    font-size:0.68rem; font-weight:700; letter-spacing:0.3em;
-    text-transform:uppercase; color:var(--green);
-    padding:1.8rem 0 0.8rem;
-    border-bottom:1px solid rgba(74,103,65,0.15);
-    margin-bottom:0.5rem;
-  }
+/* ══ FOOTER ══ */
+footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; text-align:center; }
+.footer-card { max-width:1100px; margin:0 auto; background:#fff; box-shadow:var(--card-shadow); border-radius:4px; padding:3rem 3.5rem 2rem; }
+.footer-name { font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:700; color:var(--dark); letter-spacing:0.12em; text-transform:uppercase; }
+.footer-tagline { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:0.95rem; color:#bbb; margin-top:0.3rem; }
+.footer-divider { width:32px; height:1px; background:var(--gold); margin:1.5rem auto; }
+.footer-bottom { color:#ccc; font-size:0.7rem; letter-spacing:0.08em; border-top:1px solid rgba(74,103,65,0.08); padding-top:1.2rem; }
 
-  /* Individual dish row */
-  .dish {
-    display:grid; grid-template-columns:72px 1fr auto;
-    gap:1.2rem; align-items:center;
-    background:white; padding:1rem 1.2rem;
-    border-bottom:1px solid rgba(74,103,65,0.07);
-    transition:all 0.2s; cursor:pointer;
-  }
-  .dish:last-child { border-bottom:none; }
-  .dish:hover { background:rgba(247,240,227,0.6); transform:translateX(4px); }
-  .dish-img { width:72px; height:72px; border-radius:3px; object-fit:cover; flex-shrink:0; }
-  .dish-img-placeholder {
-    width:72px; height:72px; border-radius:3px; flex-shrink:0;
-    background:linear-gradient(135deg,var(--green) 0%,var(--green-dark) 100%);
-    display:flex; align-items:center; justify-content:center; font-size:1.3rem;
-  }
-  .dish-name {
-    font-family:'Playfair Display',serif; font-size:0.95rem; font-weight:700;
-    color:var(--dark); margin-bottom:0.2rem; letter-spacing:0.01em;
-  }
-  .dish-desc { font-size:0.78rem; color:#aaa; line-height:1.5; }
-  .dish-tag {
-    font-size:0.58rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
-    color:var(--green); background:rgba(74,103,65,0.08);
-    padding:0.15rem 0.5rem; border-radius:2px; display:inline-block; margin-top:0.3rem;
-  }
-  .dish-right { display:flex; flex-direction:column; align-items:flex-end; gap:0.5rem; min-width:60px; }
-  .dish-price {
-    font-family:'Playfair Display',serif; font-size:1rem;
-    font-weight:700; color:var(--gold); white-space:nowrap;
-  }
+/* ══ TOAST ══ */
+.toast { position:fixed; bottom:2rem; right:1.5rem; z-index:999; background:var(--dark); color:var(--cream); padding:0.9rem 1.5rem; border-left:2px solid var(--gold); font-size:0.8rem; font-weight:500; transform:translateY(80px); opacity:0; transition:all 0.3s; pointer-events:none; max-width:calc(100vw - 3rem); }
+.toast.show { transform:translateY(0); opacity:1; }
 
-  /* Cart controls */
-  .add-btn {
-    width:32px; height:32px; border-radius:50%;
-    background:var(--green-dark); color:var(--cream); border:none;
-    font-size:1.1rem; cursor:pointer; display:flex; align-items:center; justify-content:center;
-    transition:background 0.2s; flex-shrink:0;
-  }
-  .add-btn:hover { background:var(--green); }
-  .dish-qty { display:flex; align-items:center; gap:0.3rem; background:var(--green-dark); border-radius:20px; padding:0.15rem 0.25rem; }
-  .dish-qty-btn { width:26px; height:26px; border-radius:50%; border:none; background:rgba(255,255,255,0.15); color:var(--cream); font-size:0.9rem; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.15s; line-height:1; flex-shrink:0; }
-  .dish-qty-btn:hover { background:rgba(255,255,255,0.3); }
-  .dish-qty-num { font-size:0.85rem; font-weight:700; color:var(--cream); min-width:16px; text-align:center; }
+/* ══ SCROLL ANIMATIONS ══ */
+.reveal { opacity:0; transform:translateY(20px); transition:opacity 0.65s ease, transform 0.65s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+.reveal-child { opacity:0; transform:translateY(16px); transition:opacity 0.5s ease, transform 0.5s ease; }
+.reveal-child.visible { opacity:1; transform:translateY(0); }
+.reveal-child:nth-child(2) { transition-delay:0.08s; }
+.reveal-child:nth-child(3) { transition-delay:0.16s; }
+@media (prefers-reduced-motion:reduce) { .reveal,.reveal-child { transition:none; opacity:1; transform:none; } }
 
-  /* ════════════════════════════════════
-     ORDER SECTION — dark background,
-     same palette as index #reviews
-  ════════════════════════════════════ */
-  #order { padding:6rem 2rem; background:var(--dark); }
-  .order-header {
-    text-align:center; margin-bottom:3.5rem;
-  }
-  .order-eyebrow {
-    display:block; font-size:0.68rem; font-weight:600;
-    letter-spacing:0.3em; text-transform:uppercase;
-    color:rgba(107,143,97,0.8); margin-bottom:1rem;
-  }
-  .order-title {
-    font-family:'Playfair Display',serif;
-    font-size:clamp(1.8rem,3.5vw,2.8rem); font-weight:900;
-    color:var(--cream); line-height:1.1;
-  }
-  .order-title em { font-style:italic; color:var(--gold); }
+/* ══ RESPONSIVE ══ */
+@media (max-width:900px) {
+  nav { grid-template-columns:auto 1fr auto; padding:0 1.2rem; height:60px; }
+  .nav-left, .nav-right { display:none; }
+  .nav-logo-name { font-size:1.1rem; } .nav-logo-sub { display:none; }
+  .nav-hamburger { display:flex; }
 
-  .order-layout { max-width:920px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:2px; }
+  .page-hero { min-height:44svh; padding:5.5rem 1.5rem 3rem; }
+  .page-hero-title { font-size:clamp(2.8rem,11vw,4rem); }
 
-  /* Form panel */
-  .form-panel {
-    background:rgba(255,255,255,0.04);
-    border:1px solid rgba(107,143,97,0.15);
-    padding:2.5rem;
-  }
-  .mode-toggle { display:flex; margin-bottom:2rem; border:1px solid rgba(107,143,97,0.2); overflow:hidden; }
-  .mode-btn {
-    flex:1; padding:0.8rem; background:transparent; border:none;
-    color:rgba(247,240,227,0.4); font-family:'DM Sans'; font-size:0.72rem;
-    font-weight:600; letter-spacing:0.15em; text-transform:uppercase;
-    cursor:pointer; transition:all 0.2s; border-right:1px solid rgba(107,143,97,0.2);
-  }
-  .mode-btn:last-child { border-right:none; }
-  .mode-btn.active { background:var(--green); color:var(--cream); }
+  #menu { padding:1rem 0 1.5rem; }
+  .menu-card { border-radius:0; padding:2.5rem 1.2rem; }
+  .menu-header { flex-direction:column; align-items:flex-start; gap:1rem; }
+  .tabs { width:100%; }
+  .tab { flex:1; text-align:center; padding:0.55rem 0.3rem; font-size:0.6rem; }
+  .dish { grid-template-columns:58px 1fr auto; gap:0.8rem; padding:0.85rem 0; }
+  .dish:hover { padding-left:0; padding-right:0; margin-left:0; margin-right:0; }
+  .dish-thumb, .dish-thumb-placeholder { width:58px; height:58px; }
+  .dish-name { font-size:0.95rem; } .dish-desc { font-size:0.72rem; }
 
-  .form-group { display:flex; flex-direction:column; gap:0.4rem; margin-bottom:1rem; }
-  .form-group label {
-    font-size:0.62rem; font-weight:600; letter-spacing:0.2em;
-    text-transform:uppercase; color:rgba(247,240,227,0.3);
-  }
-  .form-group input,
-  .form-group textarea,
-  .form-group select {
-    background:rgba(255,255,255,0.05); border:none;
-    border-bottom:1px solid rgba(107,143,97,0.25);
-    padding:0.75rem 0; color:var(--cream);
-    font-family:'DM Sans'; font-size:1rem; outline:none;
-    transition:border-color 0.2s; -webkit-appearance:none;
-    border-radius:0;
-  }
-  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-bottom-color:var(--gold); }
-  .form-group select option { background:var(--dark); }
-  .form-group textarea { resize:vertical; min-height:80px; padding:0.75rem 0; }
-  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  #order { padding:0 0 1.5rem; }
+  .order-card { border-radius:0; }
+  .order-header { padding:2.5rem 1.5rem 1.5rem; }
+  .order-body { grid-template-columns:1fr; }
+  .form-panel { padding:1.5rem; border-right:none; border-bottom:1px solid rgba(74,103,65,0.09); }
+  .cart-panel { padding:1.5rem; }
+  .fr { grid-template-columns:1fr; }
+  .tgl { font-size:0.62rem; padding:0.75rem 0.3rem; }
 
-  /* Cart panel */
-  .cart-panel {
-    background:rgba(255,255,255,0.03);
-    border:1px solid rgba(107,143,97,0.15);
-    border-left:none; padding:2.5rem;
-    display:flex; flex-direction:column;
-  }
-  .cart-header {
-    font-family:'Playfair Display',serif; font-size:1rem; font-weight:700;
-    color:var(--cream); margin-bottom:1.5rem;
-    display:flex; align-items:center; justify-content:space-between;
-    padding-bottom:1rem; border-bottom:1px solid rgba(107,143,97,0.15);
-    letter-spacing:0.06em; text-transform:uppercase; font-size:0.72rem;
-  }
-  .cart-badge {
-    background:var(--green); color:var(--cream);
-    border-radius:50%; width:22px; height:22px;
-    font-size:0.7rem; font-weight:700;
-    display:flex; align-items:center; justify-content:center;
-  }
-  .cart-empty { color:rgba(247,240,227,0.2); font-size:0.83rem; text-align:center; padding:2.5rem 0; font-style:italic; }
-  .cart-row {
-    display:flex; justify-content:space-between; align-items:center;
-    padding:0.65rem 0; border-bottom:1px solid rgba(107,143,97,0.08);
-    color:var(--cream); font-size:0.82rem; gap:0.5rem;
-  }
-  .cart-row:last-of-type { border-bottom:none; }
-  .cart-row-name { flex:1; line-height:1.3; }
-  .cart-row-price { color:var(--gold); font-weight:600; white-space:nowrap; }
-  .cart-row-qty { display:flex; align-items:center; gap:0.35rem; background:rgba(255,255,255,0.06); border-radius:20px; padding:0.1rem 0.35rem; }
-  .cart-qty-btn { background:none; border:none; color:var(--cream); cursor:pointer; font-size:0.9rem; width:20px; height:20px; display:flex; align-items:center; justify-content:center; border-radius:50%; transition:background 0.15s; }
-  .cart-qty-btn:hover { background:rgba(255,255,255,0.12); }
-  .cart-qty-num { font-size:0.82rem; font-weight:600; min-width:14px; text-align:center; }
-  .cart-total {
-    display:flex; justify-content:space-between;
-    padding-top:1rem; margin-top:0.5rem;
-    border-top:1px solid rgba(107,143,97,0.2);
-    font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:var(--gold);
-  }
-  .confirm-btn {
-    width:100%; margin-top:1.5rem; padding:1rem;
-    background:var(--green); color:var(--cream); border:none;
-    font-family:'DM Sans'; font-size:0.78rem; font-weight:700;
-    letter-spacing:0.18em; text-transform:uppercase;
-    cursor:pointer; transition:all 0.25s;
-  }
-  .confirm-btn:hover { background:var(--green-light); transform:translateY(-1px); }
-
-  /* ════════════════════════════════════
-     FOOTER — same as index.html
-  ════════════════════════════════════ */
-  footer {
-    background:var(--dark); padding:4rem 2rem 2rem; text-align:center;
-    border-top:1px solid rgba(107,143,97,0.12);
-  }
-  .footer-name {
-    font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:900;
-    color:var(--cream); letter-spacing:0.1em; text-transform:uppercase;
-  }
-  .footer-tagline { font-family:'Playfair Display',serif; font-style:italic; font-size:0.85rem; color:rgba(247,240,227,0.35); margin-top:0.3rem; }
-  .footer-divider { width:32px; height:1px; background:var(--gold); margin:1.5rem auto; }
-  .footer-bottom { color:rgba(247,240,227,0.2); font-size:0.72rem; letter-spacing:0.08em; }
-
-  /* ════════════════════════════════════
-     TOAST
-  ════════════════════════════════════ */
-  .toast {
-    position:fixed; bottom:2rem; right:1.5rem; z-index:999;
-    background:var(--dark); color:var(--cream);
-    padding:0.9rem 1.5rem; border-left:2px solid var(--gold);
-    font-size:0.82rem; font-weight:500; letter-spacing:0.04em;
-    transform:translateY(80px); opacity:0; transition:all 0.3s;
-    pointer-events:none; max-width:calc(100vw - 3rem);
-  }
-  .toast.show { transform:translateY(0); opacity:1; }
-
-  /* ════════════════════════════════════
-     SCROLL ANIMATIONS
-  ════════════════════════════════════ */
-  .reveal { opacity:0; transform:scale(0.95) translateY(16px); transition:opacity 0.65s ease, transform 0.65s ease; }
-  .reveal.visible { opacity:1; transform:scale(1) translateY(0); }
-  .reveal-child { opacity:0; transform:translateY(18px); transition:opacity 0.5s ease, transform 0.5s ease; }
-  .reveal-child.visible { opacity:1; transform:translateY(0); }
-  .reveal-child:nth-child(2) { transition-delay:0.08s; }
-  .reveal-child:nth-child(3) { transition-delay:0.16s; }
-  .reveal-child:nth-child(4) { transition-delay:0.08s; }
-  .reveal-child:nth-child(5) { transition-delay:0.16s; }
-  @media (prefers-reduced-motion:reduce) { .reveal,.reveal-child { transition:none; opacity:1; transform:none; } }
-
-  /* ════════════════════════════════════
-     RESPONSIVE — MOBILE (≤768px)
-  ════════════════════════════════════ */
-  @media (max-width:768px) {
-    nav { grid-template-columns:auto 1fr auto; padding:0 1.2rem; height:60px; }
-    .nav-left { display:none; }
-    .nav-right { display:none; }
-    .nav-logo-name { font-size:1rem; }
-    .nav-logo-sub { display:none; }
-    .nav-hamburger { display:flex; }
-
-    .page-hero { min-height:45svh; padding:5rem 1.5rem 3rem; }
-    .page-hero-title { font-size:clamp(2.5rem,10vw,3.5rem); }
-
-    #menu { padding:3rem 1rem 4rem; }
-    .menu-top { flex-direction:column; align-items:flex-start; gap:1rem; }
-    .tabs { width:100%; }
-    .tab { flex:1; text-align:center; padding:0.55rem 0.5rem; font-size:0.65rem; }
-
-    .dish { grid-template-columns:60px 1fr auto; gap:0.8rem; padding:0.85rem 0.9rem; }
-    .dish:hover { transform:none; }
-    .dish-img, .dish-img-placeholder { width:60px; height:60px; }
-    .dish-name { font-size:0.88rem; }
-    .dish-desc { font-size:0.73rem; }
-    .dish-price { font-size:0.92rem; }
-
-    #order { padding:3.5rem 1rem; }
-    .order-layout { grid-template-columns:1fr; gap:2px; }
-    .form-panel { padding:1.5rem; }
-    .cart-panel { border-left:1px solid rgba(107,143,97,0.15); border-top:none; padding:1.5rem; }
-    .form-row { grid-template-columns:1fr; }
-    .mode-btn { font-size:0.65rem; padding:0.75rem 0.3rem; }
-
-    footer { padding:3rem 1.5rem 1.5rem; }
-  }
-
-  </style>
+  footer { padding:0 0 1.5rem; }
+  .footer-card { border-radius:0; padding:2.5rem 1.5rem 1.5rem; }
+}
+</style>
 </head>
 <body>
 
-<!-- ══════════════════════════════
-     NAVIGATION
-══════════════════════════════ -->
+<!-- NAV -->
 <nav>
   <ul class="nav-left">
     <li><a href="#menu">Carta</a></li>
@@ -405,21 +215,18 @@
   <div class="nav-right">
     <a href="index.html" class="nav-back">← Inici</a>
   </div>
-  <button class="nav-hamburger" id="navToggle" aria-label="Obrir menú">
+  <button class="nav-hamburger" id="navToggle" aria-label="Menú">
     <span></span><span></span><span></span>
   </button>
 </nav>
 <div class="nav-dropdown" id="navDropdown">
-  <a href="#menu"      onclick="closeNav()">Carta</a>
-  <a href="#order"     onclick="closeNav()">Comanda</a>
+  <a href="#menu"  onclick="closeNav()">Carta</a>
+  <a href="#order" onclick="closeNav()">Comanda</a>
   <a href="index.html">← Inici</a>
 </div>
 
 
-<!-- ══════════════════════════════
-     PAGE HERO
-     Exterior photo, title centred
-══════════════════════════════ -->
+<!-- PAGE HERO -->
 <div class="page-hero">
   <div class="page-hero-bg"></div>
   <div class="page-hero-vignette"></div>
@@ -431,44 +238,37 @@
 </div>
 
 
-<!-- ══════════════════════════════
-     MENU
-══════════════════════════════ -->
+<!-- MENU -->
 <section id="menu">
-  <div class="menu-inner">
-    <div class="menu-top reveal">
-      <div>
-        <span class="menu-top-label">El nostre menú</span>
-        <h2 class="menu-top-title">Carta <em>Can Kebab</em></h2>
-      </div>
+  <div class="menu-card reveal">
+    <div class="menu-header">
+      <h2 class="menu-header-title">Carta <em>Can Kebab</em></h2>
       <div class="tabs">
-        <button class="tab active" onclick="filterCat('all',this)">Tot</button>
-        <button class="tab" onclick="filterCat('kebabs',this)">Kebabs</button>
-        <button class="tab" onclick="filterCat('sides',this)">Sides</button>
-        <button class="tab" onclick="filterCat('combos',this)">Combos</button>
-        <button class="tab" onclick="filterCat('postres',this)">Postres</button>
+        <button class="tab active" onclick="showCat('all',this)">Tot</button>
+        <button class="tab" onclick="showCat('kebabs',this)">Kebabs</button>
+        <button class="tab" onclick="showCat('sides',this)">Sides</button>
+        <button class="tab" onclick="showCat('combos',this)">Combos</button>
+        <button class="tab" onclick="showCat('postres',this)">Postres</button>
       </div>
     </div>
 
     <div class="menu-grid">
 
-      <!-- ── KEBABS ── -->
+      <!-- KEBABS -->
       <div class="menu-cat show" id="cat-all-kebabs">
-        <div class="cat-heading reveal">Kebabs Signature</div>
+        <div class="cat-heading">Kebabs Signature</div>
 
         <div class="dish reveal-child" data-name="Kebab Àrab" data-price="10.99">
-          <img src="img_durum_arab.jpg" alt="Kebab Àrab" class="dish-img" style="object-position:center top;">
+          <img src="img_durum_arab.jpg" alt="Àrab" class="dish-thumb" style="object-position:center top;">
           <div>
-            <div class="dish-name">Àrab
-              <span style="font-size:0.58rem;color:var(--green);font-weight:700;background:rgba(74,103,65,0.08);padding:0.1rem 0.4rem;margin-left:0.4rem;letter-spacing:0.08em;text-transform:uppercase;">⭐ Popular</span>
-            </div>
+            <div class="dish-name">Àrab <span style="font-size:0.55rem;color:var(--green);font-weight:700;background:rgba(74,103,65,0.08);padding:0.1rem 0.4rem;letter-spacing:0.1em;text-transform:uppercase;">⭐ Popular</span></div>
             <div class="dish-desc">Durum o pita · pollastre 120g · hummus · salsa iogurt · chimichurri àrab · herbes · ceba encurtida</div>
           </div>
           <div class="dish-right"><span class="dish-price">10.99€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish reveal-child" data-name="Kebab Empordanès" data-price="10.99">
-          <img src="img_pita_empordanes.jpg" alt="Empordanès" class="dish-img" style="object-position:center center;">
+          <img src="img_pita_empordanes.jpg" alt="Empordanès" class="dish-thumb" style="object-position:center center;">
           <div>
             <div class="dish-name">Empordanès</div>
             <div class="dish-desc">Durum o pita · pollastre 120g · salsa romesco · escarola · tomàquet sec · oliva kalamata</div>
@@ -477,99 +277,99 @@
         </div>
 
         <div class="dish reveal-child" data-name="Kebab De foc i brasa" data-price="10.99">
-          <img src="img_pita_mans.jpg" alt="De foc i brasa" class="dish-img" style="object-position:center top;">
+          <img src="img_pita_mans.jpg" alt="Foc i brasa" class="dish-thumb" style="object-position:center top;">
           <div>
             <div class="dish-name">De foc i brasa 🔥</div>
-            <div class="dish-desc">Durum o pita · pollastre 120g · puré d'albergínia · pebrot caramel·litzat · salsa picant casolana · allioli d'all escalivat</div>
+            <div class="dish-desc">Durum o pita · pollastre 120g · puré d'albergínia al carbó · pebrot caramel·litzat · salsa picant casolana · allioli d'all escalivat</div>
           </div>
           <div class="dish-right"><span class="dish-price">10.99€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
-        <div class="dish reveal-child" data-name="Rostit de diumenge" data-price="11.50">
-          <div class="dish-img-placeholder">🍗</div>
+        <div class="dish reveal-child" data-name="Kebab Rostit de diumenge" data-price="11.50">
+          <div class="dish-thumb-placeholder">🍗</div>
           <div>
             <div class="dish-name">Rostit de diumenge</div>
             <div class="dish-desc">Durum o pita · pollastre · patata al caliu · allioli</div>
-            <span class="dish-tag">Només diumenge</span>
+            <span class="dish-badge">Només diumenge</span>
           </div>
           <div class="dish-right"><span class="dish-price">11.50€</span><div class="dish-qty-wrap"></div></div>
         </div>
       </div>
 
-      <!-- ── SIDES ── -->
+      <!-- SIDES -->
       <div class="menu-cat show" id="cat-all-sides">
-        <div class="cat-heading reveal">Sides</div>
+        <div class="cat-heading">Sides</div>
 
         <div class="dish reveal-child" data-name="Can fries" data-price="3.90">
-          <div class="dish-img-placeholder">🍟</div>
+          <div class="dish-thumb-placeholder">🍟</div>
           <div><div class="dish-name">Can fries</div><div class="dish-desc">Patates fregides especiades</div></div>
           <div class="dish-right"><span class="dish-price">3.90€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish reveal-child" data-name="Dressed fries" data-price="5.50">
-          <img src="img_kebab_fries.jpg" alt="Dressed fries" class="dish-img" style="object-position:center center;">
+          <img src="img_kebab_fries.jpg" alt="Dressed fries" class="dish-thumb" style="object-position:center center;">
           <div><div class="dish-name">Dressed fries</div><div class="dish-desc">Patates fregides · sumac · feta · ceba encurtida · chimichurri àrab · julivert</div></div>
           <div class="dish-right"><span class="dish-price">5.50€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish reveal-child" data-name="Kebab fries" data-price="6.50">
-          <img src="img_kebab_fries.jpg" alt="Kebab fries" class="dish-img" style="object-position:center center;">
+          <img src="img_kebab_fries.jpg" alt="Kebab fries" class="dish-thumb" style="object-position:center center;">
           <div><div class="dish-name">Kebab fries</div><div class="dish-desc">Patates fregides · pollastre · ceba encurtida · salsa tahini · julivert</div></div>
           <div class="dish-right"><span class="dish-price">6.50€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish reveal-child" data-name="Couscous bowl" data-price="8.99">
-          <img src="img_couscous.jpg" alt="Couscous bowl" class="dish-img" style="object-position:center center;">
-          <div><div class="dish-name">Couscous bowl</div><div class="dish-desc">Couscous amanit · pollastre · amanida · cogombre · ceba encurtida · salsa iogurt · tahini</div></div>
+          <img src="img_couscous.jpg" alt="Couscous bowl" class="dish-thumb" style="object-position:center center;">
+          <div><div class="dish-name">Couscous bowl</div><div class="dish-desc">Couscous amanit · pollastre · amanida · cogombre · ceba encurtida · salsa iogurt · salsa tahini</div></div>
           <div class="dish-right"><span class="dish-price">8.99€</span><div class="dish-qty-wrap"></div></div>
         </div>
       </div>
 
-      <!-- ── COMBOS ── -->
+      <!-- COMBOS -->
       <div class="menu-cat show" id="cat-all-combos">
-        <div class="cat-heading reveal">Combos</div>
+        <div class="cat-heading">Combos</div>
 
         <div class="dish reveal-child" data-name="Classic experience" data-price="13">
-          <div class="dish-img-placeholder">🥙</div>
+          <div class="dish-thumb-placeholder">🥙</div>
           <div><div class="dish-name">Classic experience</div><div class="dish-desc">Kebab base · can fries · beguda</div></div>
           <div class="dish-right"><span class="dish-price">13€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish reveal-child" data-name="Signature feast" data-price="16.50">
-          <div class="dish-img-placeholder">⭐</div>
+          <div class="dish-thumb-placeholder">⭐</div>
           <div>
             <div class="dish-name">Signature feast</div>
             <div class="dish-desc">Kebab signature (àrab, empordanès o de foc i brasa) · can fries · beguda</div>
-            <span class="dish-tag">Best value</span>
+            <span class="dish-badge">Best value</span>
           </div>
           <div class="dish-right"><span class="dish-price">16.50€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish reveal-child" data-name="Couscous experience" data-price="13">
-          <div class="dish-img-placeholder">🍲</div>
+          <div class="dish-thumb-placeholder">🍲</div>
           <div><div class="dish-name">Couscous experience</div><div class="dish-desc">Couscous bowl · beguda</div></div>
           <div class="dish-right"><span class="dish-price">13€</span><div class="dish-qty-wrap"></div></div>
         </div>
       </div>
 
-      <!-- ── POSTRES ── -->
+      <!-- POSTRES -->
       <div class="menu-cat show" id="cat-all-postres">
-        <div class="cat-heading reveal">Postres</div>
+        <div class="cat-heading">Postres</div>
 
         <div class="dish reveal-child" data-name="Cheesecake" data-price="5">
-          <div class="dish-img-placeholder">🍰</div>
+          <div class="dish-thumb-placeholder">🍰</div>
           <div><div class="dish-name">Cheesecake</div></div>
           <div class="dish-right"><span class="dish-price">5€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish reveal-child" data-name="Carrot cake" data-price="5">
-          <img src="img_carrot_cake.jpg" alt="Carrot cake" class="dish-img" style="object-position:center center;">
+          <img src="img_carrot_cake.jpg" alt="Carrot cake" class="dish-thumb" style="object-position:center center;">
           <div><div class="dish-name">Carrot cake</div></div>
           <div class="dish-right"><span class="dish-price">5€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish reveal-child" data-name="Chocolate fondant" data-price="5">
-          <img src="img_chocolate.jpg" alt="Chocolate fondant" class="dish-img" style="object-position:center center;">
+          <img src="img_chocolate.jpg" alt="Chocolate fondant" class="dish-thumb" style="object-position:center center;">
           <div><div class="dish-name">Decadent chocolate fondant</div></div>
           <div class="dish-right"><span class="dish-price">5€</span><div class="dish-qty-wrap"></div></div>
         </div>
@@ -580,85 +380,80 @@
 </section>
 
 
-<!-- ══════════════════════════════
-     ORDER SECTION
-══════════════════════════════ -->
+<!-- ORDER -->
 <section id="order">
-  <div class="order-header reveal">
-    <span class="order-eyebrow">Fes la teva comanda</span>
-    <h2 class="order-title">Recull o <em>a domicili</em></h2>
-  </div>
-
-  <div class="order-layout">
-    <!-- FORM -->
-    <div class="form-panel reveal">
-      <div class="mode-toggle">
-        <button class="mode-btn active" id="btn-recollida" onclick="setMode('recollida')">🏃 Recollida al local</button>
-        <button class="mode-btn"        id="btn-domicili"  onclick="setMode('domicili')">🛵 A domicili</button>
-      </div>
-
-      <div id="delivery-fields" style="display:none;">
-        <div class="form-group"><label>Adreça *</label><input id="f-addr" type="text" placeholder="Carrer i número" autocomplete="street-address"></div>
-        <div class="form-row">
-          <div class="form-group"><label>Pis / Porta</label><input id="f-floor" type="text" placeholder="2n 1a"></div>
-          <div class="form-group"><label>Codi postal *</label><input id="f-zip" type="text" placeholder="08001" inputmode="numeric"></div>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group"><label>Nom *</label><input id="f-name" type="text" placeholder="El teu nom" autocomplete="given-name"></div>
-        <div class="form-group"><label>Telèfon *</label><input id="f-tel" type="tel" placeholder="6XX XXX XXX" autocomplete="tel" inputmode="tel"></div>
-      </div>
-
-      <div id="pickup-time-field">
-        <div class="form-group"><label>Hora de recollida *</label>
-          <select id="f-time">
-            <option value="">Selecciona una hora</option>
-            <option>El més aviat possible</option>
-            <option>En 30 minuts</option>
-            <option>En 45 minuts</option>
-            <option>En 1 hora</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="form-group"><label>Notes (al·lèrgies, peticions...)</label>
-        <textarea id="f-notes" placeholder="Sense ceba, salsa extra..."></textarea>
-      </div>
+  <div class="order-card reveal">
+    <div class="order-header">
+      <h2 class="order-title">Recull o <em>a domicili</em></h2>
     </div>
+    <div class="order-body">
 
-    <!-- CART -->
-    <div class="cart-panel reveal">
-      <div class="cart-header">
-        La teva comanda
-        <div class="cart-badge" id="cart-count">0</div>
+      <!-- FORM -->
+      <div class="form-panel">
+        <div class="mode-toggle">
+          <button class="tgl on" id="tgl-recollida" onclick="setMode('recollida')">🏃 Recollida al local</button>
+          <button class="tgl"    id="tgl-domicili"  onclick="setMode('domicili')">🛵 A domicili</button>
+        </div>
+        <div id="delivery-section" style="display:none">
+          <div class="fg"><label>Adreça *</label><input id="f-adreca" type="text" placeholder="Carrer i número" autocomplete="street-address"></div>
+          <div class="fr">
+            <div class="fg"><label>Pis / Porta</label><input id="f-pis" type="text" placeholder="2n 1a"></div>
+            <div class="fg"><label>Codi postal *</label><input id="f-cp" type="text" placeholder="08001" inputmode="numeric"></div>
+          </div>
+        </div>
+        <div class="fr">
+          <div class="fg"><label>Nom *</label><input id="f-nom" type="text" placeholder="El teu nom" autocomplete="given-name"></div>
+          <div class="fg"><label>Telèfon *</label><input id="f-tel" type="tel" placeholder="6XX XXX XXX" autocomplete="tel" inputmode="tel"></div>
+        </div>
+        <div id="recollida-hora-section">
+          <div class="fg"><label>Hora de recollida *</label>
+            <select id="f-hora">
+              <option value="">Selecciona una hora</option>
+              <option>El més aviat possible</option>
+              <option>En 30 minuts</option>
+              <option>En 45 minuts</option>
+              <option>En 1 hora</option>
+            </select>
+          </div>
+        </div>
+        <div class="fg"><label>Notes (al·lèrgies, peticions...)</label>
+          <textarea id="f-notes" placeholder="Sense ceba, salsa extra..."></textarea>
+        </div>
+        <button class="submit-btn" onclick="submitOrder()">Confirmar comanda</button>
       </div>
-      <div id="cart-items"><p class="cart-empty">Afegeix plats de la carta</p></div>
-      <div class="cart-total" id="cart-total" style="display:none;">
-        <span>Total</span>
-        <span id="cart-total-val">0.00€</span>
+
+      <!-- CART -->
+      <div class="cart-panel">
+        <div class="cart-header-row">
+          <span class="cart-label">La teva comanda</span>
+          <div class="cart-badge" id="cart-count">0</div>
+        </div>
+        <div id="cart-items"><p class="cart-empty">Afegeix plats de la carta</p></div>
+        <div class="cart-total-row" id="cart-total-row" style="display:none">
+          <span>Total</span>
+          <span id="cart-total-val">0.00€</span>
+        </div>
       </div>
-      <button class="confirm-btn" onclick="submitOrder()">Confirmar comanda</button>
+
     </div>
   </div>
 </section>
 
 
-<!-- ══════════════════════════════
-     FOOTER
-══════════════════════════════ -->
+<!-- FOOTER -->
 <footer>
-  <div class="footer-name">Can Kebab</div>
-  <div class="footer-tagline">Kebab artesanal al cor de Barcelona</div>
-  <div class="footer-divider"></div>
-  <div class="footer-bottom">© 2025 Can Kebab · Barcelona &nbsp;·&nbsp; Fet amb ❤️ per al barri</div>
+  <div class="footer-card reveal">
+    <div class="footer-name">Can Kebab</div>
+    <div class="footer-tagline">Kebab artesanal al cor de Barcelona</div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">© 2025 Can Kebab · Barcelona &nbsp;·&nbsp; Fet amb ❤️ per al barri</div>
+  </div>
 </footer>
 
 <div class="toast" id="toast"></div>
 
-
 <script>
-/* ── Nav hamburger ── */
+/* ── Nav ── */
 const navToggle   = document.getElementById('navToggle');
 const navDropdown = document.getElementById('navDropdown');
 navToggle.addEventListener('click', () => navDropdown.classList.toggle('open'));
@@ -696,8 +491,7 @@ function renderDishes() {
       wrap.querySelector('.minus').addEventListener('click', e => {
         e.stopPropagation();
         const idx = cart.findIndex(i => i.name === name);
-        cart[idx].qty--;
-        if (cart[idx].qty <= 0) cart.splice(idx, 1);
+        if (--cart[idx].qty <= 0) cart.splice(idx,1);
         renderCart(); renderDishes();
       });
       wrap.querySelector('.plus').addEventListener('click', e => {
@@ -709,55 +503,55 @@ function renderDishes() {
   });
 }
 
+function changeQty(idx, delta) {
+  cart[idx].qty += delta;
+  if (cart[idx].qty <= 0) cart.splice(idx,1);
+  renderCart(); renderDishes();
+}
+
 function renderCart() {
-  const el       = document.getElementById('cart-items');
-  const countEl  = document.getElementById('cart-count');
-  const totalEl  = document.getElementById('cart-total');
+  const el      = document.getElementById('cart-items');
+  const countEl = document.getElementById('cart-count');
+  const totalRow = document.getElementById('cart-total-row');
   const totalVal = document.getElementById('cart-total-val');
-  countEl.textContent = cart.reduce((s,i) => s + i.qty, 0);
+  countEl.textContent = cart.reduce((s,i) => s+i.qty, 0);
   if (!cart.length) {
     el.innerHTML = '<p class="cart-empty">Afegeix plats de la carta</p>';
-    totalEl.style.display = 'none'; return;
+    totalRow.style.display = 'none'; return;
   }
   let html = '', total = 0;
   cart.forEach((item, idx) => {
     const sub = (item.price * item.qty).toFixed(2);
     total += item.price * item.qty;
-    html += `<div class="cart-row">
-      <span class="cart-row-name">${item.name}</span>
-      <div class="cart-row-qty">
-        <button class="cart-qty-btn" onclick="cartChangeQty(${idx},-1)">−</button>
-        <span class="cart-qty-num">${item.qty}</span>
-        <button class="cart-qty-btn" onclick="cartChangeQty(${idx},1)">+</button>
+    html += `<div class="cart-item-row">
+      <span class="ci-name">${item.name}</span>
+      <div class="ci-qty">
+        <button class="ci-qty-btn" onclick="changeQty(${idx},-1)">−</button>
+        <span class="ci-qty-num">${item.qty}</span>
+        <button class="ci-qty-btn" onclick="changeQty(${idx},1)">+</button>
       </div>
-      <span class="cart-row-price">${sub}€</span>
+      <span class="ci-price">${sub}€</span>
     </div>`;
   });
   el.innerHTML = html;
-  totalEl.style.display = 'flex';
+  totalRow.style.display = 'flex';
   totalVal.textContent = total.toFixed(2) + '€';
 }
 
-function cartChangeQty(idx, delta) {
-  cart[idx].qty += delta;
-  if (cart[idx].qty <= 0) cart.splice(idx, 1);
-  renderCart(); renderDishes();
-}
-
 function submitOrder() {
-  if (!cart.length)                                                   { showToast('⚠️ Afegeix algun plat primer!'); return; }
-  if (!document.getElementById('f-name').value.trim())               { showToast('⚠️ Cal indicar el nom.'); return; }
-  if (!document.getElementById('f-tel').value.trim())                { showToast('⚠️ Cal indicar el telèfon.'); return; }
-  if (orderMode === 'recollida' && !document.getElementById('f-time').value) { showToast('⚠️ Selecciona una hora de recollida.'); return; }
+  if (!cart.length) { showToast('⚠️ Afegeix algun plat primer!'); return; }
+  if (!document.getElementById('f-nom').value.trim()) { showToast('⚠️ Cal indicar el nom.'); return; }
+  if (!document.getElementById('f-tel').value.trim()) { showToast('⚠️ Cal indicar el telèfon.'); return; }
+  if (orderMode === 'recollida' && !document.getElementById('f-hora').value) { showToast('⚠️ Selecciona una hora de recollida.'); return; }
   if (orderMode === 'domicili') {
-    if (!document.getElementById('f-addr').value.trim()) { showToast("⚠️ Cal indicar l'adreça."); return; }
-    if (!document.getElementById('f-zip').value.trim())  { showToast('⚠️ Cal indicar el codi postal.'); return; }
+    if (!document.getElementById('f-adreca').value.trim()) { showToast("⚠️ Cal indicar l'adreça."); return; }
+    if (!document.getElementById('f-cp').value.trim())     { showToast('⚠️ Cal indicar el codi postal.'); return; }
   }
   showToast('🎉 Comanda enviada! Ens posem en contacte aviat.');
   cart = []; renderCart(); renderDishes();
 }
 
-function filterCat(cat, btn) {
+function showCat(cat, btn) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   btn.classList.add('active');
   if (cat === 'all') {
@@ -770,10 +564,10 @@ function filterCat(cat, btn) {
 
 function setMode(mode) {
   orderMode = mode;
-  document.getElementById('btn-recollida').classList.toggle('active', mode === 'recollida');
-  document.getElementById('btn-domicili').classList.toggle('active',  mode === 'domicili');
-  document.getElementById('delivery-fields').style.display    = mode === 'domicili'  ? 'block' : 'none';
-  document.getElementById('pickup-time-field').style.display  = mode === 'recollida' ? 'block' : 'none';
+  document.getElementById('tgl-recollida').classList.toggle('on', mode === 'recollida');
+  document.getElementById('tgl-domicili').classList.toggle('on', mode === 'domicili');
+  document.getElementById('delivery-section').style.display       = mode === 'domicili'  ? 'block' : 'none';
+  document.getElementById('recollida-hora-section').style.display = mode === 'recollida' ? 'block' : 'none';
 }
 
 function showToast(msg) {
@@ -782,19 +576,14 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2800);
 }
 
-/* ── Scroll animations ── */
-(function () {
-  const observer = new IntersectionObserver(
-    entries => entries.forEach(entry => {
-      if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
-    }),
-    { threshold: 0.1 }
-  );
-  document.querySelectorAll('.reveal, .reveal-child').forEach(el => observer.observe(el));
+(function(){
+  const obs = new IntersectionObserver(entries => entries.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
+  }), { threshold:0.1 });
+  document.querySelectorAll('.reveal,.reveal-child').forEach(el => obs.observe(el));
 })();
 
 renderDishes();
 </script>
-
 </body>
 </html>
