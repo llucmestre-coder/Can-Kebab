@@ -273,6 +273,32 @@
     footer { padding:1.5rem; flex-direction:column; text-align:center; }
   }
 
+  /* ════════════════════════════════════
+     SCROLL ANIMATIONS — fade in + scale
+  ════════════════════════════════════ */
+  .reveal {
+    opacity: 0;
+    transform: scale(0.94);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .reveal.visible { opacity:1; transform:scale(1); }
+
+  .reveal-child {
+    opacity: 0;
+    transform: scale(0.92);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .reveal-child.visible { opacity:1; transform:scale(1); }
+  .reveal-child:nth-child(2) { transition-delay:0.1s; }
+  .reveal-child:nth-child(3) { transition-delay:0.2s; }
+  .reveal-child:nth-child(4) { transition-delay:0.1s; }
+  .reveal-child:nth-child(5) { transition-delay:0.2s; }
+  .reveal-child:nth-child(6) { transition-delay:0.3s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal-child { transition:none; opacity:1; transform:none; }
+  }
+
   </style>
 </head>
 <body>
@@ -321,7 +347,7 @@
 ══════════════════════════════ -->
 <section id="menu">
   <div class="menu-inner">
-    <div class="menu-top">
+    <div class="menu-top reveal">
       <div>
         <span class="section-eyebrow">El nostre menú</span>
         <h2 class="section-title">Carta <em>Can Kebab</em></h2>
@@ -340,9 +366,9 @@
 
       <!-- ── KEBABS ── -->
       <div class="menu-cat show" id="cat-all-kebabs">
-        <div class="cat-heading">🥙 Kebabs Signature</div>
+        <div class="cat-heading reveal">🥙 Kebabs Signature</div>
 
-        <div class="dish" data-name="Kebab Àrab" data-price="10.99">
+        <div class="dish reveal-child" data-name="Kebab Àrab" data-price="10.99">
           <img src="img_durum_arab.jpg" alt="Kebab Àrab" class="dish-img" style="object-position:center top;">
           <div>
             <div class="dish-name">Àrab
@@ -353,7 +379,7 @@
           <div class="dish-right"><span class="dish-price">10.99€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
-        <div class="dish" data-name="Kebab Empordanès" data-price="10.99">
+        <div class="dish reveal-child" data-name="Kebab Empordanès" data-price="10.99">
           <img src="img_pita_empordanes.jpg" alt="Empordanès" class="dish-img" style="object-position:center center;">
           <div>
             <div class="dish-name">Empordanès</div>
@@ -362,7 +388,7 @@
           <div class="dish-right"><span class="dish-price">10.99€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
-        <div class="dish" data-name="Kebab De foc i brasa" data-price="10.99">
+        <div class="dish reveal-child" data-name="Kebab De foc i brasa" data-price="10.99">
           <img src="img_pita_mans.jpg" alt="De foc i brasa" class="dish-img" style="object-position:center top;">
           <div>
             <div class="dish-name">De foc i brasa 🔥</div>
@@ -371,7 +397,7 @@
           <div class="dish-right"><span class="dish-price">10.99€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
-        <div class="dish" data-name="Rostit de diumenge" data-price="11.50">
+        <div class="dish reveal-child" data-name="Rostit de diumenge" data-price="11.50">
           <div class="dish-img-placeholder">🍗</div>
           <div>
             <div class="dish-name">Rostit de diumenge</div>
@@ -384,27 +410,27 @@
 
       <!-- ── SIDES ── -->
       <div class="menu-cat show" id="cat-all-sides">
-        <div class="cat-heading">🍟 Sides</div>
+        <div class="cat-heading reveal">🍟 Sides</div>
 
-        <div class="dish" data-name="Can fries" data-price="3.90">
+        <div class="dish reveal-child" data-name="Can fries" data-price="3.90">
           <div class="dish-img-placeholder">🍟</div>
           <div><div class="dish-name">Can fries</div><div class="dish-desc">Patates fregides especiades</div></div>
           <div class="dish-right"><span class="dish-price">3.90€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
-        <div class="dish" data-name="Dressed fries" data-price="5.50">
+        <div class="dish reveal-child" data-name="Dressed fries" data-price="5.50">
           <img src="img_kebab_fries.jpg" alt="Dressed fries" class="dish-img" style="object-position:center center;">
           <div><div class="dish-name">Dressed fries</div><div class="dish-desc">Patates fregides · sumac · feta · ceba encurtida · chimichurri àrab · julivert</div></div>
           <div class="dish-right"><span class="dish-price">5.50€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
-        <div class="dish" data-name="Kebab fries" data-price="6.50">
+        <div class="dish reveal-child" data-name="Kebab fries" data-price="6.50">
           <img src="img_kebab_fries.jpg" alt="Kebab fries" class="dish-img" style="object-position:center center;">
           <div><div class="dish-name">Kebab fries</div><div class="dish-desc">Patates fregides · pollastre · ceba encurtida · salsa tahini · julivert</div></div>
           <div class="dish-right"><span class="dish-price">6.50€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
-        <div class="dish" data-name="Couscous bowl" data-price="8.99">
+        <div class="dish reveal-child" data-name="Couscous bowl" data-price="8.99">
           <img src="img_couscous.jpg" alt="Couscous bowl" class="dish-img" style="object-position:center center;">
           <div><div class="dish-name">Couscous bowl</div><div class="dish-desc">Couscous amanit · pollastre · amanida · cogombre · ceba encurtida · salsa iogurt · tahini</div></div>
           <div class="dish-right"><span class="dish-price">8.99€</span><div class="dish-qty-wrap"></div></div>
@@ -413,15 +439,15 @@
 
       <!-- ── COMBOS ── -->
       <div class="menu-cat show" id="cat-all-combos">
-        <div class="cat-heading">🎯 Combos</div>
+        <div class="cat-heading reveal">🎯 Combos</div>
 
-        <div class="dish" data-name="Classic experience" data-price="13">
+        <div class="dish reveal-child" data-name="Classic experience" data-price="13">
           <div class="dish-img-placeholder">🥙🍟</div>
           <div><div class="dish-name">Classic experience</div><div class="dish-desc">Kebab base · can fries · beguda</div></div>
           <div class="dish-right"><span class="dish-price">13€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
-        <div class="dish" data-name="Signature feast" data-price="16.50">
+        <div class="dish reveal-child" data-name="Signature feast" data-price="16.50">
           <div class="dish-img-placeholder">⭐🥙</div>
           <div>
             <div class="dish-name">Signature feast</div>
@@ -431,7 +457,7 @@
           <div class="dish-right"><span class="dish-price">16.50€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
-        <div class="dish" data-name="Couscous experience" data-price="13">
+        <div class="dish reveal-child" data-name="Couscous experience" data-price="13">
           <div class="dish-img-placeholder">🍲</div>
           <div><div class="dish-name">Couscous experience</div><div class="dish-desc">Couscous bowl · beguda</div></div>
           <div class="dish-right"><span class="dish-price">13€</span><div class="dish-qty-wrap"></div></div>
@@ -440,21 +466,21 @@
 
       <!-- ── POSTRES ── -->
       <div class="menu-cat show" id="cat-all-postres">
-        <div class="cat-heading">🍰 Postres</div>
+        <div class="cat-heading reveal">🍰 Postres</div>
 
-        <div class="dish" data-name="Cheesecake" data-price="5">
+        <div class="dish reveal-child" data-name="Cheesecake" data-price="5">
           <div class="dish-img-placeholder">🍰</div>
           <div><div class="dish-name">Cheesecake</div></div>
           <div class="dish-right"><span class="dish-price">5€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
-        <div class="dish" data-name="Carrot cake" data-price="5">
+        <div class="dish reveal-child" data-name="Carrot cake" data-price="5">
           <img src="img_carrot_cake.jpg" alt="Carrot cake" class="dish-img" style="object-position:center center;">
           <div><div class="dish-name">Carrot cake</div></div>
           <div class="dish-right"><span class="dish-price">5€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
-        <div class="dish" data-name="Chocolate fondant" data-price="5">
+        <div class="dish reveal-child" data-name="Chocolate fondant" data-price="5">
           <img src="img_chocolate.jpg" alt="Chocolate fondant" class="dish-img" style="object-position:center center;">
           <div><div class="dish-name">Decadent chocolate fondant</div></div>
           <div class="dish-right"><span class="dish-price">5€</span><div class="dish-qty-wrap"></div></div>
@@ -470,7 +496,7 @@
      Form (left) + Cart (right)
 ══════════════════════════════ -->
 <section id="order">
-  <div class="order-header">
+  <div class="order-header reveal">
     <span class="section-eyebrow">Fes la teva comanda</span>
     <h2 class="order-heading">Recull o <em>a domicili</em></h2>
   </div>
@@ -478,7 +504,7 @@
   <div class="order-layout">
 
     <!-- FORM -->
-    <div class="form-panel">
+    <div class="form-panel reveal">
       <!-- Pickup / Delivery toggle -->
       <div class="mode-toggle">
         <button class="mode-btn active" id="btn-recollida" onclick="setMode('recollida')">🏃 Recollida al local</button>
@@ -524,7 +550,7 @@
     </div>
 
     <!-- CART -->
-    <div class="cart-panel">
+    <div class="cart-panel reveal">
       <div class="cart-header">
         La teva comanda
         <div class="cart-badge" id="cart-count">0</div>
@@ -690,6 +716,28 @@ function showToast(msg) {
 /* Init: render + buttons on page load */
 renderDishes();
 
+</script>
+
+<script>
+/* ════════════════════════════════════
+   SCROLL ANIMATIONS — Intersection Observer
+════════════════════════════════════ */
+(function () {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12 }
+  );
+  document.querySelectorAll('.reveal, .reveal-child').forEach(el => {
+    observer.observe(el);
+  });
+})();
 </script>
 </body>
 </html>
