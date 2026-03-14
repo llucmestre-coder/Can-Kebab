@@ -41,7 +41,62 @@ nav {
 .mobile-menu a.mob-cta { background:var(--green); padding:0.8rem 2.5rem; border-radius:4px; font-size:1.5rem; }
 .mobile-close { position:absolute; top:1.5rem; right:1.8rem; background:none; border:none; color:var(--cream); font-size:2rem; cursor:pointer; }
 
-/* ── PAGE HEADER ── */
+/* ── LOCAL PHOTO BANNER ── */
+.local-banner {
+  display:grid; grid-template-columns:2fr 1fr 1fr 1fr;
+  grid-template-rows:260px; gap:3px; overflow:hidden;
+}
+.local-banner-img { position:relative; overflow:hidden; }
+.local-banner-img img { width:100%; height:100%; object-fit:cover; transition:transform 0.5s; }
+.local-banner-img:hover img { transform:scale(1.05); }
+.local-banner-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(28,26,21,0.7) 0%, transparent 60%);
+  display:flex; align-items:flex-end; padding:1rem;
+}
+.local-banner-text { display:flex; flex-direction:column; gap:0.2rem; }
+.local-banner-text span { color:var(--cream); font-size:0.8rem; font-weight:500; }
+
+/* ── MID MENU IMAGE STRIP ── */
+.menu-img-break {
+  display:grid; grid-template-columns:1fr 1fr 1fr;
+  grid-template-rows:180px; gap:3px; margin:1.5rem 0;
+  border-radius:6px; overflow:hidden;
+}
+.menu-img-break img { width:100%; height:100%; object-fit:cover; object-position:center top; transition:transform 0.4s; }
+.menu-img-break img:hover { transform:scale(1.05); }
+
+/* ── LOCAL GALLERY ── */
+.local-gallery {
+  display:grid; grid-template-columns:1.4fr 1fr;
+  height:400px; gap:3px; overflow:hidden;
+  background:var(--dark);
+}
+.local-gallery-right { display:grid; grid-template-columns:1fr 1fr; gap:3px; }
+.local-gallery-item { position:relative; overflow:hidden; }
+.local-gallery-item img { width:100%; height:100%; object-fit:cover; transition:transform 0.5s; }
+.local-gallery-item:hover img { transform:scale(1.06); }
+.local-gallery-label {
+  position:absolute; bottom:0; left:0; right:0;
+  padding:0.6rem 0.8rem;
+  background:linear-gradient(transparent,rgba(28,26,21,0.85));
+  color:var(--cream); font-size:0.72rem; font-weight:500;
+  letter-spacing:0.06em; text-transform:uppercase;
+  opacity:0; transition:opacity 0.3s;
+}
+.local-gallery-item:hover .local-gallery-label { opacity:1; }
+
+/* ── ICON BUTTONS ── */
+.icon-btn {
+  display:inline-flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:0.4rem; padding:1rem 1.5rem; border-radius:8px;
+  transition:all 0.2s; cursor:pointer; min-width:100px;
+  font-family:'DM Sans'; border:none;
+}
+.icon-btn-icon { font-size:1.6rem; line-height:1; }
+.icon-btn-label { font-size:0.72rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; }
+.icon-btn-primary { background:var(--green); color:var(--cream); }
+.icon-btn-primary:hover { background:var(--green-light); transform:translateY(-3px); }
 .page-header { padding:7rem 2rem 3rem; background:var(--dark); text-align:center; }
 .page-header .section-label { color:var(--green-light); }
 .page-header h1 { font-family:'Playfair Display',serif; font-size:clamp(2.2rem,5vw,4rem); font-weight:900; color:var(--cream); margin-top:0.5rem; }
@@ -150,9 +205,18 @@ footer p { color:rgba(247,240,227,0.35); font-size:0.78rem; }
 
 /* ── RESPONSIVE ── */
 @media(max-width:768px){
+  .local-banner { grid-template-columns:1fr 1fr; grid-template-rows:160px 160px; }
+  .menu-img-break { grid-template-columns:1fr 1fr; grid-template-rows:140px; }
+  .menu-img-break img:last-child { display:none; }
+
   nav { padding:1rem 1.2rem; }
   .nav-links { display:none; }
   .nav-hamburger { display:flex; }
+
+  .local-gallery { grid-template-columns:1fr; height:auto; }
+  .local-gallery-item.main { height:220px; }
+  .local-gallery-right { grid-template-columns:1fr 1fr; }
+  .local-gallery-right .local-gallery-item { height:140px; }
 
   .page-header { padding:5.5rem 1.5rem 2rem; }
 
@@ -214,6 +278,54 @@ footer p { color:rgba(247,240,227,0.35); font-size:0.78rem; }
   <p>Tria els teus plats i fes la comanda directament aquí baix</p>
 </div>
 
+<!-- PHOTO GALLERY LOCAL -->
+<div class="local-gallery">
+  <div class="local-gallery-item main">
+    <img src="img_exterior.jpg" alt="Exterior Can Kebab">
+    <div class="local-gallery-label">El local</div>
+  </div>
+  <div class="local-gallery-right">
+    <div class="local-gallery-item">
+      <img src="img_durum_arab.jpg" alt="Durum àrab" style="object-position:center top;">
+      <div class="local-gallery-label">Durum àrab</div>
+    </div>
+    <div class="local-gallery-item">
+      <img src="img_brot.jpg" alt="El nostre brot" style="object-position:center center;">
+      <div class="local-gallery-label">El nostre brot</div>
+    </div>
+    <div class="local-gallery-item">
+      <img src="img_pita_empordanes.jpg" alt="Pita empordanesa">
+      <div class="local-gallery-label">Pita empordanesa</div>
+    </div>
+    <div class="local-gallery-item">
+      <img src="img_couscous.jpg" alt="Couscous bowl" style="object-position:center center;">
+      <div class="local-gallery-label">Couscous bowl</div>
+    </div>
+  </div>
+</div>
+
+<!-- LOCAL PHOTO BANNER -->
+<div class="local-banner">
+  <div class="local-banner-img">
+    <img src="img_exterior.jpg" alt="Can Kebab exterior" style="object-position:center center;">
+    <div class="local-banner-overlay">
+      <div class="local-banner-text">
+        <span>Carrer Jaume Piquet, 1</span>
+        <span>Barcelona</span>
+      </div>
+    </div>
+  </div>
+  <div class="local-banner-img">
+    <img src="img_brot.jpg" alt="El nostre brot">
+  </div>
+  <div class="local-banner-img">
+    <img src="img_pita_mans.jpg" alt="Pita" style="object-position:center top;">
+  </div>
+  <div class="local-banner-img">
+    <img src="img_durum_arab.jpg" alt="Durum àrab" style="object-position:center top;">
+  </div>
+</div>
+
 <!-- MENU -->
 <section id="menu">
   <div class="menu-inner">
@@ -273,6 +385,13 @@ footer p { color:rgba(247,240,227,0.35); font-size:0.78rem; }
           </div>
           <div class="dish-right"><span class="dish-price">11.50€</span><div class="dish-qty-wrap"></div></div>
         </div>
+      </div>
+
+      <!-- IMAGE BREAK between kebabs and sides -->
+      <div class="menu-img-break">
+        <img src="img_wrap_falafel.jpg" alt="Wrap falafel">
+        <img src="img_couscous.jpg"     alt="Couscous" style="object-position:center center;">
+        <img src="img_kebab_fries.jpg"  alt="Kebab fries" style="object-position:center center;">
       </div>
 
       <!-- SIDES -->
