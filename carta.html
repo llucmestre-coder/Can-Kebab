@@ -1,260 +1,285 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Carta — Can Kebab</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-/* ── VARIABLES ── */
-:root {
-  --green:#4A6741; --green-dark:#2D3F2A; --green-light:#6B8F61;
-  --cream:#F7F0E3; --warm-white:#FDFAF4; --dark:#1C1A15;
-  --brown:#5C3D2E; --gold:#C8973A; --terracotta:#B85C38;
-}
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; }
-body { background:var(--warm-white); color:var(--dark); font-family:'DM Sans',sans-serif; overflow-x:hidden; }
-img { display:block; max-width:100%; }
-a { text-decoration:none; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carta — Can Kebab</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
 
-/* ── NAVIGATION ── */
-nav {
-  position:fixed; top:0; left:0; right:0; z-index:200;
-  display:flex; justify-content:space-between; align-items:center;
-  padding:1rem 3rem;
-  background:rgba(28,26,21,0.96); backdrop-filter:blur(16px);
-  border-bottom:1px solid rgba(74,103,65,0.3);
-}
-.nav-logo { display:flex; align-items:center; gap:0.8rem; font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:900; color:var(--cream); }
-.logo-mark { width:36px; height:36px; background:var(--green); border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; }
-.nav-links { display:flex; gap:2rem; list-style:none; align-items:center; }
-.nav-links a { color:rgba(247,240,227,0.65); font-size:0.82rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; transition:color 0.2s; }
-.nav-links a:hover { color:var(--green-light); }
-.nav-back { background:rgba(74,103,65,0.2); color:var(--cream) !important; padding:0.55rem 1.3rem; border-radius:3px; border:1px solid rgba(74,103,65,0.4); }
-.nav-back:hover { background:var(--green) !important; border-color:var(--green) !important; }
-.nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:4px; }
-.nav-hamburger span { display:block; width:24px; height:2px; background:var(--cream); border-radius:2px; }
-.mobile-menu { display:none; position:fixed; inset:0; z-index:300; background:rgba(28,26,21,0.98); flex-direction:column; align-items:center; justify-content:center; gap:2.5rem; }
-.mobile-menu.open { display:flex; }
-.mobile-menu a { color:var(--cream); font-family:'Playfair Display',serif; font-size:2rem; font-weight:700; }
-.mobile-menu a.mob-cta { background:var(--green); padding:0.8rem 2.5rem; border-radius:4px; font-size:1.5rem; }
-.mobile-close { position:absolute; top:1.5rem; right:1.8rem; background:none; border:none; color:var(--cream); font-size:2rem; cursor:pointer; }
+  /* ════════════════════════════════════
+     VARIABLES & RESET
+  ════════════════════════════════════ */
+  :root {
+    --green:       #4A6741;
+    --green-dark:  #2D3F2A;
+    --green-light: #6B8F61;
+    --cream:       #F7F0E3;
+    --warm-white:  #FDFAF4;
+    --dark:        #1C1A15;
+    --gold:        #C8973A;
+    --terracotta:  #B85C38;
+  }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html  { scroll-behavior:smooth; }
+  body  { background:var(--warm-white); color:var(--dark); font-family:'DM Sans',sans-serif; overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+  img   { display:block; max-width:100%; }
+  a     { text-decoration:none; color:inherit; }
 
-/* ── LOCAL PHOTO BANNER ── */
-.local-banner {
-  display:grid; grid-template-columns:2fr 1fr 1fr 1fr;
-  grid-template-rows:260px; gap:3px; overflow:hidden;
-}
-.local-banner-img { position:relative; overflow:hidden; }
-.local-banner-img img { width:100%; height:100%; object-fit:cover; transition:transform 0.5s; }
-.local-banner-img:hover img { transform:scale(1.05); }
-.local-banner-overlay {
-  position:absolute; inset:0;
-  background:linear-gradient(to top, rgba(28,26,21,0.7) 0%, transparent 60%);
-  display:flex; align-items:flex-end; padding:1rem;
-}
-.local-banner-text { display:flex; flex-direction:column; gap:0.2rem; }
-.local-banner-text span { color:var(--cream); font-size:0.8rem; font-weight:500; }
+  /* ════════════════════════════════════
+     NAVIGATION
+  ════════════════════════════════════ */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:200;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:1rem 3rem;
+    background:rgba(28,26,21,0.96); backdrop-filter:blur(16px);
+    border-bottom:1px solid rgba(74,103,65,0.3);
+  }
+  .nav-logo { display:flex; align-items:center; gap:0.7rem; font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:900; color:var(--cream); }
+  .logo-mark { width:36px; height:36px; background:var(--green); border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0; }
+  .nav-links { display:flex; gap:2rem; list-style:none; align-items:center; }
+  .nav-links a { color:rgba(247,240,227,0.65); font-size:0.82rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; transition:color 0.2s; }
+  .nav-links a:hover { color:var(--green-light); }
+  .nav-back { background:rgba(74,103,65,0.2); color:var(--cream) !important; padding:0.5rem 1.2rem; border-radius:3px; border:1px solid rgba(74,103,65,0.4); }
+  .nav-back:hover { background:var(--green) !important; border-color:var(--green) !important; }
+  .nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:4px; }
+  .nav-hamburger span { display:block; width:24px; height:2px; background:var(--cream); border-radius:2px; }
+  .mobile-menu { display:none; position:fixed; inset:0; z-index:300; background:rgba(28,26,21,0.98); flex-direction:column; align-items:center; justify-content:center; gap:2.5rem; }
+  .mobile-menu.open { display:flex; }
+  .mobile-menu a { color:var(--cream); font-family:'Playfair Display',serif; font-size:2rem; font-weight:700; }
+  .mobile-menu a.mob-cta { background:var(--green); padding:0.8rem 2.5rem; border-radius:4px; font-size:1.5rem; }
+  .mobile-close { position:absolute; top:1.5rem; right:1.8rem; background:none; border:none; color:var(--cream); font-size:2rem; cursor:pointer; }
 
-/* ── MID MENU IMAGE STRIP ── */
-.menu-img-break {
-  display:grid; grid-template-columns:1fr 1fr 1fr;
-  grid-template-rows:180px; gap:3px; margin:1.5rem 0;
-  border-radius:6px; overflow:hidden;
-}
-.menu-img-break img { width:100%; height:100%; object-fit:cover; object-position:center top; transition:transform 0.4s; }
-.menu-img-break img:hover { transform:scale(1.05); }
+  /* ════════════════════════════════════
+     PAGE HERO
+     Restaurant exterior as background,
+     menu title overlaid on top
+  ════════════════════════════════════ */
+  .page-hero {
+    position: relative;
+    min-height: 55svh;
+    display: flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align: center; padding:8rem 2rem 4rem; overflow:hidden;
+  }
+  /* Dark-tinted background image */
+  .page-hero-bg {
+    position: absolute; inset:0;
+    background-image: url('img_exterior.jpg');
+    background-size: cover; background-position:center;
+    filter: brightness(0.3);
+    z-index: 0;
+  }
+  /* Subtle vignette on top of image */
+  .page-hero-vignette {
+    position: absolute; inset:0;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(28,26,21,0.6) 100%);
+    z-index: 1;
+  }
+  /* Text content sits above both layers */
+  .page-hero-content { position:relative; z-index:2; }
+  .page-hero-eyebrow {
+    display: inline-block; font-size:0.7rem; font-weight:600;
+    letter-spacing: 0.28em; text-transform:uppercase;
+    color: var(--green-light); margin-bottom:0.8rem;
+  }
+  .page-hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem,6vw,5rem); font-weight:900;
+    color: var(--cream); line-height:1.05;
+  }
+  .page-hero-title em { font-style:italic; color:var(--green-light); }
+  .page-hero-sub {
+    color: rgba(247,240,227,0.6); font-size:1rem; margin-top:1rem; line-height:1.6;
+  }
 
-/* ── LOCAL GALLERY ── */
-.local-gallery {
-  display:grid; grid-template-columns:1.4fr 1fr;
-  height:400px; gap:3px; overflow:hidden;
-  background:var(--dark);
-}
-.local-gallery-right { display:grid; grid-template-columns:1fr 1fr; gap:3px; }
-.local-gallery-item { position:relative; overflow:hidden; }
-.local-gallery-item img { width:100%; height:100%; object-fit:cover; transition:transform 0.5s; }
-.local-gallery-item:hover img { transform:scale(1.06); }
-.local-gallery-label {
-  position:absolute; bottom:0; left:0; right:0;
-  padding:0.6rem 0.8rem;
-  background:linear-gradient(transparent,rgba(28,26,21,0.85));
-  color:var(--cream); font-size:0.72rem; font-weight:500;
-  letter-spacing:0.06em; text-transform:uppercase;
-  opacity:0; transition:opacity 0.3s;
-}
-.local-gallery-item:hover .local-gallery-label { opacity:1; }
+  /* ════════════════════════════════════
+     SECTION HELPERS
+  ════════════════════════════════════ */
+  .section-eyebrow { display:block; font-size:0.7rem; font-weight:600; letter-spacing:0.28em; text-transform:uppercase; color:var(--green); margin-bottom:0.7rem; }
+  .section-title { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,3.5vw,2.6rem); font-weight:900; line-height:1.1; color:var(--dark); }
+  .section-title em { font-style:italic; color:var(--terracotta); }
 
-/* ── ICON BUTTONS ── */
-.icon-btn {
-  display:inline-flex; flex-direction:column; align-items:center; justify-content:center;
-  gap:0.4rem; padding:1rem 1.5rem; border-radius:8px;
-  transition:all 0.2s; cursor:pointer; min-width:100px;
-  font-family:'DM Sans'; border:none;
-}
-.icon-btn-icon { font-size:1.6rem; line-height:1; }
-.icon-btn-label { font-size:0.72rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; }
-.icon-btn-primary { background:var(--green); color:var(--cream); }
-.icon-btn-primary:hover { background:var(--green-light); transform:translateY(-3px); }
-.page-header { position:relative; padding:9rem 2rem 4rem; text-align:center; overflow:hidden; min-height:42svh; display:flex; flex-direction:column; align-items:center; justify-content:center; }
-.page-header-bg { position:absolute; inset:0; background-image:url('img_exterior.jpg'); background-size:cover; background-position:center; filter:brightness(0.32); z-index:0; }
-.page-header-content { position:relative; z-index:1; }
-.page-header .section-label { color:var(--green-light); }
-.page-header h1 { font-family:'Playfair Display',serif; font-size:clamp(2.2rem,5vw,4rem); font-weight:900; color:var(--cream); margin-top:0.5rem; }
-.page-header h1 em { font-style:italic; color:var(--green-light); }
-.page-header p { color:rgba(247,240,227,0.6); margin-top:0.8rem; font-size:0.95rem; }
+  /* ════════════════════════════════════
+     MENU SECTION
+     Category tabs + dish cards
+  ════════════════════════════════════ */
+  #menu { padding:4rem 2rem 5rem; background:var(--warm-white); }
+  .menu-inner { max-width:1100px; margin:0 auto; }
+  .menu-top { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2.5rem; flex-wrap:wrap; gap:1rem; }
 
-/* ── SECTION HELPERS ── */
-.section-label { display:block; font-size:0.7rem; font-weight:600; letter-spacing:0.28em; text-transform:uppercase; color:var(--green); margin-bottom:0.7rem; }
-.section-title { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,3.5vw,2.6rem); font-weight:900; line-height:1.1; color:var(--dark); }
-.section-title em { font-style:italic; color:var(--terracotta); }
+  /* Category filter tabs */
+  .tabs { display:flex; gap:0.4rem; flex-wrap:wrap; }
+  .tab {
+    padding: 0.5rem 1.1rem; border:1px solid rgba(74,103,65,0.25);
+    background: transparent; color:#5C3D2E;
+    font-family: 'DM Sans'; font-size:0.78rem; font-weight:500;
+    letter-spacing: 0.08em; text-transform:uppercase;
+    border-radius: 2px; cursor:pointer; transition:all 0.2s;
+  }
+  .tab.active, .tab:hover { background:var(--green-dark); color:var(--cream); border-color:var(--green-dark); }
 
-/* ── MENU ── */
-#menu { padding:4rem 2rem 5rem; background:var(--warm-white); }
-.menu-inner { max-width:1100px; margin:0 auto; }
-.menu-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2.5rem; flex-wrap:wrap; gap:1rem; }
+  /* Category container */
+  .menu-grid { display:flex; flex-direction:column; gap:0.8rem; }
+  .menu-cat { display:none; }
+  .menu-cat.show { display:flex; flex-direction:column; gap:0.8rem; }
+  .cat-heading {
+    font-family: 'Playfair Display', serif; font-size:1.3rem; font-weight:700;
+    color: var(--green-dark); padding-bottom:0.7rem;
+    border-bottom: 2px solid var(--green); margin-bottom:0.5rem;
+    display: flex; align-items:center; gap:0.6rem;
+  }
 
-/* Category tabs */
-.tabs { display:flex; gap:0.4rem; flex-wrap:wrap; }
-.tab {
-  padding:0.5rem 1.1rem; border:1px solid rgba(74,103,65,0.25);
-  background:transparent; color:var(--brown);
-  font-family:'DM Sans'; font-size:0.78rem; font-weight:500;
-  letter-spacing:0.08em; text-transform:uppercase;
-  border-radius:2px; cursor:pointer; transition:all 0.2s;
-}
-.tab.active, .tab:hover { background:var(--green-dark); color:var(--cream); border-color:var(--green-dark); }
+  /* Individual dish row */
+  .dish {
+    display: grid; grid-template-columns:80px 1fr auto;
+    gap: 1rem; align-items:center;
+    background: white; border:1px solid rgba(74,103,65,0.1);
+    border-radius: 6px; padding:0.9rem 1rem;
+    transition: all 0.2s; cursor:pointer;
+  }
+  .dish:hover { border-color:var(--green); box-shadow:0 4px 20px rgba(74,103,65,0.12); transform:translateX(3px); }
+  .dish-img { width:80px; height:80px; border-radius:6px; object-fit:cover; flex-shrink:0; }
+  .dish-img-placeholder { width:80px; height:80px; border-radius:6px; background:linear-gradient(135deg,var(--green) 0%,var(--green-dark) 100%); display:flex; align-items:center; justify-content:center; font-size:1.4rem; flex-shrink:0; }
+  .dish-name { font-family:'Playfair Display',serif; font-size:1rem; font-weight:700; color:var(--dark); margin-bottom:0.25rem; }
+  .dish-desc { font-size:0.8rem; color:#888; line-height:1.45; }
+  .dish-tag { font-size:0.62rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--green); background:rgba(74,103,65,0.1); padding:0.15rem 0.5rem; border-radius:2px; display:inline-block; margin-top:0.3rem; }
+  .dish-right { display:flex; flex-direction:column; align-items:flex-end; gap:0.5rem; min-width:60px; }
+  .dish-price { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:var(--gold); white-space:nowrap; }
 
-/* Menu grid & categories */
-.menu-grid { display:flex; flex-direction:column; gap:0.8rem; }
-.menu-cat { display:none; }
-.menu-cat.show { display:flex; flex-direction:column; gap:0.8rem; }
-.cat-title { font-family:'Playfair Display',serif; font-size:1.35rem; font-weight:700; color:var(--green-dark); padding-bottom:0.7rem; border-bottom:2px solid var(--green); margin-bottom:0.5rem; display:flex; align-items:center; gap:0.6rem; }
+  /* ── Add / Qty buttons on each dish ── */
+  .add-btn {
+    width:34px; height:34px; border-radius:50%;
+    background: var(--green-dark); color:var(--cream); border:none;
+    font-size: 1.2rem; cursor:pointer;
+    display: flex; align-items:center; justify-content:center;
+    transition: background 0.2s; flex-shrink:0;
+  }
+  .add-btn:hover { background:var(--green); }
+  .dish-qty { display:flex; align-items:center; gap:0.35rem; background:var(--green-dark); border-radius:20px; padding:0.2rem 0.3rem; }
+  .dish-qty-btn { width:28px; height:28px; border-radius:50%; border:none; background:rgba(255,255,255,0.15); color:var(--cream); font-size:1rem; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.15s; line-height:1; flex-shrink:0; }
+  .dish-qty-btn:hover { background:rgba(255,255,255,0.3); }
+  .dish-qty-num { font-size:0.9rem; font-weight:700; color:var(--cream); min-width:18px; text-align:center; }
 
-/* Dish cards */
-.dish {
-  display:grid; grid-template-columns:80px 1fr auto;
-  gap:1rem; align-items:center;
-  background:white; border:1px solid rgba(74,103,65,0.1);
-  border-radius:6px; padding:0.9rem 1rem;
-  transition:all 0.2s; cursor:pointer;
-}
-.dish:hover { border-color:var(--green); box-shadow:0 4px 20px rgba(74,103,65,0.12); transform:translateX(3px); }
-.dish-thumb { width:80px; height:80px; border-radius:6px; object-fit:cover; flex-shrink:0; }
-.dish-thumb-placeholder { width:80px; height:80px; border-radius:6px; background:linear-gradient(135deg,var(--green) 0%,var(--green-dark) 100%); display:flex; align-items:center; justify-content:center; font-size:1.4rem; flex-shrink:0; }
-.dish-name { font-family:'Playfair Display',serif; font-size:1rem; font-weight:700; color:var(--dark); margin-bottom:0.25rem; }
-.dish-desc { font-size:0.8rem; color:#888; line-height:1.45; }
-.dish-badge { font-size:0.62rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--green); background:rgba(74,103,65,0.1); padding:0.15rem 0.5rem; border-radius:2px; display:inline-block; margin-top:0.3rem; }
-.dish-right { display:flex; flex-direction:column; align-items:flex-end; gap:0.5rem; min-width:60px; }
-.dish-price { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:var(--gold); white-space:nowrap; }
+  /* ════════════════════════════════════
+     ORDER SECTION
+  ════════════════════════════════════ */
+  #order { padding:5rem 2rem; background:var(--green-dark); }
+  .order-header { text-align:center; margin-bottom:2.5rem; }
+  .order-header .section-eyebrow { color:var(--green-light); }
+  .order-heading { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,3.5vw,2.6rem); font-weight:900; color:var(--cream); line-height:1.1; }
+  .order-heading em { font-style:italic; color:var(--gold); }
 
-/* Add / qty buttons on dish */
-.add-btn { width:34px; height:34px; border-radius:50%; background:var(--green-dark); color:var(--cream); border:none; font-size:1.2rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.2s; flex-shrink:0; }
-.add-btn:hover { background:var(--green); }
-.dish-qty { display:flex; align-items:center; gap:0.35rem; background:var(--green-dark); border-radius:20px; padding:0.2rem 0.3rem; }
-.dish-qty-btn { width:28px; height:28px; border-radius:50%; border:none; background:rgba(255,255,255,0.15); color:var(--cream); font-size:1rem; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.15s; line-height:1; flex-shrink:0; }
-.dish-qty-btn:hover { background:rgba(255,255,255,0.3); }
-.dish-qty-num { font-size:0.9rem; font-weight:700; color:var(--cream); min-width:18px; text-align:center; }
+  /* Two-column layout: form + cart */
+  .order-layout { max-width:900px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; }
 
-/* ── ORDER SECTION ── */
-#order { padding:5rem 2rem; background:var(--green-dark); }
-#order .section-label { color:var(--green-light); }
-.order-heading { text-align:center; margin-bottom:2.5rem; }
-.order-heading h2 { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,3.5vw,2.6rem); font-weight:900; color:var(--cream); }
-.order-heading h2 em { font-style:italic; color:var(--gold); }
+  /* Form panel */
+  .form-panel { background:rgba(255,255,255,0.05); border:1px solid rgba(107,143,97,0.25); border-radius:6px; padding:2rem; }
+  .mode-toggle { display:flex; margin-bottom:1.8rem; border:1px solid rgba(107,143,97,0.3); border-radius:3px; overflow:hidden; }
+  .mode-btn { flex:1; padding:0.8rem; background:transparent; border:none; color:rgba(247,240,227,0.5); font-family:'DM Sans'; font-size:0.82rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; cursor:pointer; transition:all 0.2s; }
+  .mode-btn.active { background:var(--green); color:var(--cream); }
 
-.order-layout { max-width:900px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; }
-.order-form-wrap { background:rgba(255,255,255,0.05); border:1px solid rgba(107,143,97,0.25); border-radius:6px; padding:2rem; }
+  .form-group { display:flex; flex-direction:column; gap:0.4rem; margin-bottom:1rem; }
+  .form-group label { font-size:0.72rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:rgba(247,240,227,0.45); }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    background: rgba(255,255,255,0.07); border:1px solid rgba(107,143,97,0.25);
+    border-radius: 3px; padding:0.85rem 0.9rem; color:var(--cream);
+    font-family: 'DM Sans'; font-size:1rem; outline:none;
+    transition: border-color 0.2s; -webkit-appearance:none;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus { border-color:var(--green-light); }
+  .form-group select option { background:#2D3F2A; }
+  .form-group textarea { resize:vertical; min-height:80px; }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; }
 
-.toggle-row { display:flex; margin-bottom:1.8rem; border:1px solid rgba(107,143,97,0.3); border-radius:3px; overflow:hidden; }
-.tgl { flex:1; padding:0.8rem; background:transparent; border:none; color:rgba(247,240,227,0.5); font-family:'DM Sans'; font-size:0.82rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; cursor:pointer; transition:all 0.2s; }
-.tgl.on { background:var(--green); color:var(--cream); }
+  /* Cart panel */
+  .cart-panel { background:rgba(255,255,255,0.04); border:1px solid rgba(107,143,97,0.2); border-radius:6px; padding:1.5rem; }
+  .cart-header { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:var(--cream); margin-bottom:1.2rem; display:flex; align-items:center; justify-content:space-between; }
+  .cart-badge { background:var(--green); color:var(--cream); border-radius:50%; width:24px; height:24px; font-size:0.75rem; font-weight:700; display:flex; align-items:center; justify-content:center; }
+  .cart-empty { color:rgba(247,240,227,0.3); font-size:0.85rem; text-align:center; padding:2rem 0; }
+  .cart-row { display:flex; justify-content:space-between; align-items:center; padding:0.6rem 0; border-bottom:1px solid rgba(107,143,97,0.12); color:var(--cream); font-size:0.84rem; gap:0.5rem; }
+  .cart-row:last-of-type { border-bottom:none; }
+  .cart-row-name { flex:1; line-height:1.3; }
+  .cart-row-price { color:var(--gold); font-weight:600; white-space:nowrap; }
+  .cart-row-qty { display:flex; align-items:center; gap:0.4rem; background:rgba(255,255,255,0.07); border-radius:20px; padding:0.15rem 0.4rem; }
+  .cart-qty-btn { background:none; border:none; color:var(--cream); cursor:pointer; font-size:1rem; width:22px; height:22px; display:flex; align-items:center; justify-content:center; border-radius:50%; transition:background 0.15s; }
+  .cart-qty-btn:hover { background:rgba(255,255,255,0.15); }
+  .cart-qty-num { font-size:0.85rem; font-weight:600; min-width:16px; text-align:center; }
+  .cart-total { display:flex; justify-content:space-between; padding-top:0.9rem; margin-top:0.5rem; border-top:1px solid rgba(107,143,97,0.3); font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:700; color:var(--gold); }
+  .confirm-btn { width:100%; margin-top:1rem; padding:1rem; background:var(--green); color:var(--cream); border:none; border-radius:3px; font-family:'DM Sans'; font-size:1rem; font-weight:600; cursor:pointer; transition:all 0.2s; letter-spacing:0.04em; }
+  .confirm-btn:hover { background:var(--green-light); transform:translateY(-1px); }
 
-.fg { display:flex; flex-direction:column; gap:0.4rem; margin-bottom:1rem; }
-.fg label { font-size:0.72rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:rgba(247,240,227,0.45); }
-.fg input, .fg textarea, .fg select { background:rgba(255,255,255,0.07); border:1px solid rgba(107,143,97,0.25); border-radius:3px; padding:0.8rem 0.9rem; color:var(--cream); font-family:'DM Sans'; font-size:1rem; outline:none; transition:border-color 0.2s; -webkit-appearance:none; }
-.fg input:focus, .fg textarea:focus, .fg select:focus { border-color:var(--green-light); }
-.fg select option { background:#2D3F2A; }
-.fg textarea { resize:vertical; min-height:80px; }
-.fr { display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; }
+  /* ════════════════════════════════════
+     FOOTER
+  ════════════════════════════════════ */
+  footer { background:var(--green-dark); padding:2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; border-top:1px solid rgba(107,143,97,0.2); }
+  .footer-logo-sm { display:flex; align-items:center; gap:0.6rem; font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:900; color:var(--cream); }
+  footer p { color:rgba(247,240,227,0.35); font-size:0.78rem; }
 
-/* Cart panel */
-.cart-panel { background:rgba(255,255,255,0.04); border:1px solid rgba(107,143,97,0.2); border-radius:6px; padding:1.5rem; }
-.cart-title { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:var(--cream); margin-bottom:1.2rem; display:flex; align-items:center; justify-content:space-between; }
-.cart-count { background:var(--green); color:var(--cream); border-radius:50%; width:24px; height:24px; font-size:0.75rem; font-weight:700; display:flex; align-items:center; justify-content:center; }
-.cart-empty { color:rgba(247,240,227,0.3); font-size:0.85rem; text-align:center; padding:2rem 0; }
-.cart-item-row { display:flex; justify-content:space-between; align-items:center; padding:0.6rem 0; border-bottom:1px solid rgba(107,143,97,0.12); color:var(--cream); font-size:0.85rem; gap:0.5rem; }
-.cart-item-row:last-of-type { border-bottom:none; }
-.ci-name { flex:1; line-height:1.3; font-size:0.82rem; }
-.ci-price { color:var(--gold); font-weight:600; white-space:nowrap; }
-.ci-qty { display:flex; align-items:center; gap:0.4rem; background:rgba(255,255,255,0.07); border-radius:20px; padding:0.15rem 0.4rem; }
-.ci-qty-btn { background:none; border:none; color:var(--cream); cursor:pointer; font-size:1rem; width:22px; height:22px; display:flex; align-items:center; justify-content:center; border-radius:50%; transition:background 0.15s; }
-.ci-qty-btn:hover { background:rgba(255,255,255,0.15); }
-.ci-qty-num { font-size:0.85rem; font-weight:600; min-width:16px; text-align:center; }
-.cart-total-row { display:flex; justify-content:space-between; padding-top:0.9rem; margin-top:0.5rem; border-top:1px solid rgba(107,143,97,0.3); font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:700; color:var(--gold); }
-.submit-btn { width:100%; margin-top:1rem; padding:1rem; background:var(--green); color:var(--cream); border:none; border-radius:3px; font-family:'DM Sans'; font-size:1rem; font-weight:600; cursor:pointer; transition:all 0.2s; letter-spacing:0.04em; }
-.submit-btn:hover { background:var(--green-light); transform:translateY(-1px); }
+  /* ════════════════════════════════════
+     TOAST NOTIFICATION
+  ════════════════════════════════════ */
+  .toast {
+    position: fixed; bottom:2rem; right:1.5rem; z-index:999;
+    background: var(--green-dark); color:var(--cream);
+    padding: 0.9rem 1.4rem; border-radius:4px;
+    border-left: 3px solid var(--green-light);
+    font-size: 0.85rem; font-weight:500;
+    transform: translateY(80px); opacity:0; transition:all 0.3s;
+    pointer-events: none; max-width:calc(100vw - 3rem);
+  }
+  .toast.show { transform:translateY(0); opacity:1; }
 
-/* ── FOOTER ── */
-footer { background:var(--green-dark); padding:2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; border-top:1px solid rgba(107,143,97,0.2); }
-.footer-logo { display:flex; align-items:center; gap:0.6rem; font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:900; color:var(--cream); }
-footer p { color:rgba(247,240,227,0.35); font-size:0.78rem; }
+  /* ════════════════════════════════════
+     RESPONSIVE — MOBILE (≤768px)
+  ════════════════════════════════════ */
+  @media (max-width: 768px) {
+    nav { padding:1rem 1.2rem; }
+    .nav-links { display:none; }
+    .nav-hamburger { display:flex; }
 
-/* ── TOAST ── */
-.toast { position:fixed; bottom:2rem; right:1.5rem; z-index:999; background:var(--green-dark); color:var(--cream); padding:0.9rem 1.4rem; border-radius:4px; border-left:3px solid var(--green-light); font-size:0.85rem; font-weight:500; transform:translateY(80px); opacity:0; transition:all 0.3s; pointer-events:none; max-width:calc(100vw - 3rem); }
-.toast.show { transform:translateY(0); opacity:1; }
+    .page-hero { min-height:45svh; padding:6.5rem 1.5rem 3rem; }
 
-/* ── RESPONSIVE ── */
-@media(max-width:768px){
-  .local-banner { grid-template-columns:1fr 1fr; grid-template-rows:160px 160px; }
-  .menu-img-break { grid-template-columns:1fr 1fr; grid-template-rows:140px; }
-  .menu-img-break img:last-child { display:none; }
+    #menu { padding:2.5rem 1rem 3rem; }
+    .menu-top { flex-direction:column; align-items:flex-start; gap:1rem; }
+    .tabs { gap:0.3rem; }
+    .tab { padding:0.55rem 0.9rem; font-size:0.75rem; }
 
-  nav { padding:1rem 1.2rem; }
-  .nav-links { display:none; }
-  .nav-hamburger { display:flex; }
+    /* Compact dish rows on mobile */
+    .dish { grid-template-columns:64px 1fr auto; gap:0.7rem; padding:0.75rem 0.8rem; }
+    .dish:hover { transform:none; }
+    .dish-img, .dish-img-placeholder { width:64px; height:64px; }
+    .dish-name { font-size:0.9rem; }
+    .dish-desc { font-size:0.75rem; }
+    .dish-price { font-size:1rem; }
+    .dish-right { min-width:50px; }
+    .add-btn { width:30px; height:30px; font-size:1rem; }
+    .dish-qty-btn { width:24px; height:24px; }
 
-  .local-gallery { grid-template-columns:1fr; height:auto; }
-  .local-gallery-item.main { height:220px; }
-  .local-gallery-right { grid-template-columns:1fr 1fr; }
-  .local-gallery-right .local-gallery-item { height:140px; }
+    /* Order: stacked */
+    #order { padding:3rem 1rem; }
+    .order-layout { grid-template-columns:1fr; gap:1.5rem; }
+    .form-panel { padding:1.2rem; }
+    .form-row { grid-template-columns:1fr; }
+    .mode-btn { font-size:0.78rem; padding:0.8rem 0.5rem; }
+    .form-group input, .form-group textarea, .form-group select { font-size:1rem; }
+    .confirm-btn { padding:1.1rem; font-size:1rem; }
+    .cart-panel { padding:1.2rem; }
 
-  .page-header { padding:7rem 1.5rem 2.5rem; min-height:35svh; }
+    footer { padding:1.5rem; flex-direction:column; text-align:center; }
+  }
 
-  #menu { padding:2.5rem 1rem 3rem; }
-  .menu-header { flex-direction:column; align-items:flex-start; gap:1rem; }
-  .tabs { gap:0.3rem; }
-  .tab { padding:0.55rem 0.9rem; font-size:0.75rem; }
-
-  /* Dishes on mobile: compact layout */
-  .dish { grid-template-columns:64px 1fr auto; gap:0.7rem; padding:0.75rem 0.8rem; }
-  .dish:hover { transform:none; }
-  .dish-thumb, .dish-thumb-placeholder { width:64px; height:64px; }
-  .dish-name { font-size:0.9rem; }
-  .dish-desc { font-size:0.75rem; }
-  .dish-price { font-size:1rem; }
-  .dish-right { min-width:50px; }
-  .add-btn { width:30px; height:30px; font-size:1.1rem; }
-  .dish-qty-btn { width:24px; height:24px; }
-
-  /* Order on mobile: form first, then cart */
-  #order { padding:3rem 1rem; }
-  .order-layout { grid-template-columns:1fr; gap:1.5rem; }
-  .order-form-wrap { padding:1.2rem; }
-  .fr { grid-template-columns:1fr; }
-  .tgl { font-size:0.78rem; padding:0.8rem 0.5rem; }
-  .fg input, .fg textarea, .fg select { font-size:1rem; padding:0.85rem 0.9rem; }
-  .submit-btn { font-size:1rem; padding:1.1rem; }
-  .cart-panel { padding:1.2rem; }
-
-  footer { padding:1.5rem; flex-direction:column; text-align:center; }
-}
-</style>
+  </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ══════════════════════════════
+     NAVIGATION
+══════════════════════════════ -->
 <nav>
   <a href="index.html" class="nav-logo"><div class="logo-mark">🥙</div>Can Kebab</a>
   <ul class="nav-links">
@@ -266,6 +291,8 @@ footer p { color:rgba(247,240,227,0.35); font-size:0.78rem; }
     <span></span><span></span><span></span>
   </button>
 </nav>
+
+<!-- Mobile menu -->
 <div class="mobile-menu" id="mobileNav">
   <button class="mobile-close" onclick="document.getElementById('mobileNav').classList.remove('open')">✕</button>
   <a href="#menu"  onclick="document.getElementById('mobileNav').classList.remove('open')">Carta</a>
@@ -273,98 +300,61 @@ footer p { color:rgba(247,240,227,0.35); font-size:0.78rem; }
   <a href="index.html" class="mob-cta">← Inici</a>
 </div>
 
-<!-- PAGE HEADER -->
-<div class="page-header">
-  <div class="page-header-bg"></div>
-  <div class="page-header-content">
-    <span class="section-label">Can Kebab · Barcelona</span>
-    <h1>La nostra <em>carta</em></h1>
-    <p>Tria els teus plats i fes la comanda directament aquí baix</p>
+<!-- ══════════════════════════════
+     PAGE HERO
+     Exterior photo as background,
+     menu title in the foreground
+══════════════════════════════ -->
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-vignette"></div>
+  <div class="page-hero-content">
+    <span class="page-hero-eyebrow">Can Kebab · Barcelona</span>
+    <h1 class="page-hero-title">La nostra <em>carta</em></h1>
+    <p class="page-hero-sub">Tria els teus plats i fes la comanda directament aquí baix</p>
   </div>
 </div>
 
-<!-- PHOTO GALLERY LOCAL -->
-<div class="local-gallery">
-  <div class="local-gallery-item main">
-    <img src="img_exterior.jpg" alt="Exterior Can Kebab">
-    <div class="local-gallery-label">El local</div>
-  </div>
-  <div class="local-gallery-right">
-    <div class="local-gallery-item">
-      <img src="img_durum_arab.jpg" alt="Durum àrab" style="object-position:center top;">
-      <div class="local-gallery-label">Durum àrab</div>
-    </div>
-    <div class="local-gallery-item">
-      <img src="img_brot.jpg" alt="El nostre brot" style="object-position:center center;">
-      <div class="local-gallery-label">El nostre brot</div>
-    </div>
-    <div class="local-gallery-item">
-      <img src="img_pita_empordanes.jpg" alt="Pita empordanesa">
-      <div class="local-gallery-label">Pita empordanesa</div>
-    </div>
-    <div class="local-gallery-item">
-      <img src="img_couscous.jpg" alt="Couscous bowl" style="object-position:center center;">
-      <div class="local-gallery-label">Couscous bowl</div>
-    </div>
-  </div>
-</div>
-
-<!-- LOCAL PHOTO BANNER -->
-<div class="local-banner">
-  <div class="local-banner-img">
-    <img src="img_exterior.jpg" alt="Can Kebab exterior" style="object-position:center center;">
-    <div class="local-banner-overlay">
-      <div class="local-banner-text">
-        <span>Carrer Jaume Piquet, 1</span>
-        <span>Barcelona</span>
-      </div>
-    </div>
-  </div>
-  <div class="local-banner-img">
-    <img src="img_brot.jpg" alt="El nostre brot">
-  </div>
-  <div class="local-banner-img">
-    <img src="img_pita_mans.jpg" alt="Pita" style="object-position:center top;">
-  </div>
-  <div class="local-banner-img">
-    <img src="img_durum_arab.jpg" alt="Durum àrab" style="object-position:center top;">
-  </div>
-</div>
-
-<!-- MENU -->
+<!-- ══════════════════════════════
+     MENU
+     Filter tabs + dish cards
+══════════════════════════════ -->
 <section id="menu">
   <div class="menu-inner">
-    <div class="menu-header">
+    <div class="menu-top">
       <div>
-        <span class="section-label">El nostre menú</span>
+        <span class="section-eyebrow">El nostre menú</span>
         <h2 class="section-title">Carta <em>Can Kebab</em></h2>
       </div>
+      <!-- Filter tabs -->
       <div class="tabs">
-        <button class="tab active" onclick="showCat('all',this)">Tot</button>
-        <button class="tab" onclick="showCat('kebabs',this)">Kebabs</button>
-        <button class="tab" onclick="showCat('sides',this)">Sides</button>
-        <button class="tab" onclick="showCat('combos',this)">Combos</button>
-        <button class="tab" onclick="showCat('postres',this)">Postres</button>
+        <button class="tab active" onclick="filterCat('all',this)">Tot</button>
+        <button class="tab" onclick="filterCat('kebabs',this)">Kebabs</button>
+        <button class="tab" onclick="filterCat('sides',this)">Sides</button>
+        <button class="tab" onclick="filterCat('combos',this)">Combos</button>
+        <button class="tab" onclick="filterCat('postres',this)">Postres</button>
       </div>
     </div>
 
     <div class="menu-grid">
 
-      <!-- KEBABS -->
+      <!-- ── KEBABS ── -->
       <div class="menu-cat show" id="cat-all-kebabs">
-        <div class="cat-title">🥙 Kebabs Signature</div>
+        <div class="cat-heading">🥙 Kebabs Signature</div>
 
         <div class="dish" data-name="Kebab Àrab" data-price="10.99">
-          <img src="img_durum_arab.jpg" alt="Àrab" class="dish-thumb" style="object-position:center top;">
+          <img src="img_durum_arab.jpg" alt="Kebab Àrab" class="dish-img" style="object-position:center top;">
           <div>
-            <div class="dish-name">Àrab <span style="font-size:0.65rem;color:var(--green);font-weight:600;background:rgba(74,103,65,0.1);padding:0.1rem 0.4rem;border-radius:2px;margin-left:0.3rem">⭐ Popular</span></div>
+            <div class="dish-name">Àrab
+              <span style="font-size:0.62rem;color:var(--green);font-weight:600;background:rgba(74,103,65,0.1);padding:0.1rem 0.4rem;border-radius:2px;margin-left:0.3rem">⭐ Popular</span>
+            </div>
             <div class="dish-desc">Durum o pita · pollastre 120g · hummus · salsa iogurt · chimichurri àrab · herbes · ceba encurtida</div>
           </div>
           <div class="dish-right"><span class="dish-price">10.99€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish" data-name="Kebab Empordanès" data-price="10.99">
-          <img src="img_pita_empordanes.jpg" alt="Empordanès" class="dish-thumb" style="object-position:center center;">
+          <img src="img_pita_empordanes.jpg" alt="Empordanès" class="dish-img" style="object-position:center center;">
           <div>
             <div class="dish-name">Empordanès</div>
             <div class="dish-desc">Durum o pita · pollastre 120g · salsa romesco · escarola · tomàquet sec · oliva kalamata</div>
@@ -373,149 +363,151 @@ footer p { color:rgba(247,240,227,0.35); font-size:0.78rem; }
         </div>
 
         <div class="dish" data-name="Kebab De foc i brasa" data-price="10.99">
-          <img src="img_pita_mans.jpg" alt="Foc i brasa" class="dish-thumb" style="object-position:center top;">
+          <img src="img_pita_mans.jpg" alt="De foc i brasa" class="dish-img" style="object-position:center top;">
           <div>
             <div class="dish-name">De foc i brasa 🔥</div>
-            <div class="dish-desc">Durum o pita · pollastre 120g · puré d'albergínia al carbó · pebrot caramel·litzat · salsa picant casolana · allioli d'all escalivat</div>
+            <div class="dish-desc">Durum o pita · pollastre 120g · puré d'albergínia · pebrot caramel·litzat · salsa picant casolana · allioli d'all escalivat</div>
           </div>
           <div class="dish-right"><span class="dish-price">10.99€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
-        <div class="dish" data-name="Kebab Rostit de diumenge" data-price="11.50">
-          <div class="dish-thumb-placeholder">🍗</div>
+        <div class="dish" data-name="Rostit de diumenge" data-price="11.50">
+          <div class="dish-img-placeholder">🍗</div>
           <div>
             <div class="dish-name">Rostit de diumenge</div>
             <div class="dish-desc">Durum o pita · pollastre · patata al caliu · allioli</div>
-            <span class="dish-badge">Només diumenge</span>
+            <span class="dish-tag">Només diumenge</span>
           </div>
           <div class="dish-right"><span class="dish-price">11.50€</span><div class="dish-qty-wrap"></div></div>
         </div>
       </div>
 
-      <!-- IMAGE BREAK between kebabs and sides -->
-      <div class="menu-img-break">
-        <img src="img_wrap_falafel.jpg" alt="Wrap falafel">
-        <img src="img_couscous.jpg"     alt="Couscous" style="object-position:center center;">
-        <img src="img_kebab_fries.jpg"  alt="Kebab fries" style="object-position:center center;">
-      </div>
-
-      <!-- SIDES -->
+      <!-- ── SIDES ── -->
       <div class="menu-cat show" id="cat-all-sides">
-        <div class="cat-title">🍟 Sides</div>
+        <div class="cat-heading">🍟 Sides</div>
 
         <div class="dish" data-name="Can fries" data-price="3.90">
-          <div class="dish-thumb-placeholder">🍟</div>
+          <div class="dish-img-placeholder">🍟</div>
           <div><div class="dish-name">Can fries</div><div class="dish-desc">Patates fregides especiades</div></div>
           <div class="dish-right"><span class="dish-price">3.90€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish" data-name="Dressed fries" data-price="5.50">
-          <img src="img_kebab_fries.jpg" alt="Dressed fries" class="dish-thumb" style="object-position:center center;">
+          <img src="img_kebab_fries.jpg" alt="Dressed fries" class="dish-img" style="object-position:center center;">
           <div><div class="dish-name">Dressed fries</div><div class="dish-desc">Patates fregides · sumac · feta · ceba encurtida · chimichurri àrab · julivert</div></div>
           <div class="dish-right"><span class="dish-price">5.50€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish" data-name="Kebab fries" data-price="6.50">
-          <img src="img_kebab_fries.jpg" alt="Kebab fries" class="dish-thumb" style="object-position:center center;">
+          <img src="img_kebab_fries.jpg" alt="Kebab fries" class="dish-img" style="object-position:center center;">
           <div><div class="dish-name">Kebab fries</div><div class="dish-desc">Patates fregides · pollastre · ceba encurtida · salsa tahini · julivert</div></div>
           <div class="dish-right"><span class="dish-price">6.50€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish" data-name="Couscous bowl" data-price="8.99">
-          <img src="img_couscous.jpg" alt="Couscous bowl" class="dish-thumb" style="object-position:center center;">
-          <div><div class="dish-name">Couscous bowl</div><div class="dish-desc">Couscous amanit · pollastre · amanida · cogombre · ceba encurtida · salsa iogurt · salsa tahini</div></div>
+          <img src="img_couscous.jpg" alt="Couscous bowl" class="dish-img" style="object-position:center center;">
+          <div><div class="dish-name">Couscous bowl</div><div class="dish-desc">Couscous amanit · pollastre · amanida · cogombre · ceba encurtida · salsa iogurt · tahini</div></div>
           <div class="dish-right"><span class="dish-price">8.99€</span><div class="dish-qty-wrap"></div></div>
         </div>
       </div>
 
-      <!-- COMBOS -->
+      <!-- ── COMBOS ── -->
       <div class="menu-cat show" id="cat-all-combos">
-        <div class="cat-title">🎯 Combos</div>
+        <div class="cat-heading">🎯 Combos</div>
 
         <div class="dish" data-name="Classic experience" data-price="13">
-          <div class="dish-thumb-placeholder">🥙🍟</div>
+          <div class="dish-img-placeholder">🥙🍟</div>
           <div><div class="dish-name">Classic experience</div><div class="dish-desc">Kebab base · can fries · beguda</div></div>
           <div class="dish-right"><span class="dish-price">13€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish" data-name="Signature feast" data-price="16.50">
-          <div class="dish-thumb-placeholder">⭐🥙</div>
+          <div class="dish-img-placeholder">⭐🥙</div>
           <div>
             <div class="dish-name">Signature feast</div>
             <div class="dish-desc">Kebab signature (àrab, empordanès o de foc i brasa) · can fries · beguda</div>
-            <span class="dish-badge">Best value</span>
+            <span class="dish-tag">Best value</span>
           </div>
           <div class="dish-right"><span class="dish-price">16.50€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish" data-name="Couscous experience" data-price="13">
-          <div class="dish-thumb-placeholder">🍲</div>
+          <div class="dish-img-placeholder">🍲</div>
           <div><div class="dish-name">Couscous experience</div><div class="dish-desc">Couscous bowl · beguda</div></div>
           <div class="dish-right"><span class="dish-price">13€</span><div class="dish-qty-wrap"></div></div>
         </div>
       </div>
 
-      <!-- POSTRES -->
+      <!-- ── POSTRES ── -->
       <div class="menu-cat show" id="cat-all-postres">
-        <div class="cat-title">🍰 Postres</div>
+        <div class="cat-heading">🍰 Postres</div>
 
         <div class="dish" data-name="Cheesecake" data-price="5">
-          <div class="dish-thumb-placeholder">🍰</div>
+          <div class="dish-img-placeholder">🍰</div>
           <div><div class="dish-name">Cheesecake</div></div>
           <div class="dish-right"><span class="dish-price">5€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish" data-name="Carrot cake" data-price="5">
-          <img src="img_carrot_cake.jpg" alt="Carrot cake" class="dish-thumb" style="object-position:center center;">
+          <img src="img_carrot_cake.jpg" alt="Carrot cake" class="dish-img" style="object-position:center center;">
           <div><div class="dish-name">Carrot cake</div></div>
           <div class="dish-right"><span class="dish-price">5€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish" data-name="Chocolate fondant" data-price="5">
-          <img src="img_chocolate.jpg" alt="Chocolate fondant" class="dish-thumb" style="object-position:center center;">
+          <img src="img_chocolate.jpg" alt="Chocolate fondant" class="dish-img" style="object-position:center center;">
           <div><div class="dish-name">Decadent chocolate fondant</div></div>
           <div class="dish-right"><span class="dish-price">5€</span><div class="dish-qty-wrap"></div></div>
         </div>
       </div>
 
-    </div>
-  </div>
+    </div><!-- /menu-grid -->
+  </div><!-- /menu-inner -->
 </section>
 
-<!-- ORDER -->
+<!-- ══════════════════════════════
+     ORDER SECTION
+     Form (left) + Cart (right)
+══════════════════════════════ -->
 <section id="order">
-  <div class="order-heading">
-    <span class="section-label">Fes la teva comanda</span>
-    <h2>Recull o <em>a domicili</em></h2>
+  <div class="order-header">
+    <span class="section-eyebrow">Fes la teva comanda</span>
+    <h2 class="order-heading">Recull o <em>a domicili</em></h2>
   </div>
 
   <div class="order-layout">
+
     <!-- FORM -->
-    <div class="order-form-wrap">
-      <div class="toggle-row">
-        <button class="tgl on" id="tgl-recollida" onclick="setMode('recollida')">🏃 Recollida al local</button>
-        <button class="tgl" id="tgl-domicili" onclick="setMode('domicili')">🛵 A domicili</button>
+    <div class="form-panel">
+      <!-- Pickup / Delivery toggle -->
+      <div class="mode-toggle">
+        <button class="mode-btn active" id="btn-recollida" onclick="setMode('recollida')">🏃 Recollida al local</button>
+        <button class="mode-btn"        id="btn-domicili"  onclick="setMode('domicili')">🛵 A domicili</button>
       </div>
 
-      <!-- Delivery fields (hidden by default) -->
-      <div id="delivery-section" style="display:none">
-        <div class="fg"><label>Adreça *</label><input id="f-adreca" type="text" placeholder="Carrer i número" autocomplete="street-address"></div>
-        <div class="fr">
-          <div class="fg"><label>Pis / Porta</label><input id="f-pis" type="text" placeholder="2n 1a"></div>
-          <div class="fg"><label>Codi postal *</label><input id="f-cp" type="text" placeholder="08001" inputmode="numeric"></div>
+      <!-- Delivery address (hidden for pickup) -->
+      <div id="delivery-fields" style="display:none;">
+        <div class="form-group">
+          <label>Adreça *</label>
+          <input id="f-addr" type="text" placeholder="Carrer i número" autocomplete="street-address">
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Pis / Porta</label><input id="f-floor" type="text" placeholder="2n 1a"></div>
+          <div class="form-group"><label>Codi postal *</label><input id="f-zip" type="text" placeholder="08001" inputmode="numeric"></div>
         </div>
       </div>
 
       <!-- Common fields -->
-      <div class="fr">
-        <div class="fg"><label>Nom *</label><input id="f-nom" type="text" placeholder="El teu nom" autocomplete="given-name"></div>
-        <div class="fg"><label>Telèfon *</label><input id="f-tel" type="tel" placeholder="6XX XXX XXX" autocomplete="tel" inputmode="tel"></div>
+      <div class="form-row">
+        <div class="form-group"><label>Nom *</label><input id="f-name" type="text" placeholder="El teu nom" autocomplete="given-name"></div>
+        <div class="form-group"><label>Telèfon *</label><input id="f-tel" type="tel" placeholder="6XX XXX XXX" autocomplete="tel" inputmode="tel"></div>
       </div>
 
-      <!-- Pickup time (recollida only) -->
-      <div id="recollida-hora-section">
-        <div class="fg"><label>Hora de recollida *</label>
-          <select id="f-hora">
+      <!-- Pickup time (hidden for delivery) -->
+      <div id="pickup-time-field">
+        <div class="form-group">
+          <label>Hora de recollida *</label>
+          <select id="f-time">
             <option value="">Selecciona una hora</option>
             <option>El més aviat possible</option>
             <option>En 30 minuts</option>
@@ -525,41 +517,49 @@ footer p { color:rgba(247,240,227,0.35); font-size:0.78rem; }
         </div>
       </div>
 
-      <div class="fg"><label>Notes (al·lèrgies, peticions...)</label>
+      <div class="form-group">
+        <label>Notes (al·lèrgies, peticions...)</label>
         <textarea id="f-notes" placeholder="Sense ceba, salsa extra..."></textarea>
       </div>
     </div>
 
     <!-- CART -->
     <div class="cart-panel">
-      <div class="cart-title">
+      <div class="cart-header">
         La teva comanda
-        <div class="cart-count" id="cart-count">0</div>
+        <div class="cart-badge" id="cart-count">0</div>
       </div>
       <div id="cart-items"><p class="cart-empty">Afegeix plats de la carta 👆</p></div>
-      <div class="cart-total-row" id="cart-total-row" style="display:none">
+      <div class="cart-total" id="cart-total" style="display:none;">
         <span>Total</span>
         <span id="cart-total-val">0.00€</span>
       </div>
-      <button class="submit-btn" onclick="submitOrder()">Confirmar comanda</button>
+      <button class="confirm-btn" onclick="submitOrder()">Confirmar comanda</button>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ══════════════════════════════
+     FOOTER
+══════════════════════════════ -->
 <footer>
-  <div class="footer-logo"><div class="logo-mark" style="background:var(--green-light)">🥙</div>Can Kebab</div>
+  <div class="footer-logo-sm"><div class="logo-mark" style="background:var(--green-light)">🥙</div>Can Kebab</div>
   <p>© 2025 Can Kebab · Barcelona</p>
   <p>Fet amb ❤️ per al barri</p>
 </footer>
 
 <div class="toast" id="toast"></div>
 
+<!-- ══════════════════════════════
+     JAVASCRIPT
+══════════════════════════════ -->
 <script>
-/* ── CART ── */
-let cart = [];
 
-/* Render +/qty controls on each dish */
+/* ── Cart state ── */
+let cart = [];
+let orderMode = 'recollida';
+
+/* Render +/qty control on each dish card */
 function renderDishes() {
   document.querySelectorAll('.dish[data-name]').forEach(dish => {
     const name  = dish.dataset.name;
@@ -567,28 +567,31 @@ function renderDishes() {
     const wrap  = dish.querySelector('.dish-qty-wrap');
     if (!wrap) return;
     const item = cart.find(i => i.name === name);
-    if (!item || item.qty === 0) {
-      wrap.innerHTML = `<button class="add-btn">+</button>`;
-      wrap.querySelector('.add-btn').addEventListener('click', function(e) {
+
+    if (!item) {
+      /* Show plain + button */
+      wrap.innerHTML = '<button class="add-btn">+</button>';
+      wrap.querySelector('.add-btn').addEventListener('click', e => {
         e.stopPropagation();
         cart.push({ name, price, qty: 1 });
         showToast(`✅ ${name} afegit!`);
         renderCart(); renderDishes();
       });
     } else {
+      /* Show − qty + controls */
       wrap.innerHTML = `<div class="dish-qty">
         <button class="dish-qty-btn minus">−</button>
         <span class="dish-qty-num">${item.qty}</span>
         <button class="dish-qty-btn plus">+</button>
       </div>`;
-      wrap.querySelector('.minus').addEventListener('click', function(e) {
+      wrap.querySelector('.minus').addEventListener('click', e => {
         e.stopPropagation();
         const idx = cart.findIndex(i => i.name === name);
         cart[idx].qty--;
         if (cart[idx].qty <= 0) cart.splice(idx, 1);
         renderCart(); renderDishes();
       });
-      wrap.querySelector('.plus').addEventListener('click', function(e) {
+      wrap.querySelector('.plus').addEventListener('click', e => {
         e.stopPropagation();
         cart.find(i => i.name === name).qty++;
         renderCart(); renderDishes();
@@ -597,92 +600,96 @@ function renderDishes() {
   });
 }
 
-/* Update cart panel */
-function changeQty(index, delta) {
-  cart[index].qty += delta;
-  if (cart[index].qty <= 0) cart.splice(index, 1);
-  renderCart(); renderDishes();
-}
-
+/* Update the cart panel */
 function renderCart() {
   const el       = document.getElementById('cart-items');
   const countEl  = document.getElementById('cart-count');
-  const totalRow = document.getElementById('cart-total-row');
+  const totalEl  = document.getElementById('cart-total');
   const totalVal = document.getElementById('cart-total-val');
-  const totalItems = cart.reduce((s,i) => s + i.qty, 0);
+
+  const totalItems = cart.reduce((s, i) => s + i.qty, 0);
   countEl.textContent = totalItems;
-  if (cart.length === 0) {
+
+  if (!cart.length) {
     el.innerHTML = '<p class="cart-empty">Afegeix plats de la carta 👆</p>';
-    totalRow.style.display = 'none'; return;
+    totalEl.style.display = 'none';
+    return;
   }
+
   let html = '', total = 0;
   cart.forEach((item, idx) => {
     const sub = (item.price * item.qty).toFixed(2);
     total += item.price * item.qty;
-    html += `<div class="cart-item-row">
-      <span class="ci-name">${item.name}</span>
-      <div class="ci-qty">
-        <button class="ci-qty-btn" onclick="changeQty(${idx},-1)">−</button>
-        <span class="ci-qty-num">${item.qty}</span>
-        <button class="ci-qty-btn" onclick="changeQty(${idx},1)">+</button>
+    html += `<div class="cart-row">
+      <span class="cart-row-name">${item.name}</span>
+      <div class="cart-row-qty">
+        <button class="cart-qty-btn" onclick="cartChangeQty(${idx},-1)">−</button>
+        <span class="cart-qty-num">${item.qty}</span>
+        <button class="cart-qty-btn" onclick="cartChangeQty(${idx},1)">+</button>
       </div>
-      <span class="ci-price">${sub}€</span>
+      <span class="cart-row-price">${sub}€</span>
     </div>`;
   });
   el.innerHTML = html;
-  totalRow.style.display = 'flex';
+  totalEl.style.display = 'flex';
   totalVal.textContent = total.toFixed(2) + '€';
 }
 
-/* Submit with validation */
+/* Adjust quantity from cart panel buttons */
+function cartChangeQty(idx, delta) {
+  cart[idx].qty += delta;
+  if (cart[idx].qty <= 0) cart.splice(idx, 1);
+  renderCart(); renderDishes();
+}
+
+/* Validate & submit */
 function submitOrder() {
-  if (cart.length === 0) { showToast('⚠️ Afegeix algun plat primer!'); return; }
-  const nom = document.getElementById('f-nom').value.trim();
-  const tel = document.getElementById('f-tel').value.trim();
-  if (!nom) { showToast('⚠️ Cal indicar el nom.'); return; }
-  if (!tel) { showToast('⚠️ Cal indicar el telèfon.'); return; }
-  if (orderMode === 'recollida') {
-    if (!document.getElementById('f-hora').value) { showToast('⚠️ Selecciona una hora de recollida.'); return; }
+  if (!cart.length)                             { showToast('⚠️ Afegeix algun plat primer!'); return; }
+  if (!document.getElementById('f-name').value.trim()) { showToast('⚠️ Cal indicar el nom.');    return; }
+  if (!document.getElementById('f-tel').value.trim())  { showToast('⚠️ Cal indicar el telèfon.'); return; }
+  if (orderMode === 'recollida' && !document.getElementById('f-time').value) {
+    showToast('⚠️ Selecciona una hora de recollida.'); return;
   }
   if (orderMode === 'domicili') {
-    if (!document.getElementById('f-adreca').value.trim()) { showToast("⚠️ Cal indicar l'adreça."); return; }
-    if (!document.getElementById('f-cp').value.trim())     { showToast('⚠️ Cal indicar el codi postal.'); return; }
+    if (!document.getElementById('f-addr').value.trim()) { showToast("⚠️ Cal indicar l'adreça.");      return; }
+    if (!document.getElementById('f-zip').value.trim())  { showToast('⚠️ Cal indicar el codi postal.'); return; }
   }
   showToast('🎉 Comanda enviada! Ens posem en contacte aviat.');
   cart = []; renderCart(); renderDishes();
 }
 
-/* Category tabs */
-function showCat(cat, btn) {
+/* Category filter tabs */
+function filterCat(cat, btn) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   btn.classList.add('active');
   if (cat === 'all') {
     document.querySelectorAll('.menu-cat').forEach(c => c.classList.add('show'));
   } else {
     document.querySelectorAll('.menu-cat').forEach(c => c.classList.remove('show'));
-    document.querySelectorAll(`[id^="cat-all-${cat}"]`).forEach(t => t.classList.add('show'));
+    document.querySelectorAll(`[id^="cat-all-${cat}"]`).forEach(c => c.classList.add('show'));
   }
 }
 
-/* Order mode toggle */
-let orderMode = 'recollida';
+/* Toggle pickup / delivery mode */
 function setMode(mode) {
   orderMode = mode;
-  document.getElementById('tgl-recollida').classList.toggle('on', mode === 'recollida');
-  document.getElementById('tgl-domicili').classList.toggle('on', mode === 'domicili');
-  document.getElementById('delivery-section').style.display       = mode === 'domicili'  ? 'block' : 'none';
-  document.getElementById('recollida-hora-section').style.display = mode === 'recollida' ? 'block' : 'none';
+  document.getElementById('btn-recollida').classList.toggle('active', mode === 'recollida');
+  document.getElementById('btn-domicili').classList.toggle('active',  mode === 'domicili');
+  document.getElementById('delivery-fields').style.display    = mode === 'domicili'  ? 'block' : 'none';
+  document.getElementById('pickup-time-field').style.display  = mode === 'recollida' ? 'block' : 'none';
 }
 
-/* Toast */
+/* Toast helper */
 function showToast(msg) {
   const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
+  t.textContent = msg;
+  t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2800);
 }
 
-/* Init */
+/* Init: render + buttons on page load */
 renderDishes();
+
 </script>
 </body>
 </html>
