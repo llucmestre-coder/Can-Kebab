@@ -517,6 +517,41 @@
     .reviews-grid { grid-template-columns:1fr 1fr; }
   }
 
+  /* ════════════════════════════════════
+     SCROLL ANIMATIONS — fade in + scale
+     Elements start invisible + slightly
+     shrunk, then grow to full size.
+  ════════════════════════════════════ */
+
+  /* Default hidden state */
+  .reveal {
+    opacity: 0;
+    transform: scale(0.94);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  /* Visible state — added by JS when element enters viewport */
+  .reveal.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+  /* Staggered delay for grid children (cards, review boxes, etc.) */
+  .reveal-child {
+    opacity: 0;
+    transform: scale(0.92);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .reveal-child.visible { opacity:1; transform:scale(1); }
+  .reveal-child:nth-child(2) { transition-delay: 0.1s; }
+  .reveal-child:nth-child(3) { transition-delay: 0.2s; }
+  .reveal-child:nth-child(4) { transition-delay: 0.1s; }
+  .reveal-child:nth-child(5) { transition-delay: 0.2s; }
+  .reveal-child:nth-child(6) { transition-delay: 0.3s; }
+
+  /* Respect user preference for reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal-child { transition: none; opacity:1; transform:none; }
+  }
+
   </style>
 </head>
 <body>
@@ -574,7 +609,7 @@
      INFO STRIP
      Key facts at a glance
 ══════════════════════════════ -->
-<div class="info-strip">
+<div class="info-strip reveal">
   <div class="info-strip-item">📍 Carrer Jaume Piquet, 1 · Barcelona</div>
   <div class="info-strip-item">📞 <a href="tel:603974811">603 974 811</a></div>
   <div class="info-strip-item">🕒 Obert cada dia</div>
@@ -587,7 +622,7 @@
 <!-- ══════════════════════════════
      FOOD PHOTO GALLERY STRIP
 ══════════════════════════════ -->
-<div class="gallery-strip">
+<div class="gallery-strip reveal">
   <img src="img_brot.jpg"          alt="El nostre brot de carn">
   <img src="img_pita_mans.jpg"     alt="Pita artesanal">
   <img src="img_kebab_fries.jpg"   alt="Kebab fries">
@@ -639,14 +674,14 @@
 ══════════════════════════════ -->
 <section id="destacats">
   <div class="section-inner">
-    <div class="section-header">
+    <div class="section-header reveal">
       <span class="section-eyebrow">Els nostres plats</span>
       <h2 class="section-title">Una tria dels nostres <em>favorits</em></h2>
     </div>
 
     <div class="dishes-grid">
       <!-- Dish 1 -->
-      <div class="dish-card">
+      <div class="dish-card reveal-child">
         <img src="img_durum_arab.jpg" alt="Kebab Àrab" class="dish-card-img">
         <div class="dish-card-body">
           <div>
@@ -658,7 +693,7 @@
       </div>
 
       <!-- Dish 2 -->
-      <div class="dish-card">
+      <div class="dish-card reveal-child">
         <img src="img_pita_empordanes.jpg" alt="Kebab Empordanès" class="dish-card-img">
         <div class="dish-card-body">
           <div>
@@ -669,7 +704,7 @@
       </div>
 
       <!-- Dish 3 -->
-      <div class="dish-card">
+      <div class="dish-card reveal-child">
         <img src="img_kebab_fries.jpg" alt="Kebab fries" class="dish-card-img">
         <div class="dish-card-body">
           <div>
@@ -680,7 +715,7 @@
       </div>
 
       <!-- Dish 4 -->
-      <div class="dish-card tall">
+      <div class="dish-card tall reveal-child">
         <img src="img_couscous.jpg" alt="Couscous bowl" class="dish-card-img" style="object-position:center center;">
         <div class="dish-card-body">
           <div>
@@ -691,7 +726,7 @@
       </div>
 
       <!-- Dish 5 -->
-      <div class="dish-card tall">
+      <div class="dish-card tall reveal-child">
         <img src="img_falafel.jpg" alt="Falafel" class="dish-card-img">
         <div class="dish-card-body">
           <div>
@@ -702,7 +737,7 @@
       </div>
 
       <!-- Dish 6 -->
-      <div class="dish-card tall">
+      <div class="dish-card tall reveal-child">
         <img src="img_carrot_cake.jpg" alt="Carrot cake" class="dish-card-img">
         <div class="dish-card-body">
           <div>
@@ -713,7 +748,7 @@
       </div>
     </div>
 
-    <div class="section-cta">
+    <div class="section-cta reveal">
       <a href="carta.html" class="btn-primary" style="font-size:1rem;padding:1rem 2.5rem;">
         Veure la carta completa →
       </a>
@@ -724,7 +759,7 @@
 <!-- ══════════════════════════════
      PHOTO MOSAIC GALLERY
 ══════════════════════════════ -->
-<div class="mosaic">
+<div class="mosaic reveal">
   <div class="mosaic-item tall">
     <img src="img_durum_arab.jpg" alt="Durum artesanal">
     <div class="mosaic-label">Durum</div>
@@ -755,7 +790,7 @@
      ABOUT SECTION
 ══════════════════════════════ -->
 <section id="about">
-  <div class="about-grid">
+  <div class="about-grid reveal">
     <div class="about-img-wrap">
       <img src="img_exterior.jpg" alt="Exterior Can Kebab" class="about-img">
     </div>
@@ -777,22 +812,22 @@
      CUSTOMER REVIEWS
 ══════════════════════════════ -->
 <section id="reviews">
-  <div class="reviews-header">
+  <div class="reviews-header reveal">
     <span class="section-eyebrow">Què en diuen</span>
     <h2 class="section-title section-title--light">Opinions dels <em>clients</em></h2>
   </div>
   <div class="reviews-grid">
-    <div class="review-card">
+    <div class="review-card reveal-child">
       <div class="review-stars">★★★★★</div>
       <p class="review-text">"Els millors kebabs del barri, sense cap dubte. La salsa de l'empordanès és increïble."</p>
       <div class="review-author">— Google Reviews</div>
     </div>
-    <div class="review-card">
+    <div class="review-card reveal-child">
       <div class="review-stars">★★★★★</div>
       <p class="review-text">"Un kebab diferent, amb producte bo i salsetes de la casa. Repetiré segur!"</p>
       <div class="review-author">— Google Reviews</div>
     </div>
-    <div class="review-card">
+    <div class="review-card reveal-child">
       <div class="review-stars">★★★★☆</div>
       <p class="review-text">"Molt bo el couscous bowl. Local net i gent amable. Totalment recomanable."</p>
       <div class="review-author">— Google Reviews</div>
@@ -804,7 +839,7 @@
      FOOTER
 ══════════════════════════════ -->
 <footer>
-  <div class="footer-grid">
+  <div class="footer-grid reveal">
     <!-- Brand -->
     <div class="footer-brand">
       <div class="footer-brand-logo">
@@ -840,6 +875,33 @@
     <p>Fet amb ❤️ per al barri</p>
   </div>
 </footer>
+
+<script>
+/* ════════════════════════════════════
+   SCROLL ANIMATIONS — Intersection Observer
+   Watches .reveal and .reveal-child elements.
+   When they enter the viewport, adds .visible
+   which triggers the CSS fade-in + scale.
+════════════════════════════════════ */
+(function () {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target); /* animate once only */
+        }
+      });
+    },
+    { threshold: 0.12 } /* trigger when 12% of element is visible */
+  );
+
+  /* Observe all reveal elements */
+  document.querySelectorAll('.reveal, .reveal-child').forEach(el => {
+    observer.observe(el);
+  });
+})();
+</script>
 
 </body>
 </html>
