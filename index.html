@@ -234,6 +234,25 @@
   }
   .add-btn:hover { background:var(--green); }
 
+  /* Inline qty controls on dish */
+  .dish-qty {
+    display:flex; align-items:center; gap:0.35rem;
+    background:var(--green-dark); border-radius:20px;
+    padding:0.2rem 0.3rem;
+  }
+  .dish-qty-btn {
+    width:26px; height:26px; border-radius:50%; border:none;
+    background:rgba(255,255,255,0.15); color:var(--cream);
+    font-size:1rem; font-weight:600; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition:background 0.15s; line-height:1; flex-shrink:0;
+  }
+  .dish-qty-btn:hover { background:rgba(255,255,255,0.3); }
+  .dish-qty-num {
+    font-size:0.9rem; font-weight:700; color:var(--cream);
+    min-width:18px; text-align:center;
+  }
+
   /* ── PHOTO MOSAIC ── */
   .mosaic {
     display:grid;
@@ -523,41 +542,41 @@
       <div class="menu-cat show" id="cat-all-kebabs">
         <div class="cat-title">🥙 Kebabs Signature</div>
 
-        <div class="dish" onclick="addToCart('Kebab Àrab',10.99)">
+        <div class="dish" data-name="Kebab Àrab" data-price="10.99" onclick="dishClick(this)">
           <img src="img_durum_arab.jpg" alt="Àrab" class="dish-thumb">
           <div>
             <div class="dish-name">Àrab <span style="font-size:0.65rem;color:var(--green);font-weight:600;background:rgba(74,103,65,0.1);padding:0.1rem 0.4rem;border-radius:2px;margin-left:0.4rem">⭐ Popular</span></div>
             <div class="dish-desc">Durum o pita · pollastre 120g · hummus · salsa iogurt · chimichurri àrab · herbes · ceba encurtida</div>
           </div>
-          <div class="dish-right"><span class="dish-price">10.99€</span><button class="add-btn">+</button></div>
+          <div class="dish-right"><span class="dish-price">10.99€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
-        <div class="dish" onclick="addToCart('Kebab Empordanès',10.99)">
+        <div class="dish" data-name="Kebab Empordanès" data-price="10.99" onclick="dishClick(this)">
           <img src="img_pita_empordanes.jpg" alt="Empordanès" class="dish-thumb">
           <div>
             <div class="dish-name">Empordanès</div>
             <div class="dish-desc">Durum o pita · pollastre 120g · salsa romesco · escarola · tomàquet sec · oliva kalamata</div>
           </div>
-          <div class="dish-right"><span class="dish-price">10.99€</span><button class="add-btn">+</button></div>
+          <div class="dish-right"><span class="dish-price">10.99€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
-        <div class="dish" onclick="addToCart('Kebab De foc i brasa',10.99)">
+        <div class="dish" data-name="Kebab De foc i brasa" data-price="10.99" onclick="dishClick(this)">
           <img src="img_pita_mans.jpg" alt="Foc i brasa" class="dish-thumb">
           <div>
             <div class="dish-name">De foc i brasa 🔥</div>
             <div class="dish-desc">Durum o pita · pollastre 120g · puré d'albergínia al carbó · pebrot caramel·litzat · salsa picant casolana · allioli d'all escalivat</div>
           </div>
-          <div class="dish-right"><span class="dish-price">10.99€</span><button class="add-btn">+</button></div>
+          <div class="dish-right"><span class="dish-price">10.99€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
-        <div class="dish" onclick="addToCart('Kebab Rostit de diumenge',11.50)">
+        <div class="dish" data-name="Kebab Rostit de diumenge" data-price="11.50" onclick="dishClick(this)">
           <div class="dish-thumb-placeholder">🍗</div>
           <div>
             <div class="dish-name">Rostit de diumenge</div>
             <div class="dish-desc">Durum o pita · pollastre · patata al caliu · allioli</div>
             <span class="dish-badge">Només diumenge</span>
           </div>
-          <div class="dish-right"><span class="dish-price">11.50€</span><button class="add-btn">+</button></div>
+          <div class="dish-right"><span class="dish-price">11.50€</span><div class="dish-qty-wrap"></div></div>
         </div>
       </div>
 
@@ -565,40 +584,40 @@
       <div class="menu-cat show" id="cat-all-sides">
         <div class="cat-title">🍟 Sides</div>
 
-        <div class="dish" onclick="addToCart('Can fries',3.90)">
+        <div class="dish" data-name="Can fries" data-price="3.90" onclick="dishClick(this)">
           <div class="dish-thumb-placeholder">🍟</div>
           <div>
             <div class="dish-name">Can fries</div>
             <div class="dish-desc">Patates fregides especiades</div>
           </div>
-          <div class="dish-right"><span class="dish-price">3.90€</span><button class="add-btn">+</button></div>
+          <div class="dish-right"><span class="dish-price">3.90€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
-        <div class="dish" onclick="addToCart('Dressed fries',5.50)">
+        <div class="dish" data-name="Dressed fries" data-price="5.50" onclick="dishClick(this)">
           <img src="img_kebab_fries.jpg" alt="Dressed fries" class="dish-thumb">
           <div>
             <div class="dish-name">Dressed fries</div>
             <div class="dish-desc">Patates fregides · sumac · feta · ceba encurtida · chimichurri àrab · julivert</div>
           </div>
-          <div class="dish-right"><span class="dish-price">5.50€</span><button class="add-btn">+</button></div>
+          <div class="dish-right"><span class="dish-price">5.50€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
-        <div class="dish" onclick="addToCart('Kebab fries',6.50)">
+        <div class="dish" data-name="Kebab fries" data-price="6.50" onclick="dishClick(this)">
           <img src="img_kebab_fries.jpg" alt="Kebab fries" class="dish-thumb">
           <div>
             <div class="dish-name">Kebab fries</div>
             <div class="dish-desc">Patates fregides · pollastre · ceba encurtida · salsa tahini · julivert</div>
           </div>
-          <div class="dish-right"><span class="dish-price">6.50€</span><button class="add-btn">+</button></div>
+          <div class="dish-right"><span class="dish-price">6.50€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
-        <div class="dish" onclick="addToCart('Couscous bowl',8.99)">
+        <div class="dish" data-name="Couscous bowl" data-price="8.99" onclick="dishClick(this)">
           <img src="img_couscous.jpg" alt="Couscous bowl" class="dish-thumb">
           <div>
             <div class="dish-name">Couscous bowl</div>
             <div class="dish-desc">Couscous amanit · pollastre · amanida · cogombre · ceba encurtida · salsa iogurt · salsa tahini</div>
           </div>
-          <div class="dish-right"><span class="dish-price">8.99€</span><button class="add-btn">+</button></div>
+          <div class="dish-right"><span class="dish-price">8.99€</span><div class="dish-qty-wrap"></div></div>
         </div>
       </div>
 
@@ -606,32 +625,32 @@
       <div class="menu-cat show" id="cat-all-combos">
         <div class="cat-title">🎯 Combos</div>
 
-        <div class="dish" onclick="addToCart('Classic experience',13)">
+        <div class="dish" data-name="Classic experience" data-price="13" onclick="dishClick(this)">
           <div class="dish-thumb-placeholder">🥙🍟</div>
           <div>
             <div class="dish-name">Classic experience</div>
             <div class="dish-desc">Kebab base · can fries · beguda</div>
           </div>
-          <div class="dish-right"><span class="dish-price">13€</span><button class="add-btn">+</button></div>
+          <div class="dish-right"><span class="dish-price">13€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
-        <div class="dish" onclick="addToCart('Signature feast',16.50)">
+        <div class="dish" data-name="Signature feast" data-price="16.50" onclick="dishClick(this)">
           <div class="dish-thumb-placeholder">⭐🥙</div>
           <div>
             <div class="dish-name">Signature feast</div>
             <div class="dish-desc">Kebab signature (àrab, empordanès o de foc i brasa) · can fries · beguda</div>
             <span class="dish-badge">Best value</span>
           </div>
-          <div class="dish-right"><span class="dish-price">16.50€</span><button class="add-btn">+</button></div>
+          <div class="dish-right"><span class="dish-price">16.50€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
-        <div class="dish" onclick="addToCart('Couscous experience',13)">
+        <div class="dish" data-name="Couscous experience" data-price="13" onclick="dishClick(this)">
           <div class="dish-thumb-placeholder">🍲</div>
           <div>
             <div class="dish-name">Couscous experience</div>
             <div class="dish-desc">Couscous bowl · beguda</div>
           </div>
-          <div class="dish-right"><span class="dish-price">13€</span><button class="add-btn">+</button></div>
+          <div class="dish-right"><span class="dish-price">13€</span><div class="dish-qty-wrap"></div></div>
         </div>
       </div>
 
@@ -639,22 +658,22 @@
       <div class="menu-cat show" id="cat-all-postres">
         <div class="cat-title">🍰 Postres</div>
 
-        <div class="dish" onclick="addToCart('Cheesecake',5)">
+        <div class="dish" data-name="Cheesecake" data-price="5" onclick="dishClick(this)">
           <div class="dish-thumb-placeholder">🍰</div>
           <div><div class="dish-name">Cheesecake</div></div>
-          <div class="dish-right"><span class="dish-price">5€</span><button class="add-btn">+</button></div>
+          <div class="dish-right"><span class="dish-price">5€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
-        <div class="dish" onclick="addToCart('Carrot cake',5)">
+        <div class="dish" data-name="Carrot cake" data-price="5" onclick="dishClick(this)">
           <img src="img_carrot_cake.jpg" alt="Carrot cake" class="dish-thumb">
           <div><div class="dish-name">Carrot cake</div></div>
-          <div class="dish-right"><span class="dish-price">5€</span><button class="add-btn">+</button></div>
+          <div class="dish-right"><span class="dish-price">5€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
-        <div class="dish" onclick="addToCart('Chocolate fondant',5)">
+        <div class="dish" data-name="Chocolate fondant" data-price="5" onclick="dishClick(this)">
           <img src="img_chocolate.jpg" alt="Chocolate fondant" class="dish-thumb">
           <div><div class="dish-name">Decadent chocolate fondant</div></div>
-          <div class="dish-right"><span class="dish-price">5€</span><button class="add-btn">+</button></div>
+          <div class="dish-right"><span class="dish-price">5€</span><div class="dish-qty-wrap"></div></div>
         </div>
       </div>
 
@@ -858,18 +877,56 @@
   // ── CART ──
   let cart = [];
 
-  function addToCart(name, price) {
+  function dishClick(el) {
+    const name = el.dataset.name;
+    const price = parseFloat(el.dataset.price);
     const existing = cart.find(i => i.name === name);
-    if (existing) existing.qty++;
-    else cart.push({ name, price, qty: 1 });
+    if (!existing) {
+      cart.push({ name, price, qty: 1 });
+      showToast(`✅ ${name} afegit!`);
+    } else {
+      existing.qty++;
+    }
     renderCart();
-    showToast(`✅ ${name} afegit!`);
+    renderDishes();
+  }
+
+  function dishChangeQty(name, price, delta, event) {
+    event.stopPropagation();
+    const existing = cart.find(i => i.name === name);
+    if (existing) {
+      existing.qty += delta;
+      if (existing.qty <= 0) cart.splice(cart.indexOf(existing), 1);
+    }
+    renderCart();
+    renderDishes();
+  }
+
+  function renderDishes() {
+    document.querySelectorAll('.dish[data-name]').forEach(dish => {
+      const name = dish.dataset.name;
+      const price = parseFloat(dish.dataset.price);
+      const wrap = dish.querySelector('.dish-qty-wrap');
+      if (!wrap) return;
+      const item = cart.find(i => i.name === name);
+      if (!item || item.qty === 0) {
+        wrap.innerHTML = `<button class="add-btn" onclick="dishClick(this.closest('.dish'))">+</button>`;
+      } else {
+        wrap.innerHTML = `
+          <div class="dish-qty">
+            <button class="dish-qty-btn" onclick="dishChangeQty('${name}',${price},-1,event)">−</button>
+            <span class="dish-qty-num">${item.qty}</span>
+            <button class="dish-qty-btn" onclick="dishChangeQty('${name}',${price},1,event)">+</button>
+          </div>`;
+      }
+    });
   }
 
   function changeQty(index, delta) {
     cart[index].qty += delta;
     if (cart[index].qty <= 0) cart.splice(index, 1);
     renderCart();
+    renderDishes();
   }
 
   function renderCart() {
