@@ -97,11 +97,13 @@ nav {
 .icon-btn-label { font-size:0.72rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; }
 .icon-btn-primary { background:var(--green); color:var(--cream); }
 .icon-btn-primary:hover { background:var(--green-light); transform:translateY(-3px); }
-.page-header { padding:7rem 2rem 3rem; background:var(--dark); text-align:center; }
+.page-header { position:relative; padding:9rem 2rem 4rem; text-align:center; overflow:hidden; min-height:42svh; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+.page-header-bg { position:absolute; inset:0; background-image:url('img_exterior.jpg'); background-size:cover; background-position:center; filter:brightness(0.32); z-index:0; }
+.page-header-content { position:relative; z-index:1; }
 .page-header .section-label { color:var(--green-light); }
 .page-header h1 { font-family:'Playfair Display',serif; font-size:clamp(2.2rem,5vw,4rem); font-weight:900; color:var(--cream); margin-top:0.5rem; }
 .page-header h1 em { font-style:italic; color:var(--green-light); }
-.page-header p { color:rgba(247,240,227,0.5); margin-top:0.8rem; font-size:0.95rem; }
+.page-header p { color:rgba(247,240,227,0.6); margin-top:0.8rem; font-size:0.95rem; }
 
 /* ── SECTION HELPERS ── */
 .section-label { display:block; font-size:0.7rem; font-weight:600; letter-spacing:0.28em; text-transform:uppercase; color:var(--green); margin-bottom:0.7rem; }
@@ -218,7 +220,7 @@ footer p { color:rgba(247,240,227,0.35); font-size:0.78rem; }
   .local-gallery-right { grid-template-columns:1fr 1fr; }
   .local-gallery-right .local-gallery-item { height:140px; }
 
-  .page-header { padding:5.5rem 1.5rem 2rem; }
+  .page-header { padding:7rem 1.5rem 2.5rem; min-height:35svh; }
 
   #menu { padding:2.5rem 1rem 3rem; }
   .menu-header { flex-direction:column; align-items:flex-start; gap:1rem; }
@@ -273,9 +275,12 @@ footer p { color:rgba(247,240,227,0.35); font-size:0.78rem; }
 
 <!-- PAGE HEADER -->
 <div class="page-header">
-  <span class="section-label">Can Kebab · Barcelona</span>
-  <h1>La nostra <em>carta</em></h1>
-  <p>Tria els teus plats i fes la comanda directament aquí baix</p>
+  <div class="page-header-bg"></div>
+  <div class="page-header-content">
+    <span class="section-label">Can Kebab · Barcelona</span>
+    <h1>La nostra <em>carta</em></h1>
+    <p>Tria els teus plats i fes la comanda directament aquí baix</p>
+  </div>
 </div>
 
 <!-- PHOTO GALLERY LOCAL -->
