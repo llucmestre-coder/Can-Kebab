@@ -198,6 +198,45 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; text-align:cente
   footer { padding:0 0 1.5rem; }
   .footer-card { border-radius:0; padding:2.5rem 1.5rem 1.5rem; }
 }
+
+#carret-flotant{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  width:260px;
+  background:white;
+  border-radius:10px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.2);
+  font-family:sans-serif;
+  overflow:hidden;
+}
+
+#carret-header{
+  background:#222;
+  color:white;
+  padding:10px;
+  font-weight:bold;
+}
+
+#carret-contingut{
+  padding:15px;
+}
+
+#carret-contingut button{
+  width:100%;
+  padding:10px;
+  background:#e63946;
+  color:white;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+#carret-contingut input{
+  width:100%;
+  margin-bottom:8px;
+  padding:6px;
+}
 </style>
 </head>
 <body>
@@ -264,7 +303,7 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; text-align:cente
             <div class="dish-name">Àrab <span style="font-size:0.55rem;color:var(--green);font-weight:700;background:rgba(74,103,65,0.08);padding:0.1rem 0.4rem;letter-spacing:0.1em;text-transform:uppercase;">⭐ Popular</span></div>
             <div class="dish-desc">Durum o pita · pollastre 120g · hummus · salsa iogurt · chimichurri àrab · herbes · ceba encurtida</div>
           </div>
-          <div class="dish-right"><span class="dish-price">10.99€</span><div class="dish-qty-wrap"></div></div>
+          <div class="dish-right"><span class="dish-price">10.99€</span><button onclick="afegirAlCarret('Kebab Àrab',10.99)">Afegir</button><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish reveal-child" data-name="Kebab Empordanès" data-price="10.99">
@@ -273,7 +312,7 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; text-align:cente
             <div class="dish-name">Empordanès</div>
             <div class="dish-desc">Durum o pita · pollastre 120g · salsa romesco · escarola · tomàquet sec · oliva kalamata</div>
           </div>
-          <div class="dish-right"><span class="dish-price">10.99€</span><div class="dish-qty-wrap"></div></div>
+          <div class="dish-right"><span class="dish-price">10.99€</span><button onclick="afegirAlCarret('Kebab Empordanès',10.99)">Afegir</button><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish reveal-child" data-name="Kebab De foc i brasa" data-price="10.99">
@@ -282,7 +321,7 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; text-align:cente
             <div class="dish-name">De foc i brasa 🔥</div>
             <div class="dish-desc">Durum o pita · pollastre 120g · puré d'albergínia al carbó · pebrot caramel·litzat · salsa picant casolana · allioli d'all escalivat</div>
           </div>
-          <div class="dish-right"><span class="dish-price">10.99€</span><div class="dish-qty-wrap"></div></div>
+          <div class="dish-right"><span class="dish-price">10.99€</span><button onclick="afegirAlCarret('Kebab De foc i brasa',10.99)">Afegir</button><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish reveal-child" data-name="Kebab Rostit de diumenge" data-price="11.50">
@@ -292,7 +331,7 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; text-align:cente
             <div class="dish-desc">Durum o pita · pollastre · patata al caliu · allioli</div>
             <span class="dish-badge">Només diumenge</span>
           </div>
-          <div class="dish-right"><span class="dish-price">11.50€</span><div class="dish-qty-wrap"></div></div>
+          <div class="dish-right"><span class="dish-price">11.50€</span><button onclick="afegirAlCarret('Kebab Rostit de diumenge',11.50)">Afegir</button><div class="dish-qty-wrap"></div></div>
         </div>
       </div>
 
@@ -303,25 +342,25 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; text-align:cente
         <div class="dish reveal-child" data-name="Can fries" data-price="3.90">
           <div class="dish-thumb-placeholder">🍟</div>
           <div><div class="dish-name">Can fries</div><div class="dish-desc">Patates fregides especiades</div></div>
-          <div class="dish-right"><span class="dish-price">3.90€</span><div class="dish-qty-wrap"></div></div>
+          <div class="dish-right"><span class="dish-price">3.90€</span><button onclick="afegirAlCarret('Can fries',3.90)">Afegir</button><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish reveal-child" data-name="Dressed fries" data-price="5.50">
           <img src="img_kebab_fries.jpg" alt="Dressed fries" class="dish-thumb" style="object-position:center center;">
           <div><div class="dish-name">Dressed fries</div><div class="dish-desc">Patates fregides · sumac · feta · ceba encurtida · chimichurri àrab · julivert</div></div>
-          <div class="dish-right"><span class="dish-price">5.50€</span><div class="dish-qty-wrap"></div></div>
+          <div class="dish-right"><span class="dish-price">5.50€</span><button onclick="afegirAlCarret('Dressed fries',5.50)">Afegir</button><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish reveal-child" data-name="Kebab fries" data-price="6.50">
           <img src="img_kebab_fries.jpg" alt="Kebab fries" class="dish-thumb" style="object-position:center center;">
           <div><div class="dish-name">Kebab fries</div><div class="dish-desc">Patates fregides · pollastre · ceba encurtida · salsa tahini · julivert</div></div>
-          <div class="dish-right"><span class="dish-price">6.50€</span><div class="dish-qty-wrap"></div></div>
+          <div class="dish-right"><span class="dish-price">6.50€</span><button onclick="afegirAlCarret('Kebab fries',6.50)">Afegir</button><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish reveal-child" data-name="Couscous bowl" data-price="8.99">
           <img src="img_couscous.jpg" alt="Couscous bowl" class="dish-thumb" style="object-position:center center;">
           <div><div class="dish-name">Couscous bowl</div><div class="dish-desc">Couscous amanit · pollastre · amanida · cogombre · ceba encurtida · salsa iogurt · salsa tahini</div></div>
-          <div class="dish-right"><span class="dish-price">8.99€</span><div class="dish-qty-wrap"></div></div>
+          <div class="dish-right"><span class="dish-price">8.99€</span><button onclick="afegirAlCarret('Couscous bowl',8.99)">Afegir</button><div class="dish-qty-wrap"></div></div>
         </div>
       </div>
 
@@ -332,7 +371,7 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; text-align:cente
         <div class="dish reveal-child" data-name="Classic experience" data-price="13">
           <div class="dish-thumb-placeholder">🥙</div>
           <div><div class="dish-name">Classic experience</div><div class="dish-desc">Kebab base · can fries · beguda</div></div>
-          <div class="dish-right"><span class="dish-price">13€</span><div class="dish-qty-wrap"></div></div>
+          <div class="dish-right"><span class="dish-price">13€</span><button onclick="afegirAlCarret('Classic experience',13)">Afegir</button><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish reveal-child" data-name="Signature feast" data-price="16.50">
@@ -342,13 +381,13 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; text-align:cente
             <div class="dish-desc">Kebab signature (àrab, empordanès o de foc i brasa) · can fries · beguda</div>
             <span class="dish-badge">Best value</span>
           </div>
-          <div class="dish-right"><span class="dish-price">16.50€</span><div class="dish-qty-wrap"></div></div>
+          <div class="dish-right"><span class="dish-price">16.50€</span><button onclick="afegirAlCarret('Signature feast',16.50)">Afegir</button><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish reveal-child" data-name="Couscous experience" data-price="13">
           <div class="dish-thumb-placeholder">🍲</div>
           <div><div class="dish-name">Couscous experience</div><div class="dish-desc">Couscous bowl · beguda</div></div>
-          <div class="dish-right"><span class="dish-price">13€</span><div class="dish-qty-wrap"></div></div>
+          <div class="dish-right"><span class="dish-price">13€</span><button onclick="afegirAlCarret('Couscous experience',13)">Afegir</button><div class="dish-qty-wrap"></div></div>
         </div>
       </div>
 
@@ -359,19 +398,19 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; text-align:cente
         <div class="dish reveal-child" data-name="Cheesecake" data-price="5">
           <div class="dish-thumb-placeholder">🍰</div>
           <div><div class="dish-name">Cheesecake</div></div>
-          <div class="dish-right"><span class="dish-price">5€</span><div class="dish-qty-wrap"></div></div>
+          <div class="dish-right"><span class="dish-price">5€</span><button onclick="afegirAlCarret('Cheesecake',5)">Afegir</button><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish reveal-child" data-name="Carrot cake" data-price="5">
           <img src="img_carrot_cake.jpg" alt="Carrot cake" class="dish-thumb" style="object-position:center center;">
           <div><div class="dish-name">Carrot cake</div></div>
-          <div class="dish-right"><span class="dish-price">5€</span><div class="dish-qty-wrap"></div></div>
+          <div class="dish-right"><span class="dish-price">5€</span><button onclick="afegirAlCarret('Carrot cake',5)">Afegir</button><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish reveal-child" data-name="Chocolate fondant" data-price="5">
           <img src="img_chocolate.jpg" alt="Chocolate fondant" class="dish-thumb" style="object-position:center center;">
           <div><div class="dish-name">Decadent chocolate fondant</div></div>
-          <div class="dish-right"><span class="dish-price">5€</span><div class="dish-qty-wrap"></div></div>
+          <div class="dish-right"><span class="dish-price">5€</span><button onclick="afegirAlCarret('Chocolate fondant',5)">Afegir</button><div class="dish-qty-wrap"></div></div>
         </div>
       </div>
 
@@ -584,6 +623,100 @@ function showToast(msg) {
 })();
 
 renderDishes();
+</script>
+<div id="carret-flotant">
+
+  <div id="carret-header">
+    🛒 Carret (<span id="contador">0</span>)
+  </div>
+
+  <div id="carret-contingut">
+    <ul id="llistaCarret"></ul>
+
+    <p>Total: <span id="total">0</span> €</p>
+
+    <input id="nomClient" placeholder="El teu nom">
+    <input id="horaRecollida" placeholder="Hora recollida">
+
+    <button onclick="enviarComanda()">Enviar comanda</button>
+  </div>
+
+</div>
+
+<script>
+
+let carret = [];
+let total = 0;
+
+function afegirAlCarret(nom, preu){
+
+carret.push({nom, preu});
+total += preu;
+
+actualitzarCarret();
+
+animacioAfegir();
+
+}
+
+function actualitzarCarret(){
+
+const llista = document.getElementById("llistaCarret");
+llista.innerHTML = "";
+
+carret.forEach(item => {
+
+const li = document.createElement("li");
+li.textContent = item.nom + " - " + item.preu + "€";
+
+llista.appendChild(li);
+
+});
+
+document.getElementById("contador").textContent = carret.length;
+document.getElementById("total").textContent = total;
+
+}
+
+function enviarComanda(){
+
+let missatge = "Nova comanda - Can Kebab%0A%0A";
+
+carret.forEach(item => {
+
+missatge += "• " + item.nom + "%0A";
+
+});
+
+const nom = document.getElementById("nomClient").value;
+const hora = document.getElementById("horaRecollida").value;
+
+missatge += "%0ANom: " + nom;
+missatge += "%0AHora: " + hora;
+missatge += "%0ATotal: " + total + "€";
+
+const numero = "34600000000";
+
+const url = "https://wa.me/" + numero + "?text=" + missatge;
+
+window.open(url, "_blank");
+
+}
+
+function animacioAfegir(){
+
+const carretIcon = document.getElementById("carret-header");
+
+carretIcon.style.transform = "scale(1.2)";
+
+setTimeout(() => {
+
+carretIcon.style.transform = "scale(1)";
+
+},200);
+
+}
+
 </script>
 </body>
 </html>
