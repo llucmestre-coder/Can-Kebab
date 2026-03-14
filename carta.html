@@ -153,9 +153,23 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; text-align:cente
 .footer-divider { width:32px; height:1px; background:var(--gold); margin:1.5rem auto; }
 .footer-bottom { color:#ccc; font-size:0.7rem; letter-spacing:0.08em; border-top:1px solid rgba(74,103,65,0.08); padding-top:1.2rem; }
 
-/* ══ TOAST ══ */
-.toast { position:fixed; bottom:2rem; right:1.5rem; z-index:999; background:var(--dark); color:var(--cream); padding:0.9rem 1.5rem; border-left:2px solid var(--gold); font-size:0.8rem; font-weight:500; transform:translateY(80px); opacity:0; transition:all 0.3s; pointer-events:none; max-width:calc(100vw - 3rem); }
-.toast.show { transform:translateY(0); opacity:1; }
+/* ══ FIELD VALIDATION — shake on error ══ */
+@keyframes shake {
+  0%,100% { transform:translateX(0); }
+  20%      { transform:translateX(-6px); }
+  40%      { transform:translateX(6px); }
+  60%      { transform:translateX(-4px); }
+  80%      { transform:translateX(4px); }
+}
+.field-error input,
+.field-error textarea,
+.field-error select {
+  border-bottom-color: var(--terracotta) !important;
+  animation: shake 0.35s ease;
+}
+.field-error label {
+  color: var(--terracotta) !important;
+}
 
 /* ══ SCROLL ANIMATIONS ══ */
 .reveal { opacity:0; transform:translateY(20px); transition:opacity 0.65s ease, transform 0.65s ease; }
@@ -199,43 +213,62 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; text-align:cente
   .footer-card { border-radius:0; padding:2.5rem 1.5rem 1.5rem; }
 }
 
-#carret-flotant{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  width:260px;
-  background:white;
-  border-radius:10px;
-  box-shadow:0 5px 20px rgba(0,0,0,0.2);
-  font-family:sans-serif;
-  overflow:hidden;
+#carret-flotant {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 500;
+  display: none; /* hidden until first item added */
 }
 
-#carret-header{
-  background:#222;
-  color:white;
-  padding:10px;
-  font-weight:bold;
+#carret-icona {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: var(--green-dark);
+  color: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(28,26,21,0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  font-size: 1.4rem;
+  user-select: none;
 }
 
-#carret-contingut{
-  padding:15px;
+#carret-icona:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(28,26,21,0.45);
 }
 
-#carret-contingut button{
-  width:100%;
-  padding:10px;
-  background:#e63946;
-  color:white;
-  border:none;
-  border-radius:5px;
-  cursor:pointer;
+#carret-icona.pop {
+  animation: cartPop 0.35s cubic-bezier(0.36,0.07,0.19,0.97);
 }
 
-#carret-contingut input{
-  width:100%;
-  margin-bottom:8px;
-  padding:6px;
+@keyframes cartPop {
+  0%   { transform: scale(1); }
+  30%  { transform: scale(1.35); }
+  60%  { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+#carret-num {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--dark);
+  font-size: 0.72rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
 }
 </style>
 </head>
@@ -303,7 +336,7 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; text-align:cente
             <div class="dish-name">Àrab <span style="font-size:0.55rem;color:var(--green);font-weight:700;background:rgba(74,103,65,0.08);padding:0.1rem 0.4rem;letter-spacing:0.1em;text-transform:uppercase;">⭐ Popular</span></div>
             <div class="dish-desc">Durum o pita · pollastre 120g · hummus · salsa iogurt · chimichurri àrab · herbes · ceba encurtida</div>
           </div>
-          <div class="dish-right"><span class="dish-price">10.99€</span><button onclick="afegirAlCarret('Kebab Àrab',10.99)">Afegir</button><div class="dish-qty-wrap"></div></div>
+          <div class="dish-right"><span class="dish-price">10.99€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish reveal-child" data-name="Kebab Empordanès" data-price="10.99">
@@ -312,7 +345,7 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; text-align:cente
             <div class="dish-name">Empordanès</div>
             <div class="dish-desc">Durum o pita · pollastre 120g · salsa romesco · escarola · tomàquet sec · oliva kalamata</div>
           </div>
-          <div class="dish-right"><span class="dish-price">10.99€</span><button onclick="afegirAlCarret('Kebab Empordanès',10.99)">Afegir</button><div class="dish-qty-wrap"></div></div>
+          <div class="dish-right"><span class="dish-price">10.99€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish reveal-child" data-name="Kebab De foc i brasa" data-price="10.99">
@@ -321,7 +354,7 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; text-align:cente
             <div class="dish-name">De foc i brasa 🔥</div>
             <div class="dish-desc">Durum o pita · pollastre 120g · puré d'albergínia al carbó · pebrot caramel·litzat · salsa picant casolana · allioli d'all escalivat</div>
           </div>
-          <div class="dish-right"><span class="dish-price">10.99€</span><button onclick="afegirAlCarret('Kebab De foc i brasa',10.99)">Afegir</button><div class="dish-qty-wrap"></div></div>
+          <div class="dish-right"><span class="dish-price">10.99€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish reveal-child" data-name="Kebab Rostit de diumenge" data-price="11.50">
@@ -331,7 +364,7 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; text-align:cente
             <div class="dish-desc">Durum o pita · pollastre · patata al caliu · allioli</div>
             <span class="dish-badge">Només diumenge</span>
           </div>
-          <div class="dish-right"><span class="dish-price">11.50€</span><button onclick="afegirAlCarret('Kebab Rostit de diumenge',11.50)">Afegir</button><div class="dish-qty-wrap"></div></div>
+          <div class="dish-right"><span class="dish-price">11.50€</span><div class="dish-qty-wrap"></div></div>
         </div>
       </div>
 
@@ -342,25 +375,25 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; text-align:cente
         <div class="dish reveal-child" data-name="Can fries" data-price="3.90">
           <div class="dish-thumb-placeholder">🍟</div>
           <div><div class="dish-name">Can fries</div><div class="dish-desc">Patates fregides especiades</div></div>
-          <div class="dish-right"><span class="dish-price">3.90€</span><button onclick="afegirAlCarret('Can fries',3.90)">Afegir</button><div class="dish-qty-wrap"></div></div>
+          <div class="dish-right"><span class="dish-price">3.90€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish reveal-child" data-name="Dressed fries" data-price="5.50">
           <img src="img_kebab_fries.jpg" alt="Dressed fries" class="dish-thumb" style="object-position:center center;">
           <div><div class="dish-name">Dressed fries</div><div class="dish-desc">Patates fregides · sumac · feta · ceba encurtida · chimichurri àrab · julivert</div></div>
-          <div class="dish-right"><span class="dish-price">5.50€</span><button onclick="afegirAlCarret('Dressed fries',5.50)">Afegir</button><div class="dish-qty-wrap"></div></div>
+          <div class="dish-right"><span class="dish-price">5.50€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish reveal-child" data-name="Kebab fries" data-price="6.50">
           <img src="img_kebab_fries.jpg" alt="Kebab fries" class="dish-thumb" style="object-position:center center;">
           <div><div class="dish-name">Kebab fries</div><div class="dish-desc">Patates fregides · pollastre · ceba encurtida · salsa tahini · julivert</div></div>
-          <div class="dish-right"><span class="dish-price">6.50€</span><button onclick="afegirAlCarret('Kebab fries',6.50)">Afegir</button><div class="dish-qty-wrap"></div></div>
+          <div class="dish-right"><span class="dish-price">6.50€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish reveal-child" data-name="Couscous bowl" data-price="8.99">
           <img src="img_couscous.jpg" alt="Couscous bowl" class="dish-thumb" style="object-position:center center;">
           <div><div class="dish-name">Couscous bowl</div><div class="dish-desc">Couscous amanit · pollastre · amanida · cogombre · ceba encurtida · salsa iogurt · salsa tahini</div></div>
-          <div class="dish-right"><span class="dish-price">8.99€</span><button onclick="afegirAlCarret('Couscous bowl',8.99)">Afegir</button><div class="dish-qty-wrap"></div></div>
+          <div class="dish-right"><span class="dish-price">8.99€</span><div class="dish-qty-wrap"></div></div>
         </div>
       </div>
 
@@ -371,7 +404,7 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; text-align:cente
         <div class="dish reveal-child" data-name="Classic experience" data-price="13">
           <div class="dish-thumb-placeholder">🥙</div>
           <div><div class="dish-name">Classic experience</div><div class="dish-desc">Kebab base · can fries · beguda</div></div>
-          <div class="dish-right"><span class="dish-price">13€</span><button onclick="afegirAlCarret('Classic experience',13)">Afegir</button><div class="dish-qty-wrap"></div></div>
+          <div class="dish-right"><span class="dish-price">13€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish reveal-child" data-name="Signature feast" data-price="16.50">
@@ -381,13 +414,13 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; text-align:cente
             <div class="dish-desc">Kebab signature (àrab, empordanès o de foc i brasa) · can fries · beguda</div>
             <span class="dish-badge">Best value</span>
           </div>
-          <div class="dish-right"><span class="dish-price">16.50€</span><button onclick="afegirAlCarret('Signature feast',16.50)">Afegir</button><div class="dish-qty-wrap"></div></div>
+          <div class="dish-right"><span class="dish-price">16.50€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish reveal-child" data-name="Couscous experience" data-price="13">
           <div class="dish-thumb-placeholder">🍲</div>
           <div><div class="dish-name">Couscous experience</div><div class="dish-desc">Couscous bowl · beguda</div></div>
-          <div class="dish-right"><span class="dish-price">13€</span><button onclick="afegirAlCarret('Couscous experience',13)">Afegir</button><div class="dish-qty-wrap"></div></div>
+          <div class="dish-right"><span class="dish-price">13€</span><div class="dish-qty-wrap"></div></div>
         </div>
       </div>
 
@@ -398,19 +431,19 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; text-align:cente
         <div class="dish reveal-child" data-name="Cheesecake" data-price="5">
           <div class="dish-thumb-placeholder">🍰</div>
           <div><div class="dish-name">Cheesecake</div></div>
-          <div class="dish-right"><span class="dish-price">5€</span><button onclick="afegirAlCarret('Cheesecake',5)">Afegir</button><div class="dish-qty-wrap"></div></div>
+          <div class="dish-right"><span class="dish-price">5€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish reveal-child" data-name="Carrot cake" data-price="5">
           <img src="img_carrot_cake.jpg" alt="Carrot cake" class="dish-thumb" style="object-position:center center;">
           <div><div class="dish-name">Carrot cake</div></div>
-          <div class="dish-right"><span class="dish-price">5€</span><button onclick="afegirAlCarret('Carrot cake',5)">Afegir</button><div class="dish-qty-wrap"></div></div>
+          <div class="dish-right"><span class="dish-price">5€</span><div class="dish-qty-wrap"></div></div>
         </div>
 
         <div class="dish reveal-child" data-name="Chocolate fondant" data-price="5">
           <img src="img_chocolate.jpg" alt="Chocolate fondant" class="dish-thumb" style="object-position:center center;">
           <div><div class="dish-name">Decadent chocolate fondant</div></div>
-          <div class="dish-right"><span class="dish-price">5€</span><button onclick="afegirAlCarret('Chocolate fondant',5)">Afegir</button><div class="dish-qty-wrap"></div></div>
+          <div class="dish-right"><span class="dish-price">5€</span><div class="dish-qty-wrap"></div></div>
         </div>
       </div>
 
@@ -459,6 +492,10 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; text-align:cente
           <textarea id="f-notes" placeholder="Sense ceba, salsa extra..."></textarea>
         </div>
         <button class="submit-btn" onclick="submitOrder()">Confirmar comanda</button>
+        <button class="submit-btn" style="margin-top:0.6rem;background:var(--green-dark);display:flex;align-items:center;justify-content:center;gap:0.6rem;" onclick="enviarComanda()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Enviar per WhatsApp
+        </button>
       </div>
 
       <!-- CART -->
@@ -489,7 +526,6 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; text-align:cente
   </div>
 </footer>
 
-<div class="toast" id="toast"></div>
 
 <script>
 /* ── Nav ── */
@@ -518,7 +554,7 @@ function renderDishes() {
       wrap.querySelector('.add-btn').addEventListener('click', e => {
         e.stopPropagation();
         cart.push({ name, price, qty:1 });
-        showToast(`✅ ${name} afegit!`);
+        afegirAlCarret(name, price);
         renderCart(); renderDishes();
       });
     } else {
@@ -531,11 +567,13 @@ function renderDishes() {
         e.stopPropagation();
         const idx = cart.findIndex(i => i.name === name);
         if (--cart[idx].qty <= 0) cart.splice(idx,1);
+        actualitzarCarret();
         renderCart(); renderDishes();
       });
       wrap.querySelector('.plus').addEventListener('click', e => {
         e.stopPropagation();
         cart.find(i => i.name === name).qty++;
+        afegirAlCarret(name, price);
         renderCart(); renderDishes();
       });
     }
@@ -545,18 +583,22 @@ function renderDishes() {
 function changeQty(idx, delta) {
   cart[idx].qty += delta;
   if (cart[idx].qty <= 0) cart.splice(idx,1);
+  actualitzarCarret();
   renderCart(); renderDishes();
 }
 
 function renderCart() {
-  const el      = document.getElementById('cart-items');
-  const countEl = document.getElementById('cart-count');
+  const el       = document.getElementById('cart-items');
+  const countEl  = document.getElementById('cart-count');
   const totalRow = document.getElementById('cart-total-row');
   const totalVal = document.getElementById('cart-total-val');
-  countEl.textContent = cart.reduce((s,i) => s+i.qty, 0);
+  const totalUnits = cart.reduce((s,i) => s + i.qty, 0);
+  countEl.textContent = totalUnits;
   if (!cart.length) {
     el.innerHTML = '<p class="cart-empty">Afegeix plats de la carta</p>';
-    totalRow.style.display = 'none'; return;
+    totalRow.style.display = 'none';
+    actualitzarCarret();
+    return;
   }
   let html = '', total = 0;
   cart.forEach((item, idx) => {
@@ -577,17 +619,30 @@ function renderCart() {
   totalVal.textContent = total.toFixed(2) + '€';
 }
 
+/* Field shake — marks the parent .fg as erroni */
+function shakeField(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const fg = el.closest('.fg');
+  if (!fg) return;
+  fg.classList.remove('field-error');
+  void fg.offsetWidth; // reflow to restart animation
+  fg.classList.add('field-error');
+  setTimeout(() => fg.classList.remove('field-error'), 600);
+  el.focus();
+}
+
 function submitOrder() {
-  if (!cart.length) { showToast('⚠️ Afegeix algun plat primer!'); return; }
-  if (!document.getElementById('f-nom').value.trim()) { showToast('⚠️ Cal indicar el nom.'); return; }
-  if (!document.getElementById('f-tel').value.trim()) { showToast('⚠️ Cal indicar el telèfon.'); return; }
-  if (orderMode === 'recollida' && !document.getElementById('f-hora').value) { showToast('⚠️ Selecciona una hora de recollida.'); return; }
+  if (!cart.length) { shakeField('f-nom'); return; }
+  if (!document.getElementById('f-nom').value.trim())  { shakeField('f-nom'); return; }
+  if (!document.getElementById('f-tel').value.trim())  { shakeField('f-tel'); return; }
+  if (orderMode === 'recollida' && !document.getElementById('f-hora').value) { shakeField('f-hora'); return; }
   if (orderMode === 'domicili') {
-    if (!document.getElementById('f-adreca').value.trim()) { showToast("⚠️ Cal indicar l'adreça."); return; }
-    if (!document.getElementById('f-cp').value.trim())     { showToast('⚠️ Cal indicar el codi postal.'); return; }
+    if (!document.getElementById('f-adreca').value.trim()) { shakeField('f-adreca'); return; }
+    if (!document.getElementById('f-cp').value.trim())     { shakeField('f-cp');     return; }
   }
-  showToast('🎉 Comanda enviada! Ens posem en contacte aviat.');
-  cart = []; renderCart(); renderDishes();
+  // Success — clear cart
+  cart = []; actualitzarCarret(); renderCart(); renderDishes();
 }
 
 function showCat(cat, btn) {
@@ -604,15 +659,9 @@ function showCat(cat, btn) {
 function setMode(mode) {
   orderMode = mode;
   document.getElementById('tgl-recollida').classList.toggle('on', mode === 'recollida');
-  document.getElementById('tgl-domicili').classList.toggle('on', mode === 'domicili');
+  document.getElementById('tgl-domicili').classList.toggle('on',  mode === 'domicili');
   document.getElementById('delivery-section').style.display       = mode === 'domicili'  ? 'block' : 'none';
   document.getElementById('recollida-hora-section').style.display = mode === 'recollida' ? 'block' : 'none';
-}
-
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2800);
 }
 
 (function(){
@@ -625,23 +674,12 @@ function showToast(msg) {
 renderDishes();
 </script>
 <div id="carret-flotant">
-
-  <div id="carret-header">
-    🛒 Carret (<span id="contador">0</span>)
+  <div id="carret-icona" onclick="window.location.href='#order'" title="Veure comanda">
+    🛒
+    <span id="carret-num">0</span>
   </div>
-
-  <div id="carret-contingut">
-    <ul id="llistaCarret"></ul>
-
-    <p>Total: <span id="total">0</span> €</p>
-
-    <input id="nomClient" placeholder="El teu nom">
-    <input id="horaRecollida" placeholder="Hora recollida">
-
-    <button onclick="enviarComanda()">Enviar comanda</button>
-  </div>
-
 </div>
+
 
 <script>
 
@@ -649,72 +687,52 @@ let carret = [];
 let total = 0;
 
 function afegirAlCarret(nom, preu){
-
-carret.push({nom, preu});
-total += preu;
-
-actualitzarCarret();
-
-animacioAfegir();
-
+  // carret[] is kept in sync but the floating icon reads from cart[] (which has qty)
+  carret.push({nom, preu});
+  total = cart.reduce((s,i) => s + i.price * i.qty, 0);
+  actualitzarCarret();
+  animacioAfegir();
 }
 
 function actualitzarCarret(){
+  // Count is the sum of all units across all items in cart[]
+  const totalUnits = cart.reduce((s,i) => s + i.qty, 0);
+  const flotant = document.getElementById("carret-flotant");
+  const numEl   = document.getElementById("carret-num");
 
-const llista = document.getElementById("llistaCarret");
-llista.innerHTML = "";
-
-carret.forEach(item => {
-
-const li = document.createElement("li");
-li.textContent = item.nom + " - " + item.preu + "€";
-
-llista.appendChild(li);
-
-});
-
-document.getElementById("contador").textContent = carret.length;
-document.getElementById("total").textContent = total;
-
+  flotant.style.display = totalUnits > 0 ? "block" : "none";
+  numEl.textContent = totalUnits;
 }
 
 function enviarComanda(){
+  if (!cart.length) { shakeField('f-nom'); return; }
 
-let missatge = "Nova comanda - Can Kebab%0A%0A";
+  let missatge = "Nova comanda - Can Kebab%0A%0A";
+  cart.forEach(item => {
+    missatge += "• " + item.qty + "x " + item.name + " (" + (item.price * item.qty).toFixed(2) + "€)%0A";
+  });
 
-carret.forEach(item => {
+  const nom   = document.getElementById("f-nom")   ? document.getElementById("f-nom").value   : "";
+  const hora  = document.getElementById("f-hora")  ? document.getElementById("f-hora").value  : "";
+  const notes = document.getElementById("f-notes") ? document.getElementById("f-notes").value : "";
+  const totalFinal = cart.reduce((s,i) => s + i.price * i.qty, 0);
 
-missatge += "• " + item.nom + "%0A";
+  missatge += "%0ANom: " + nom;
+  missatge += "%0AHora: " + hora;
+  if (notes) missatge += "%0ANotes: " + notes;
+  missatge += "%0ATotal: " + totalFinal.toFixed(2) + "€";
 
-});
-
-const nom = document.getElementById("nomClient").value;
-const hora = document.getElementById("horaRecollida").value;
-
-missatge += "%0ANom: " + nom;
-missatge += "%0AHora: " + hora;
-missatge += "%0ATotal: " + total + "€";
-
-const numero = "34600000000";
-
-const url = "https://wa.me/" + numero + "?text=" + missatge;
-
-window.open(url, "_blank");
-
+  const url = "https://wa.me/34610488013?text=" + missatge;
+  window.open(url, "_blank");
 }
 
 function animacioAfegir(){
-
-const carretIcon = document.getElementById("carret-header");
-
-carretIcon.style.transform = "scale(1.2)";
-
-setTimeout(() => {
-
-carretIcon.style.transform = "scale(1)";
-
-},200);
-
+  const icona = document.getElementById("carret-icona");
+  if (!icona) return;
+  icona.classList.remove("pop");
+  void icona.offsetWidth;
+  icona.classList.add("pop");
+  icona.addEventListener("animationend", () => icona.classList.remove("pop"), { once:true });
 }
 
 </script>
