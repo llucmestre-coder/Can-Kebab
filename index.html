@@ -211,6 +211,10 @@ nav {
   color:var(--dark); margin-bottom:0.4rem;
 }
 .dish-card-desc { font-size:0.78rem; color:#aaa; line-height:1.6; flex:1; }
+.dish-card-price {
+  font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-weight:700;
+  color:var(--gold); margin-top:0.9rem; display:block;
+}
 .dish-card-badge {
   display:inline-block; margin-top:0.8rem;
   font-size:0.58rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase;
@@ -376,12 +380,32 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; }
   .hero-btns { flex-direction:column; align-items:center; gap:0.8rem; }
   .btn-hero-order, .btn-hero-call { width:100%; max-width:300px; text-align:center; padding:1rem 2rem; }
 
-  .gallery-section { padding:1.5rem 0; }
-  .gallery-wrap { border-radius:0; }
-  .gallery-main { grid-template-columns:1fr 1fr; grid-template-rows:260px 260px 200px; }
-  .gallery-main .g1 { grid-row:span 1; }
-  .gallery-main .g4 { grid-column:span 1; }
-  .gallery-strip { grid-template-columns:1fr 1fr; height:180px; }
+  .gallery-section { padding:0; }
+  .gallery-wrap { border-radius:0; box-shadow:none; }
+
+  /* Mobile: single horizontal scroll strip, snap per foto */
+  .gallery-main {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 3px;
+    height: 280px;
+    background: var(--dark);
+    scrollbar-width: none;
+  }
+  .gallery-main::-webkit-scrollbar { display:none; }
+  .gallery-main .gallery-item {
+    flex: 0 0 78vw;
+    height: 100%;
+    scroll-snap-align: start;
+    grid-row: unset;
+    grid-column: unset;
+  }
+  /* Hide bottom strip on mobile — scroll has enough photos */
+  .gallery-strip { display:none; }
 
   #destacats, #about, #reviews, #contact, footer { padding-left:0; padding-right:0; padding-bottom:1.5rem; }
   .card-section { border-radius:0; padding:3rem 1.5rem; }
@@ -495,6 +519,7 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; }
           <div class="dish-card-name">Kebab Àrab</div>
           <p class="dish-card-desc">Durum o pita · pollastre 120g · hummus · salsa iogurt · chimichurri àrab · herbes · ceba encurtida</p>
           <span class="dish-card-badge">⭐ Popular</span>
+          <span class="dish-card-price">10.99€</span>
         </div>
       </div>
       <div class="dish-card reveal-child">
@@ -502,6 +527,7 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; }
         <div class="dish-card-body">
           <div class="dish-card-name">Kebab Empordanès</div>
           <p class="dish-card-desc">Durum o pita · pollastre 120g · salsa romesco · escarola · tomàquet sec · oliva kalamata</p>
+          <span class="dish-card-price">10.99€</span>
         </div>
       </div>
       <div class="dish-card reveal-child">
@@ -509,6 +535,7 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; }
         <div class="dish-card-body">
           <div class="dish-card-name">Kebab fries</div>
           <p class="dish-card-desc">Patates fregides · pollastre · ceba encurtida · salsa tahini · julivert</p>
+          <span class="dish-card-price">6.50€</span>
         </div>
       </div>
       <div class="dish-card tall reveal-child">
@@ -516,6 +543,7 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; }
         <div class="dish-card-body">
           <div class="dish-card-name">Couscous bowl</div>
           <p class="dish-card-desc">Couscous amanit · pollastre · amanida · cogombre · ceba encurtida · salsa iogurt · tahini</p>
+          <span class="dish-card-price">8.99€</span>
         </div>
       </div>
       <div class="dish-card tall reveal-child">
@@ -523,6 +551,7 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; }
         <div class="dish-card-body">
           <div class="dish-card-name">Falafel</div>
           <p class="dish-card-desc">Falafel casolà · ceba encurtida · salsa tahini · julivert fresc</p>
+          <span class="dish-card-price">10.99€</span>
         </div>
       </div>
       <div class="dish-card tall reveal-child">
@@ -530,6 +559,7 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; }
         <div class="dish-card-body">
           <div class="dish-card-name">Carrot cake</div>
           <p class="dish-card-desc">Pastís de pastanaga casolà</p>
+          <span class="dish-card-price">5€</span>
         </div>
       </div>
     </div>
