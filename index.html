@@ -148,25 +148,28 @@ nav {
 .btn-hero-call:hover { border-color:var(--cream); background:rgba(247,240,227,0.08); }
 
 /* ══════════════════════════════
-   GALLERY — protagonist section,
-   large asymmetric grid, hover zoom
+   GALLERY
+   Desktop: 3-col × 2-row asymmetric
+   — col 1 narrow tall, col 2 wide, col 3 narrow
+   — row 1 taller than row 2
+   Mobile: 2-col × 3-row, all square cells
 ══════════════════════════════ */
 .gallery-section { background:var(--warm-white); padding:2.5rem 1.5rem; }
 .gallery-wrap {
   max-width:1400px; margin:0 auto;
   box-shadow: var(--card-shadow); border-radius:4px; overflow:hidden;
 }
-/* Single grid — all 8 photos, no separate strips */
 .gallery-main {
   display: grid;
-  grid-template-columns: 1.6fr 1fr 1fr;
-  grid-template-rows: 340px 220px 220px;
-  gap: 3px;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  grid-template-rows: 420px 280px;
+  gap: 4px;
   background: var(--dark);
 }
-/* First photo spans all 3 rows on the left */
-.gallery-main .g1 { grid-row: span 3; }
-.gallery-strip { display:none; } /* strip replaced by rows 2-3 of the main grid */
+/* Photo 2 (centre top): tall, spans 2 rows */
+.gallery-main .g-tall { grid-row: span 2; }
+
+.gallery-strip { display:none; }
 
 .gallery-item {
   overflow:hidden; position:relative; cursor:pointer; background:var(--dark);
@@ -176,7 +179,7 @@ nav {
   transition:transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.4s;
   filter:brightness(0.85);
 }
-.gallery-item:hover img { transform:scale(1.08); filter:brightness(1); }
+.gallery-item:hover img { transform:scale(1.07); filter:brightness(1); }
 
 /* ══════════════════════════════
    FEATURED DISHES
@@ -381,30 +384,13 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; }
 
   .gallery-section { padding:0; }
   .gallery-wrap { border-radius:0; box-shadow:none; }
-  /* Mobile: 2-column grid, all 8 photos visible, no scrolling */
   .gallery-main {
-    display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(4, 28vw);
+    grid-template-rows: repeat(3, 44vw);
     gap: 3px;
-    background: var(--dark);
-    height: auto;
-    overflow: visible;
-    scroll-snap-type: unset;
-    -webkit-overflow-scrolling: unset;
-    flex-direction: unset;
-    scrollbar-width: unset;
-  }
-  .gallery-main::-webkit-scrollbar { display:revert; }
-  .gallery-main .gallery-item {
-    flex: unset;
-    scroll-snap-align: unset;
-    grid-row: unset;
-    grid-column: unset;
     height: auto;
   }
-  /* First photo same size as others on mobile */
-  .gallery-main .g1 { grid-row: span 1; }
+  .gallery-main .g-tall { grid-row: span 1; }
 
   #destacats, #about, #reviews, #contact, footer { padding-left:0; padding-right:0; padding-bottom:1.5rem; }
   .card-section { border-radius:0; padding:3rem 1.5rem; }
@@ -483,30 +469,31 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; }
 <!-- GALLERY — single unified grid -->
 <div class="gallery-section">
   <div class="gallery-wrap reveal">
+    <!--
+      Desktop layout (3 cols × 2 rows, col widths 1fr / 1.5fr / 1fr):
+      ┌──────────┬───────────────────┬──────────┐
+      │  brot    │                   │  falafel │  row 1: 420px
+      ├──────────┤   durum arab      ├──────────┤
+      │ empord.  │   (span 2 rows)   │ couscous │  row 2: 280px
+      └──────────┴───────────────────┴──────────┘
+
+      Mobile: reflows to 2-col × 3-row, g-tall loses span
+    -->
     <div class="gallery-main">
-      <div class="gallery-item g1">
+      <div class="gallery-item">
         <img src="img_brot.jpg" alt="El nostre brot" style="object-position:center center;">
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item g-tall">
         <img src="img_durum_arab.jpg" alt="Kebab Àrab" style="object-position:center top;">
-      </div>
-      <div class="gallery-item">
-        <img src="img_pita_empordanes.jpg" alt="Kebab Empordanès">
-      </div>
-      <div class="gallery-item">
-        <img src="img_kebab_fries.jpg" alt="Kebab fries" style="object-position:center center;">
       </div>
       <div class="gallery-item">
         <img src="img_falafel.jpg" alt="Falafel">
       </div>
       <div class="gallery-item">
+        <img src="img_pita_empordanes.jpg" alt="Kebab Empordanès">
+      </div>
+      <div class="gallery-item">
         <img src="img_couscous.jpg" alt="Couscous bowl" style="object-position:center center;">
-      </div>
-      <div class="gallery-item">
-        <img src="img_carrot_cake.jpg" alt="Carrot cake" style="object-position:center center;">
-      </div>
-      <div class="gallery-item">
-        <img src="img_pita_mans.jpg" alt="Pita mans">
       </div>
     </div>
   </div>
