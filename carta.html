@@ -242,7 +242,7 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; text-align:cente
   right: 24px;
   bottom: 24px;
   z-index: 500;
-  display: none; /* hidden until first item added */
+  display: block;
 }
 
 #carret-icona {
@@ -615,9 +615,7 @@ function renderCart() {
   countEl.textContent = totalUnits;
   if (!cart.length) {
     el.innerHTML = '<p class="cart-empty">Afegeix plats de la carta</p>';
-    totalRow.style.display = 'none';
-    actualitzarCarret();
-    return;
+    totalRow.style.display = 'none'; return;
   }
   let html = '', total = 0;
   cart.forEach((item, idx) => {
@@ -704,9 +702,7 @@ function afegirAlCarret(nom, preu){
 
 function actualitzarCarret(){
   const totalUnits = cart.reduce((s,i) => s + i.qty, 0);
-  const flotant = document.getElementById("carret-flotant");
-  const numEl   = document.getElementById("carret-num");
-  flotant.style.display = totalUnits > 0 ? "block" : "none";
+  const numEl = document.getElementById("carret-num");
   numEl.textContent = totalUnits;
 }
 
