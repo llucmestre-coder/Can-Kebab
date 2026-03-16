@@ -102,9 +102,12 @@ nav {
   opacity: 0.45;
   pointer-events: none;
 }
-.dish-unavailable .dish-qty-wrap::after {
+.dish-unavailable .dish-qty-wrap {
+  display: none;
+}
+.dish-unavailable .dish-right::after {
   content: 'No disponible avui';
-  font-size: 0.65rem; font-weight: 600;
+  font-size: 0.62rem; font-weight: 600;
   letter-spacing: 0.08em; text-transform: uppercase;
   color: #aaa; white-space: nowrap;
 }
@@ -364,7 +367,7 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; text-align:cente
 
 <!-- MENU -->
 <section id="menu">
-  <div class="menu-card reveal">
+  <div class="menu-card">
     <div class="menu-header">
       <h2 class="menu-header-title">Carta <em>Can Kebab</em></h2>
       <div class="tabs">
@@ -506,7 +509,7 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; text-align:cente
 
 <!-- ORDER -->
 <section id="order">
-  <div class="order-card reveal">
+  <div class="order-card">
     <div class="order-header">
       <h2 class="order-title">Recull o <em>a domicili</em></h2>
     </div>
@@ -578,7 +581,7 @@ footer { background:var(--warm-white); padding:0 1.5rem 2.5rem; text-align:cente
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-card reveal">
+  <div class="footer-card">
     <div class="footer-name">Can Kebab</div>
     <div class="footer-tagline">Kebab artesanal al cor de Barcelona</div>
     <div class="footer-divider"></div>
